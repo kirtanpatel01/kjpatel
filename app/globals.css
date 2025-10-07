@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Joti+One&display=swap");
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #cad5e2;
+  --foreground: #020618;
+  --primary: #0ea5e9;
+  --secondary: #22d3ee;
+  --border: #cbd5e1;
+  --card: #E9ECEF
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-card: var(--card);
+  --font-joti: "Joti One";
+}
+
+.dark {
+  --background: #020618;
+  --foreground: #cad5e2;
+  --border: #1a1f26;
+  --card: #1F1F24;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Light mode */
+::-webkit-scrollbar-track {
+  background-color: #c4d0dc;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #5e7392;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4c6f9f;
+}
+
+/* Dark mode */
+.dark::-webkit-scrollbar-track {
+  background-color: #1e293b;
+}
+.dark::-webkit-scrollbar-thumb {
+  background-color: #31496d;
+}
+.dark::-webkit-scrollbar-thumb:hover {
+  background-color: #3c5d8e;
+}
+
+/* Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f3f5;
+}
+.dark body {
+  scrollbar-color: #475569 #1e293b;
+}
+
+.line {
+  @apply line-clamp-1 py-6 border-b border-slate-500/30 text-4xl text-start;
+}
+
+.screen-line-before {
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-10 before:h-px before:w-[200vw] before:bg-border;
+}
+
+.screen-line-after {
+  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-10 after:h-px after:w-[200vw] after:bg-border;
+}
+
+.dates {
+  @apply text-xs opacity-80;
+}
+
+.title {
+  @apply text-lg font-bold capitalize tracking-wider;
+}
+
+.sub-title {
+  @apply opacity-90 break-words;
+}
