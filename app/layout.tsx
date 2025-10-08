@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { Jost, Sora, Source_Code_Pro } from "next/font/google";
+import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/them-provider";
 import Header from "@/components/header";
-
-const jost = Jost({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
-});
+import { Toaster } from "sonner";
 
 const source = Source_Code_Pro({
   subsets: ["latin"],
@@ -27,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${source.className} antialiased`}
+        className={`${source.className} antialiased bg-background`}
       >
         <ThemeProvider
           attribute="class"
@@ -35,6 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster richColors />
           <Header />
           {children}
         </ThemeProvider>

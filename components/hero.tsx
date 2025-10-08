@@ -1,105 +1,63 @@
-"use client";
-import React, { useRef, useEffect, useState, JSX } from "react";
-import { motion } from "framer-motion";
+import Image from 'next/image'
+import React from 'react'
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import Link from 'next/link';
 
-const GRID_SIZE = 120; // spacing between grid lines
-
-function Sparks() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [dims, setDims] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    if (!ref.current) return;
-    const update = () => {
-      const rect = ref.current!.getBoundingClientRect();
-      setDims({ width: rect.width, height: rect.height });
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const sparks: JSX.Element[] = [];
-
-  const cols = Math.floor(dims.width / GRID_SIZE);
-  const rows = Math.floor(dims.height / GRID_SIZE);
-
-  // Helper to randomize motion parameters
-  const rand = (min: number, max: number) => Math.random() * (max - min) + min;
-
-  // Vertical sparks (move up ↕ down randomly)
-  for (let i = 0; i <= cols; i++) {
-    const x = i * GRID_SIZE;
-    const duration = rand(2, 5); // random speed
-    const delay = rand(0, 3); // random start offset
-    const direction = Math.random() > 0.5 ? 1 : -1; // random direction start
-
-    sparks.push(
-      <motion.div
-        key={`v-${i}`}
-        className="absolute w-0.5 dark:w-px h-0.5 dark:h-px rounded-full bg-cyan-700 dark:bg-cyan-400 shadow-[0_0_4px_0.5px_rgba(34,211,238,0.9)] animate-pulse"
-        style={{ left: x, top: direction === 1 ? 0 : dims.height - 8 }}
-        animate={{ y: direction === 1 ? [0, dims.height - 8] : [dims.height - 8, 0] }}
-        transition={{
-          duration,
-          delay,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-      />
-    );
+function Hero() {
+  type SocialLink = {
+    name: string;
+    src: string;
+    link: string;
   }
 
-  // Horizontal sparks (move left ↔ right randomly)
-  for (let i = 0; i <= rows; i++) {
-    const y = i * GRID_SIZE;
-    const duration = rand(2, 5); // random speed
-    const delay = rand(0, 3);
-    const direction = Math.random() > 0.5 ? 1 : -1;
-
-    sparks.push(
-      <motion.div
-        key={`h-${i}`}
-        className="absolute w-0.5 dark:w-px h-0.5 dark:h-px rounded-full bg-cyan-700 dark:bg-cyan-400 shadow-[0_0_4px_0.5px_rgba(34,211,238,0.9)] animate-pulse"
-        style={{ top: y, left: direction === 1 ? 0 : dims.width - 8 }}
-        animate={{ x: direction === 1 ? [0, dims.width - 8] : [dims.width - 8, 0] }}
-        transition={{
-          duration,
-          delay,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-      />
-    );
-  }
+  const socialLinks: SocialLink[] = [
+    {
+      name: "LinkedIn",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg",
+      link: "https://www.linkedin.com/in/kirtanpatel01"
+    },
+    {
+      name: "X/Twitter",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/twitter/twitter-original.svg",
+      link: "https://x.com/_k_j_patel_"
+    },
+    {
+      name: "Github",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+      link: "https://github.com/kirtanpatel01"
+    },
+  ]
 
   return (
-    <div ref={ref} className="absolute inset-0 z-10 pointer-events-none">
-      {sparks}
-    </div>
-  );
-}
-
-export default function Hero() {
-  return (
-    <div className="min-h-[calc(100vh)] bg-foreground p-4 flex justify-center items-center">
-      <div className="relative h-[calc(100vh-2rem)] w-full flex justify-center items-center bg-background border border-[color:var(--border)] rounded-3xl overflow-hidden">
-
-        {/* Grid background */}
-        <div
-          className="absolute inset-0 bg-[linear-gradient(to_right,var(--foreground)_0.5px,transparent_0.8px),linear-gradient(to_bottom,var(--foreground)_0.5px,transparent_0.8px)] bg-[size:10px_10px] opacity-2 z-0 pointer-events-none"
-        ></div>
-
-        {/* Motion sparks */}
-        <Sparks />
-
-        {/* Text */}
-        <h1 className="relative text-9xl font-black hover:text-teal-400 z-20">
-          KJ_PATEL
-        </h1>
+    <div className='flex flex-col lg:flex-row justify-center items-center gap-8 sm:gap-16'>
+      <Image src="/kjpatel.jpeg" alt='kjpatel' width={280} height={280} className='size-64 md:size-72 rounded-full shadow shadow-sky-400/25 inset-shadow-sm inset-shadow-sky-400/25' />
+      <div className='flex flex-col gap-6'>
+        <div className='flex justify-between items-center'>
+          <div className='space-y-4'>
+            <h1 className='text-3xl sm:text-4xl font-black text-sky-500 dark:text-sky-600'>Kirtan Patel</h1>
+            <span className='text-lg font-semibold text-secondary'>Full Stack Web Developer</span>
+          </div>
+          <ul className='hidden sm:flex items-center gap-4 bg-cyan-400/5 dark:bg-slate-600/75 border border-cyan-500 dark:border-slate-800 px-2 sm:px-4 sm:py-2 rounded-md'>
+            {socialLinks.map((link) => (
+              <li key={link.name} className='mt-1 sm:mt-2'>
+                <Link href={link.link} target='_blank'>
+                  <Tooltip>
+                  <TooltipTrigger>
+                    <Image src={link.src} alt={link.name} width={25} height={25} className=' cursor-pointer' />
+                  </TooltipTrigger>
+                  <TooltipContent>{link.name}</TooltipContent>
+                </Tooltip>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className='text-sm max-w-xl'>
+          I enjoy creating thoughtful solutions. I&apos;ve worked with Next.js, Supabase, Tailwind to build modern, responsive websites that balance performance with design. I focus on transforming ideas into clean, scalable solutions that users enjoy. I&apos;m always learning from debugging tricky issues to exploring new frameworks and technologies that can make my work even better.
+        </p>
       </div>
     </div>
-  );
+  )
 }
+
+export default Hero
