@@ -42,19 +42,20 @@ function Hero() {
               <li key={link.name} className='mt-1 sm:mt-2'>
                 <Link href={link.link} target='_blank'>
                   <Tooltip>
-                  <TooltipTrigger>
-                    <Image src={link.src} alt={link.name} width={25} height={25} className=' cursor-pointer' />
-                  </TooltipTrigger>
-                  <TooltipContent>{link.name}</TooltipContent>
-                </Tooltip>
+                    <TooltipTrigger>
+                      <Image src={link.src} alt={link.name} width={25} height={25} className=' cursor-pointer' />
+                    </TooltipTrigger>
+                    <TooltipContent>{link.name}</TooltipContent>
+                  </Tooltip>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-        <p className='text-sm max-w-xl'>
+        <p className="text-sm max-w-xl text-justify [hyphens:auto] [word-break:break-word] [text-justify:inter-word]">
           I enjoy creating thoughtful solutions. I&apos;ve worked with Next.js, Supabase, Tailwind to build modern, responsive websites that balance performance with design. I focus on transforming ideas into clean, scalable solutions that users enjoy. I&apos;m always learning from debugging tricky issues to exploring new frameworks and technologies that can make my work even better.
         </p>
+
       </div>
     </div>
   )
