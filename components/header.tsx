@@ -17,11 +17,13 @@ function Header() {
           </Link>
         </div>
 
-        <nav className="hidden sm:flex items-center gap-8">
-          <Link href="/blogs" className="font-semibold text-lg">Blog</Link>
-        </nav>
+        <div className="flex gap-6">
+          <nav className="hidden sm:flex items-center gap-8">
+            <Link href="/blogs" className="font-semibold text-lg">Blog</Link>
+          </nav>
 
-        <ModeToggle />
+          <ModeToggle />
+        </div>
       </div>
     </header>
   )
