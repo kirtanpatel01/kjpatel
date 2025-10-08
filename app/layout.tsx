@@ -11,8 +11,8 @@ const source = Source_Code_Pro({
 })
 
 export const metadata: Metadata = {
-  title: "KJ_Patel | Blogs",
-  description: "A personalized plateform where I share my thoughts, POVs, and knowledge.",
+  title: "KJ_Patel",
+  description: "Personal portfolio.",
 };
 
 export default function RootLayout({
