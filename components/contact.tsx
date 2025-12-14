@@ -71,22 +71,22 @@ export default function Contact() {
   return (
     <div className="space-y-8 text-sm max-w-md mx-auto">
       {/* Contact Details */}
-      <div className="flex items-center gap-2">
+      <div className="flex sm:hidden items-center gap-2">
         <label className="text-sm">Socials:</label>
-        <ul className='w-fit flex sm:hidden items-center gap-4 bg-cyan-400/5 dark:bg-slate-600/75 border border-cyan-500 dark:border-slate-800 px-3 py-2 rounded-md'>
-        {socialLinks.map((link) => (
-          <li key={link.name} className='mt-1 sm:mt-2'>
-            <Link href={link.link} target='_blank'>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Image src={link.src} alt={link.name} width={25} height={25} className=' cursor-pointer' />
-                </TooltipTrigger>
-                <TooltipContent>{link.name}</TooltipContent>
-              </Tooltip>
-            </Link>
-          </li>
-        ))}
-      </ul>
+        <ul className='w-fit flex items-center gap-4 bg-cyan-400/5 dark:bg-slate-600/75 border border-cyan-500 dark:border-slate-800 px-3 py-2 rounded-md'>
+          {socialLinks.map((link) => (
+            <li key={link.name} className='mt-1 sm:mt-2'>
+              <Link href={link.link} target='_blank'>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Image src={link.src} alt={link.name} width={25} height={25} className=' cursor-pointer' />
+                  </TooltipTrigger>
+                  <TooltipContent>{link.name}</TooltipContent>
+                </Tooltip>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="space-y-4">
         <div className="flex items-center gap-2">
