@@ -46,15 +46,15 @@ function Projects() {
     <div>
       <ul className="flex flex-col gap-12">
         {projects.map((project) => (
-          <li key={project.title} className="flex flex-col lg:flex-row lg:gap-10">
+          <li key={project.title} className="flex flex-col lg:flex-row lg:gap-10 group">
             <div className="flex flex-col gap-2">
-              <span className="text-xs opacity-75">{project.type}</span>
-              <Image src={project.src} alt={project.title} width={800} height={600} className="max-w-96 w-full rounded-lg" />
+              <span className="text-xs opacity-75 font-mono">{project.type}</span>
+              <Image src={project.src} alt={project.title} width={800} height={600} className="max-w-96 w-full rounded-lg shadow-sm border border-border/50 group-hover:scale-[1.02] transition-transform duration-300" />
             </div>
             <div className="space-y-6 mt-5">
               <div className="space-y-1">
                 <h1 className="text-lg font-bold">{project.title}</h1>
-                <p className="text-sm max-w-3xl text-justify">{project.desc}</p>
+                <p className="max-w-3xl text-secondary/80 text-pretty">{project.desc}</p>
               </div>
               <div className="flex items-center gap-6">
                 {project.tech.map((t) => (

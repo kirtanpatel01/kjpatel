@@ -62,29 +62,26 @@ function Skills() {
   ]
   
   return (
-    <div className="border dark:border-0 border-border/15 rounded shadow-md shadow-cyan-400/25 dark:shadow-cyan-700/20 p-4 sm:py-12 bg-white dark:bg-slate-700/25">
-      <ul className="flex flex-col sm:flex-row justify-evenly gap-6">
-        {skills.map((skill) => (
-          <li key={skill.title} className="w-full flex flex-col items-start sm:items-center gap-2 sm:gap-6 md:px-4">
-            <span className="font-medium">{skill.title}</span>
-            <hr className="w-full border-border" />
-            <ul className="flex flex-row sm:flex-col items-center gap-8">
-              {skill.techs.map((tech) => (
-                <li key={tech.name} className="flex items-center gap-2">
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Image src={tech.src} alt={tech.name} width={40} height={40} className="size-8 sm:size-10 rounded-full"/>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      {tech.name}
-                    </TooltipContent>
-                  </Tooltip>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {skills.map((skill) => (
+        <div key={skill.title} className="flex flex-col gap-4 p-6 bg-white dark:bg-slate-800/50 rounded-lg shadow-sm border border-border/50 hover:shadow-md transition-shadow">
+          <h3 className="font-semibold text-center border-b border-border pb-2">{skill.title}</h3>
+          <ul className="flex flex-wrap justify-center gap-4">
+            {skill.techs.map((tech) => (
+              <li key={tech.name}>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Image src={tech.src} alt={tech.name} width={40} height={40} className="size-10 hover:scale-110 transition-transform cursor-help"/>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {tech.name}
+                  </TooltipContent>
+                </Tooltip>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
 
   )

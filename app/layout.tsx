@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Code_Pro } from "next/font/google";
+import { Source_Code_Pro, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/them-provider";
 import Header from "@/components/header";
@@ -7,7 +7,14 @@ import { Toaster } from "sonner";
 
 const source = Source_Code_Pro({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"]
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-mono",
+})
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
@@ -23,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${source.className} antialiased bg-background`}
+        className={`${outfit.className} ${source.variable} antialiased bg-background`}
       >
         <ThemeProvider
           attribute="class"

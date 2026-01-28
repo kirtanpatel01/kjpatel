@@ -52,7 +52,7 @@ function Hero() {
             ))}
           </ul>
         </div>
-        <p className="text-sm text-justify [hyphens:auto] [word-break:break-word] [text-justify:inter-word]">
+        <p className="text-secondary/80 text-pretty">
           I enjoy creating thoughtful solutions. I&apos;ve worked with Next.js, Supabase, Tailwind to build modern, responsive websites that balance performance with design. I focus on transforming ideas into clean, scalable solutions that users enjoy. I&apos;m always learning from debugging tricky issues to exploring new frameworks and technologies that can make my work even better.
         </p>
 
