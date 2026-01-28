@@ -1,13 +1,6 @@
-import React from 'react'
-
-function Divider({ title }: { title: string }) {
-  return (
-    <div className='flex items-center gap-4 my-8 sm:my-16 max-w-4xl mx-auto'>
-      <div className='h-px w-full bg-border'></div>
-      <span className='font-semibold'>{title}</span>
-      <div className='h-px w-full bg-border'></div>
-    </div>
-  )
+export default function Divider({ title }: { title?: string }) {
+  // Swiss style rarely uses explicit divider components with text, 
+  // relying instead on spacing and borders within sections.
+  // Rendering nothing or just a spacer to maintain compatibility with page.tsx
+  return <div className="sr-only">{title}</div>;
 }
-
-export default Divider

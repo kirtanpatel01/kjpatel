@@ -1,83 +1,70 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
-function Projects() {
-  type Project = {
-    type: string;
-    src: string;
-    title: string;
-    desc: string;
-    tech: string[];
-    git: string;
-    live: string;
-  }
-
-  const projects: Project[] = [
+export default function Projects() {
+  const projects = [
     {
-      type: "Team Project",
-      src: "/galigaliinfo.png",
       title: "Gali Gali Info",
-      desc: "Web application specially desgined for shop owners who wants promot their products and analyze the traffic and trends in their local area.",
-      tech: [
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
-      ],
-      git: "https://github.com/kirtanpatel01/galigaliinfo",
-      live: "https://galigaliinfo.vercel.app/",
+      category: "Commerce",
+      description: "Hyper-local traffic analysis and product promotion platform.",
+      tech: "React / Node / MongoDB",
+      link: "https://galigaliinfo.vercel.app/",
+      year: "2024"
     },
     {
-      type: "Team Project",
-      src: "/fitcare.png",
       title: "Fit Care",
-      desc: "A fitness web application which hepls to weight gain/loss/maintain by providing you insights and diet recommendation according to your needs.",
-      tech: [
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
-      ],
-      git: "https://github.com/kirtanpatel01/fitcare",
-      live: "https://fitcare-alpha.vercel.app/",
+      category: "Health",
+      description: "AI-powered diet and workout planner with metabolic tracking.",
+      tech: "Next.js / Supabase / AI",
+      link: "https://fitcare-alpha.vercel.app/",
+      year: "2023"
     },
-  ]
-  return (
-    <div>
-      <ul className="flex flex-col gap-12">
-        {projects.map((project) => (
-          <li key={project.title} className="flex flex-col lg:flex-row lg:gap-10 group">
-            <div className="flex flex-col gap-2">
-              <span className="text-xs opacity-75 font-mono">{project.type}</span>
-              <Image src={project.src} alt={project.title} width={800} height={600} className="max-w-96 w-full rounded-lg shadow-sm border border-border/50 group-hover:scale-[1.02] transition-transform duration-300" />
-            </div>
-            <div className="space-y-6 mt-5">
-              <div className="space-y-1">
-                <h1 className="text-lg font-bold">{project.title}</h1>
-                <p className="max-w-3xl text-secondary/80 text-pretty">{project.desc}</p>
-              </div>
-              <div className="flex items-center gap-6">
-                {project.tech.map((t) => (
-                  <Image key={t} src={t} alt={t} width={25} height={25} className="rounded-full" />
-                ))}
-              </div>
-              <div className="space-x-4 text-black dark:text-white">
-                <Link href={project.live} target="_blank">
-                  <button className="relative bg-green-500 dark:bg-green-400/50 px-2 py-1 rounded border border-green-600 cursor-pointer">
-                  <div className="absolute -top-1 -left-1 h-1.5 w-1.5 rounded-full bg-green-400 animate-ping"></div>
-                    Live
-                  </button>
-                </Link>
-                <Link href={project.git} target="_blank">
-                  <button className="bg-orange-400 dark:bg-orange-500/50 px-2 py-1 rounded border border-orange-600 cursor-pointer">Github</button>
-                </Link>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+  ];
 
-export default Projects
+  return (
+    <section id="projects" className="py-24 border-t border-border">
+      <div className="flex flex-col gap-16">
+        {/* Section Header */}
+        <div className="flex items-baseline justify-between">
+           <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">01 / Selected Works</h2>
+        </div>
+
+        {/* Project List */}
+        <div className="flex flex-col">
+          {projects.map((project, index) => (
+            <div 
+              key={index}
+              className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-12 border-b border-border transition-colors hover:bg-secondary/30"
+            >
+              <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
+                {project.year}
+              </div>
+              
+              <div className="md:col-span-5 flex flex-col gap-2">
+                <h3 className="text-3xl font-bold tracking-tight group-hover:underline decoration-1 underline-offset-4">
+                  {project.title}
+                </h3>
+                <span className="text-sm text-muted-foreground">{project.tech}</span>
+              </div>
+
+              <div className="md:col-span-4 text-base leading-relaxed text-secondary-foreground/80">
+                {project.description}
+              </div>
+
+              <div className="md:col-span-1 flex justify-end pt-1">
+                <Link 
+                  href={project.link} 
+                  target="_blank"
+                  className="p-2 rounded-full border border-border bg-background hover:bg-foreground hover:text-background transition-colors"
+                >
+                  <ArrowUpRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

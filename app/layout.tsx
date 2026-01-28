@@ -1,8 +1,8 @@
+import Header from "@/components/header";
+import { ThemeProvider } from "@/components/them-provider";
 import type { Metadata } from "next";
 import { Source_Code_Pro, Outfit } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/them-provider";
-import Header from "@/components/header";
 import { Toaster } from "sonner";
 
 const source = Source_Code_Pro({
