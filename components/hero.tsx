@@ -2,27 +2,6 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
-// Individual Letter Component
-const Letter = ({ char, isSolid }: { char: string; isSolid: boolean }) => {
-  return (
-    <motion.span
-      className={`inline-block relative cursor-default transition-colors duration-500 ${
-        isSolid 
-          ? "text-foreground" 
-          : "text-transparent stroke-text" 
-      }`}
-      style={{
-        WebkitTextStroke: isSolid ? "0px" : "1px currentColor",
-        color: isSolid ? "var(--foreground)" : "transparent",
-      }}
-      // On group hover (parent), we want all letters to become solid. 
-      // We'll handle this via CSS group-hover classes on the parent Word.
-    >
-      {char}
-    </motion.span>
-  );
-};
-
 // Word Component
 const Word = ({ text, solidIndices }: { text: string; solidIndices: number[] }) => {
   return (

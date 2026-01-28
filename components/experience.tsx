@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import { motion } from "motion/react";
 
 export default function Experience() {
   const divRef = useRef<HTMLDivElement>(null);

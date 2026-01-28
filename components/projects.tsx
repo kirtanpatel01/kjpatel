@@ -1,11 +1,18 @@
 "use client";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { useRef } from "react";
 
-const ProjectItem = ({ project }: { project: any }) => {
-  const [isHovered, setIsHovered] = useState(false);
+interface Project {
+  year: string;
+  title: string;
+  description: string;
+  tech: string;
+  link: string;
+}
+
+const ProjectItem = ({ project }: { project: Project }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   // Magnetic Button Logic
@@ -26,13 +33,11 @@ const ProjectItem = ({ project }: { project: any }) => {
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
-    setIsHovered(false);
   };
 
   return (
     <div 
       ref={ref}
-      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-12 border-b border-border transition-colors hover:bg-secondary/20"
     >

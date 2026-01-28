@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { ArrowUp } from "lucide-react";
-import Link from "next/link";
 
 export default function Footer() {
   const scrollToTop = () => {
