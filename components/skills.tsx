@@ -11,7 +11,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 border-t border-border overflow-hidden">
        <div className="mb-12">
-           <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">02 / Expertise</h2>
+           <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">03 / Expertise</h2>
        </div>
 
        <div className="relative flex w-full overflow-hidden select-none">

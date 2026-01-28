@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Source_Code_Pro, Outfit } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import Cursor from "@/components/cursor";
 
 const source = Source_Code_Pro({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
+          <Cursor />
           <Header />
           {children}
         </ThemeProvider>

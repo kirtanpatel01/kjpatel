@@ -43,7 +43,7 @@ export default function Contact() {
         {/* Info Column */}
         <div className="flex flex-col h-full">
            <div className="mb-12">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6">03 / Contact</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6">04 / Contact</h2>
               <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">
                 GET IN <br/> TOUCH.
               </h1>
