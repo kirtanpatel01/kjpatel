@@ -69,7 +69,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="space-y-8 text-sm max-w-md mx-auto">
+    <div className="space-y-8 text-sm">
       {/* Contact Details */}
       <div className="flex sm:hidden items-center gap-2">
         <label className="text-sm">Socials:</label>

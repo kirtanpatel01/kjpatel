@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState, JSX } from "react";
 import { motion } from "framer-motion";
 
-const GRID_SIZE = 120; // spacing between grid lines
+const GRID_SIZE = 120;
 
 function Sparks() {
   const ref = useRef<HTMLDivElement>(null);

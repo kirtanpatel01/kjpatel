@@ -1,10 +1,9 @@
-// app/page.tsx
 "use client";
 
 import Hero from "@/components/hero";
-import Skills from "@/components/skills"; // later you'll create this
-import Projects from "@/components/projects"; // later
-import Contact from "@/components/contact"; // later
+import Skills from "@/components/skills"; 
+import Projects from "@/components/projects"; 
+import Contact from "@/components/contact"; 
 import Divider from "@/components/divider";
 
 export default function Home() {

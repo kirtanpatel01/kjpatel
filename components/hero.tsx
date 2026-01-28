@@ -30,7 +30,7 @@ function Hero() {
 
   return (
     <div className='flex flex-col lg:flex-row justify-center items-center gap-8 sm:gap-16'>
-      <Image src="/kjpatel.jpeg" alt='kjpatel' width={280} height={280} className='size-64 md:size-72 rounded-full shadow shadow-sky-400/25 inset-shadow-sm inset-shadow-sky-400/25' />
+      {/* <Image src="/kjpatel.jpeg" alt='kjpatel' width={280} height={280} className='size-64 md:size-72 rounded-full shadow shadow-sky-400/25 inset-shadow-sm inset-shadow-sky-400/25' /> */}
       <div className='flex flex-col gap-6'>
         <div className='flex justify-between items-center'>
           <div className='space-y-4'>
@@ -52,7 +52,7 @@ function Hero() {
             ))}
           </ul>
         </div>
-        <p className="text-sm max-w-xl text-justify [hyphens:auto] [word-break:break-word] [text-justify:inter-word]">
+        <p className="text-sm text-justify [hyphens:auto] [word-break:break-word] [text-justify:inter-word]">
           I enjoy creating thoughtful solutions. I&apos;ve worked with Next.js, Supabase, Tailwind to build modern, responsive websites that balance performance with design. I focus on transforming ideas into clean, scalable solutions that users enjoy. I&apos;m always learning from debugging tricky issues to exploring new frameworks and technologies that can make my work even better.
         </p>
 

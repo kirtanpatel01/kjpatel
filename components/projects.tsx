@@ -46,7 +46,7 @@ function Projects() {
     <div>
       <ul className="flex flex-col gap-12">
         {projects.map((project) => (
-          <li key={project.title} className="max-w-xl lg:max-w-full mx-auto flex flex-col lg:flex-row lg:gap-10">
+          <li key={project.title} className="flex flex-col lg:flex-row lg:gap-10">
             <div className="flex flex-col gap-2">
               <span className="text-xs opacity-75">{project.type}</span>
               <Image src={project.src} alt={project.title} width={800} height={600} className="max-w-96 w-full rounded-lg" />
@@ -56,20 +56,20 @@ function Projects() {
                 <h1 className="text-lg font-bold">{project.title}</h1>
                 <p className="text-sm max-w-3xl text-justify">{project.desc}</p>
               </div>
-              <div className="flex items-center gap-6 dark:bg-slate-700/75 w-fit p-4 rounded border border-border">
+              <div className="flex items-center gap-6">
                 {project.tech.map((t) => (
                   <Image key={t} src={t} alt={t} width={25} height={25} className="rounded-full" />
                 ))}
               </div>
               <div className="space-x-4 text-black dark:text-white">
                 <Link href={project.live} target="_blank">
-                  <button className="relative bg-green-500 dark:bg-green-400/50 px-4 py-2 rounded border border-green-600 cursor-pointer">
+                  <button className="relative bg-green-500 dark:bg-green-400/50 px-2 py-1 rounded border border-green-600 cursor-pointer">
                   <div className="absolute -top-1 -left-1 h-1.5 w-1.5 rounded-full bg-green-400 animate-ping"></div>
                     Live
                   </button>
                 </Link>
                 <Link href={project.git} target="_blank">
-                  <button className="bg-orange-400 dark:bg-orange-500/50 px-4 py-2 rounded border border-orange-600 cursor-pointer">Github</button>
+                  <button className="bg-orange-400 dark:bg-orange-500/50 px-2 py-1 rounded border border-orange-600 cursor-pointer">Github</button>
                 </Link>
               </div>
             </div>

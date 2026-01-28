@@ -62,7 +62,7 @@ function Skills() {
   ]
   
   return (
-    <div className="max-w-xl mx-auto border dark:border-0 border-border/15 rounded shadow-md shadow-cyan-400/25 dark:shadow-cyan-700/20 p-4 sm:py-12 bg-white dark:bg-slate-700/25">
+    <div className="border dark:border-0 border-border/15 rounded shadow-md shadow-cyan-400/25 dark:shadow-cyan-700/20 p-4 sm:py-12 bg-white dark:bg-slate-700/25">
       <ul className="flex flex-col sm:flex-row justify-evenly gap-6">
         {skills.map((skill) => (
           <li key={skill.title} className="w-full flex flex-col items-start sm:items-center gap-2 sm:gap-6 md:px-4">
