@@ -40,7 +40,7 @@ export default function Cursor() {
         el.removeEventListener("mouseleave", handleHoverEnd);
       });
     };
-  }, []); // Re-run if DOM changes significantly (simplification for now)
+  }, []);
 
   return (
     <motion.div

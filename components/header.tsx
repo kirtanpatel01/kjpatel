@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { ModeToggle } from "./mode-theme";
+import { ModeToggle } from "./mode-toggle";
 import { motion } from "motion/react";
 
 export default function Header() {
