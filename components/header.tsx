@@ -7,9 +7,7 @@ import { motion } from "motion/react";
 export default function Header() {
   return (
     <motion.header 
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      // Removed animation for visual consistency and LCP
       className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
     >
       <div className="pointer-events-auto flex items-center gap-6 px-4 sm:px-6 py-3 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-lg transition-transform hover:scale-105 duration-300">

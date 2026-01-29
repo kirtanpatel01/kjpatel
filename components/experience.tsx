@@ -18,7 +18,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-24 border-t border-border">
       <div className="flex items-baseline justify-between mb-16">
-         <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">01 / Experience</h2>
+         <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">01 / Full Stack Experience</h2>
       </div>
 
       <div 

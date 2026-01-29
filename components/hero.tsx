@@ -34,9 +34,7 @@ export default function Hero() {
     >
       <div className="w-full max-w-[90vw] lg:max-w-7xl px-6">
         <motion.div
-           initial={{ opacity: 0, scale: 0.95 }}
-           animate={{ opacity: 1, scale: 1 }}
-           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+           // LCP Optimization: Remove initial opacity: 0 for immediate render
            className="relative pointer-events-auto"
         >
            {/* 
@@ -44,20 +42,19 @@ export default function Hero() {
               "K" and "P" are solid. Others are outlines.
               Grid layout for creative positioning.
            */}
-           <div className="flex flex-col w-full text-[clamp(4rem,14vw,13rem)] font-black leading-[0.85] tracking-tighter select-none mix-blend-difference text-foreground">
-              <div className="flex self-start">
+           <h1 className="flex flex-col w-full text-[clamp(4rem,14vw,13rem)] font-black leading-[0.85] tracking-tighter select-none mix-blend-difference text-foreground">
+              <span className="sr-only">Full Stack Developer specializing in React, Next.js, Node.js</span>
+              <div aria-hidden="true" className="flex self-start">
                   <Word text="KIRTAN" solidIndices={[0]} />
               </div>
-              <div className="flex self-end">
+              <div aria-hidden="true" className="flex self-end">
                   <Word text="PATEL" solidIndices={[0]} />
               </div>
-           </div>
+           </h1>
         </motion.div>
 
         <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            // Removed animation for visual consistency
             className="mt-16 sm:mt-24 flex flex-col sm:flex-row justify-between items-end border-t border-border pt-6 pointer-events-auto"
         >
             <div className="text-lg sm:text-xl font-medium leading-relaxed max-w-sm">

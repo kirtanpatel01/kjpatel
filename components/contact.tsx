@@ -60,9 +60,9 @@ export default function Contact() {
               <div className="flex flex-col gap-1">
                  <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Socials</h3>
                  <div className="flex flex-wrap gap-6">
-                    <a href="https://linkedin.com/in/kirtanpatel01" target="_blank" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">LinkedIn</a>
-                    <a href="https://github.com/kirtanpatel01" target="_blank" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">GitHub</a>
-                    <a href="https://x.com/_k_j_patel_" target="_blank" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">Twitter</a>
+                    <a href="https://linkedin.com/in/kirtanpatel01" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">LinkedIn</a>
+                    <a href="https://github.com/kirtanpatel01" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">GitHub</a>
+                    <a href="https://x.com/_k_j_patel_" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">Twitter</a>
                  </div>
               </div>
 

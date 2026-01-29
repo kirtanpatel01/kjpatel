@@ -62,6 +62,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
             <Link 
               href={project.link} 
               target="_blank"
+              rel="noopener noreferrer"
               onMouseMove={handleMouseMove}
               className="relative p-3 rounded-full border border-border bg-background flex items-center justify-center overflow-hidden hover:bg-[#ccff00] hover:text-black transition-colors"
             >
