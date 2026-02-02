@@ -78,15 +78,13 @@ export default function Projects() {
   const projects = [
     {
       title: "Gali Gali Info",
-      category: "Commerce",
-      description: "Hyper-local traffic analysis and product promotion platform.",
+      description: "Local traffic analysis and product promotion platform.",
       tech: "React / Node / MongoDB",
       link: "https://galigaliinfo.vercel.app/",
       year: "2024"
     },
     {
       title: "Fit Care",
-      category: "Health",
       description: "AI-powered diet and workout planner with metabolic tracking.",
       tech: "Next.js / Supabase / AI",
       link: "https://fitcare-alpha.vercel.app/",

@@ -59,14 +59,14 @@ export default function Hero() {
         >
             <div className="text-lg sm:text-xl font-medium leading-relaxed max-w-sm">
                <span className="block text-muted-foreground mb-1 text-xs uppercase tracking-widest font-mono">Role</span>
-               Full Stack Developer &<br />
-               Digital Craftsman.
+               Full Stack Developer
+               {/* Digital Craftsman. */}
             </div>
 
-            <div className="text-right mt-8 sm:mt-0">
+            {/* <div className="text-right mt-8 sm:mt-0">
                <span className="block text-muted-foreground mb-1 text-xs uppercase tracking-widest font-mono">Based In</span>
                India, Earth
-            </div>
+            </div> */}
         </motion.div>
       </div>
     </motion.section>

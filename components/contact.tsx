@@ -65,13 +65,6 @@ export default function Contact() {
                     <a href="https://x.com/_k_j_patel_" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:underline underline-offset-4 decoration-1">Twitter</a>
                  </div>
               </div>
-
-              <div className="pt-8 border-t border-border/50">
-                 <p className="text-sm text-muted-foreground">
-                   Based in Vadodara, India<br/>
-                   &copy; {new Date().getFullYear()} KJ_Patel.
-                 </p>
-              </div>
            </div>
         </div>
 
