@@ -17,14 +17,14 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 border-t border-border">
       <div className="mb-16">
-        <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">03 / Expertise</h2>
+        <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">03 / Skills</h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-l border-t border-border">
         {skills.map((skill, index) => (
           <div
             key={skill.name}
-            className="group relative h-48 border-r border-b border-border p-8 flex flex-col justify-between cursor-default overflow-hidden hover:bg-[#ccff00] transition-colors duration-300"
+            className="group relative h-48 border-r border-b border-border p-8 flex flex-col justify-between cursor-default overflow-hidden hover:bg-primary transition-colors duration-300"
           >
             <div className="flex justify-between items-start">
               <span className="text-xs font-mono text-muted-foreground group-hover:text-black transition-colors">

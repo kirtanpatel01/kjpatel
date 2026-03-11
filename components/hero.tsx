@@ -12,7 +12,7 @@ const Word = ({ text, solidIndices }: { text: string; solidIndices: number[] }) 
           className={`transition-all duration-700 ${
              solidIndices.includes(i) 
              ? "text-foreground" // Solid key char
-             : "text-foreground/15 hover:text-[#ccff00]" // Hover turns Neon Lime
+             : "text-foreground/15 hover:text-primary" // Hover turns Neon Lime
           }`}
         >
           {char}

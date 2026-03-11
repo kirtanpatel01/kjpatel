@@ -35,8 +35,8 @@
   --card-foreground: #09090b;
   --popover: #ffffff;
   --popover-foreground: #09090b;
-  --primary: #09090b;
-  --primary-foreground: #ffffff;
+  --primary: #ccff00;
+  --primary-foreground: #000000;
   --secondary: #f4f4f5; /* Zinc 100 */
   --secondary-foreground: #18181b; /* Zinc 900 */
   --muted: #f4f4f5;
@@ -59,7 +59,7 @@
   --card-foreground: #ffffff;
   --popover: #09090b;
   --popover-foreground: #ffffff;
-  --primary: #ffffff;
+  --primary: #adcf22;
   --primary-foreground: #09090b;
   --secondary: #27272a; /* Zinc 800 */
   --secondary-foreground: #ffffff;

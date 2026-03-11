@@ -8,19 +8,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-      <div className="flex gap-4">
-         <span>© {new Date().getFullYear()} KJ_Patel</span>
-         <span>•</span>
-         <span>Vadodara, Gujarat, IN</span>
-      </div>
+    <footer className="py-8 border-t border-border flex flex-col md:flex-row justify-between items-start gap-4 text-xs font-mono tracking-widest text-muted-foreground">
+      <span>Built with ❤️ by Kirtan Patel</span>
 
-      <button 
-        onClick={scrollToTop} 
-        className="flex items-center gap-2 hover:text-foreground transition-colors group"
+      <button
+        onClick={scrollToTop}
+        className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer"
       >
         Back to Top
-        <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+        <ArrowUp className="w-3 h-3" />
       </button>
     </footer>
   );

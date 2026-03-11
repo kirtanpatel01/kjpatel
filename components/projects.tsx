@@ -39,7 +39,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
     <div 
       ref={ref}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-12 border-b border-border transition-colors hover:bg-secondary/20"
+      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-12 transition-colors hover:bg-secondary/20"
     >
       <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
         {project.year}
@@ -64,7 +64,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
               target="_blank"
               rel="noopener noreferrer"
               onMouseMove={handleMouseMove}
-              className="relative p-3 rounded-full border border-border bg-background flex items-center justify-center overflow-hidden hover:bg-[#ccff00] hover:text-black transition-colors"
+              className="relative p-3 rounded-full bg-background flex items-center justify-center overflow-hidden hover:bg-primary hover:text-black transition-colors"
             >
               <ArrowUpRight className="w-5 h-5 relative z-10" />
             </Link>
@@ -88,7 +88,7 @@ export default function Projects() {
       description: "ERP + POS + Inventory Management System",
       tech: "Next.js / Supabase / TailwindCSS ",
       link: "#",
-      year: "2026"
+      year: "2026 (Present)"
     },
   ];
 
@@ -98,7 +98,7 @@ export default function Projects() {
         <div className="flex items-baseline justify-between">
            <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">02 / Projects</h2>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col divide-y divide-border">
           {projects.map((project, index) => (
             <ProjectItem key={index} project={project} />
           ))}

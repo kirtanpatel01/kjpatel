@@ -44,7 +44,7 @@ export default function Cursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-4 h-4 rounded-full bg-[#ccff00] pointer-events-none z-[9999]"
+      className="fixed top-0 left-0 w-4 h-4 rounded-full bg-primary pointer-events-none z-[9999]"
       style={{
         translateX: cursorX,
         translateY: cursorY,
