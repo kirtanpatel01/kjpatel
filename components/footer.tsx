@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex gap-4">
          <span>© {new Date().getFullYear()} KJ_Patel</span>
          <span>•</span>
-         <span>Vadodara, Gujaratt, IN</span>
+         <span>Vadodara, Gujarat, IN</span>
       </div>
 
       <button 

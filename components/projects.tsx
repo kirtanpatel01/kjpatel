@@ -77,18 +77,18 @@ const ProjectItem = ({ project }: { project: Project }) => {
 export default function Projects() {
   const projects = [
     {
-      title: "Gali Gali Info",
-      description: "Local traffic analysis and product promotion platform.",
-      tech: "React / Node / MongoDB",
-      link: "https://galigaliinfo.vercel.app/",
-      year: "2024"
+      title: "Upcurve",
+      description: "Tracking platform for todos, habits, and exercises.",
+      tech: "Next.js / NeonDB / DrizzleORM ",
+      link: "https://upcurve-xi.vercel.app",
+      year: "2026"
     },
     {
-      title: "Fit Care",
-      description: "AI-powered diet and workout planner with metabolic tracking.",
-      tech: "Next.js / Supabase / AI",
-      link: "https://fitcare-alpha.vercel.app/",
-      year: "2023"
+      title: "Morganize",
+      description: "ERP + POS + Inventory Management System",
+      tech: "Next.js / Supabase / TailwindCSS ",
+      link: "#",
+      year: "2026"
     },
   ];
 

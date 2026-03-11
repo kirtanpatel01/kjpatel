@@ -25,7 +25,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kjpatel.vercel.app"),
   title: {
-    default: "Kirtan Patel | Full Stack Developer",
+    default: "Kirtan Patel",
     template: "%s | Kirtan Patel"
   },
   description: "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman tailored for high-performance web experiences.",
@@ -68,7 +68,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
-          <Cursor />
+          {/* <Cursor /> */}
           <Header />
           <JsonLd />
           {children}
