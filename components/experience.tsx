@@ -1,5 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
+import SectionHeading from "./section-heading";
+import Container from "./container";
 
 const experiences = [
   {
@@ -79,16 +81,14 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
 
 export default function Experience() {
   return (
-    <section id="work" className="py-24 border-t border-border">
-      <div className="flex items-baseline justify-between mb-16">
-        <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">01 / Work</h2>
-      </div>
+    <Container id="work">
+      <SectionHeading>01 / Work</SectionHeading>
 
       <div className="flex flex-col">
         {experiences.map((exp, index) => (
           <ExperienceItem key={index} exp={exp} />
         ))}
       </div>
-    </section>
+    </Container>
   );
 }

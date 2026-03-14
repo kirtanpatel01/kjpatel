@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
+import SectionHeading from "./section-heading";
+import Container from "./container";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
@@ -37,13 +39,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 border-t border-border">
+    <Container id="contact">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         
         {/* Info Column */}
         <div className="flex flex-col h-full">
            <div className="mb-12">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6">04 / Contact</h2>
+              <SectionHeading>04 / Contact</SectionHeading>
               <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">
                 GET IN <br/> TOUCH.
               </h1>
@@ -110,13 +112,13 @@ export default function Contact() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-6 sm:p-8 border-t border-border bg-white hover:bg-primary flex items-center justify-between cursor-pointer text-black"
+            className="w-full p-6 sm:p-8 border-t border-border bg-white dark:bg-black hover:bg-primary flex items-center justify-between cursor-pointer text-black dark:text-white dark:hover:text-black"
           >
             <span>{loading ? "Sending..." : "Send Message"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </form>
       </div>
-    </section>
+    </Container>
   );
 }

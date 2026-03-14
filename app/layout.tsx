@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Source_Code_Pro, Outfit } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import Cursor from "@/components/cursor";
 import { Analytics } from "@vercel/analytics/react";
 import JsonLd from "@/components/json-ld";
+import Footer from "@/components/footer";
 
 const source = Source_Code_Pro({
   subsets: ["latin"],
@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.className} ${source.variable} antialiased bg-background`}
+        className={`${outfit.className} ${source.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -68,10 +68,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
-          {/* <Cursor /> */}
           <Header />
           <JsonLd />
           {children}
+          <Footer />
           <Analytics />
         </ThemeProvider>
       </body>

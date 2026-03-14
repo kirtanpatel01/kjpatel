@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
-import { motion } from "motion/react";
 import Image from "next/image";
 
 const navItems = [
@@ -15,18 +14,18 @@ const navItems = [
 
 export default function Header() {
   return (
-    <div className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 flex items-center justify-between gap-6 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-lg transition-transform duration-300 px-2 py-1">
+    <div className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 flex items-center justify-between gap-6 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-md shadow-slate-900/10 transition-transform duration-300 px-1.5 py-1">
 
       <Link href="/">
         <Image src="/logo.svg" alt="KJ_Patel" width={32} height={32} />
       </Link>
 
-      <nav className="flex items-center gap-6 text-muted-foreground">
+      <nav className="flex items-center gap-6">
         {navItems.map((item) => (
           <Link
             key={item.name}
             href={item.href}
-            className={`hover:text-primary transition-colors text-shadow-black/5 text-shadow-md tracking-tight px-2 py-1 ${item.hiddenOnMobile ? "hidden sm:block" : ""
+            className={`text-muted-foreground hover:text-red-600 dark:hover:text-primary transition-colors text-shadow-black/5 tracking-wider px-2 py-1 ${item.hiddenOnMobile ? "hidden sm:block" : ""
               }`}
           >
             {item.name}

@@ -1,5 +1,8 @@
 "use client";
 
+import Container from "./container";
+import SectionHeading from "./section-heading";
+
 const skills = [
   { name: "TypeScript", category: "Language" },
   { name: "React.js", category: "Frontend" },
@@ -15,16 +18,13 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 border-t border-border">
-      <div className="mb-16">
-        <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">03 / Skills</h2>
-      </div>
-
+    <Container id="skills">
+      <SectionHeading>03 / Skills</SectionHeading>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-l border-t border-border">
         {skills.map((skill, index) => (
           <div
             key={skill.name}
-            className="group relative h-48 border-r border-b border-border p-8 flex flex-col justify-between cursor-default overflow-hidden hover:bg-primary transition-colors duration-300"
+            className="group relative h-48 border-r border-b border-border p-8 flex flex-col justify-between"
           >
             <div className="flex justify-between items-start">
               <span className="text-xs font-mono text-muted-foreground group-hover:text-black transition-colors">
@@ -44,6 +44,6 @@ export default function Skills() {
           </div>
         ))}
       </div>
-    </section>
+    </Container>
   );
 }

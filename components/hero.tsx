@@ -1,74 +1,9 @@
-"use client";
-import React from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-
-// Word Component
-const Word = ({ text, solidIndices }: { text: string; solidIndices: number[] }) => {
-  return (
-    <span className="inline-flex group items-baseline">
-      {text.split("").map((char, i) => (
-        <span 
-          key={i} 
-          className={`transition-all duration-700 ${
-             solidIndices.includes(i) 
-             ? "text-foreground" // Solid key char
-             : "text-foreground/15 hover:text-primary" // Hover turns Neon Lime
-          }`}
-        >
-          {char}
-        </span>
-      ))}
-    </span>
-  );
-};
+import Container from "./container";
 
 export default function Hero() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 200]); 
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
   return (
-    <motion.section 
-        style={{ y, opacity }}
-        className="fixed top-0 left-0 w-full h-[100vh] flex flex-col justify-center items-center z-0 pointer-events-none"
-    >
-      <div className="w-full max-w-[90vw] lg:max-w-7xl px-6">
-        <motion.div
-           // LCP Optimization: Remove initial opacity: 0 for immediate render
-           className="relative pointer-events-auto"
-        >
-           {/* 
-              Creative Concept: "Key Characters"
-              "K" and "P" are solid. Others are outlines.
-              Grid layout for creative positioning.
-           */}
-           <h1 className="flex flex-col w-full text-[clamp(4rem,14vw,13rem)] font-black leading-[0.85] tracking-tighter select-none mix-blend-difference text-foreground">
-              <span className="sr-only">Full Stack Developer specializing in React, Next.js, Node.js</span>
-              <div aria-hidden="true" className="flex self-start">
-                  <Word text="KIRTAN" solidIndices={[0]} />
-              </div>
-              <div aria-hidden="true" className="flex self-end">
-                  <Word text="PATEL" solidIndices={[0]} />
-              </div>
-           </h1>
-        </motion.div>
-
-        <motion.div 
-            // Removed animation for visual consistency
-            className="mt-16 sm:mt-24 flex flex-col sm:flex-row justify-between items-end border-t border-border pt-6 pointer-events-auto"
-        >
-            <div className="text-lg sm:text-xl font-medium leading-relaxed max-w-sm">
-               <span className="block text-muted-foreground mb-1 text-xs uppercase tracking-widest font-mono">Role</span>
-               Full Stack Developer
-               {/* Digital Craftsman. */}
-            </div>
-
-            {/* <div className="text-right mt-8 sm:mt-0">
-               <span className="block text-muted-foreground mb-1 text-xs uppercase tracking-widest font-mono">Based In</span>
-               India, Earth
-            </div> */}
-        </motion.div>
-      </div>
-    </motion.section>
+    <Container>
+      <h1 className="text-9xl font-black text-center">Kirtan Patel</h1>
+    </Container>
   );
 }
