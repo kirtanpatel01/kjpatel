@@ -37,7 +37,7 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative border border-border p-8 sm:p-12 overflow-hidden bg-background mb-4 last:mb-0 transition-colors hover:border-foreground/20"
+      className="group relative border border-border p-4 sm:p-12 overflow-hidden bg-background mb-4 last:mb-0 transition-colors hover:border-foreground/20"
     >
       {/* Spotlight Gradient */}
       <div
@@ -82,12 +82,14 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
 export default function Experience() {
   return (
     <Container id="work">
-      <SectionHeading>01 / Work</SectionHeading>
+      <div className="px-4">
+        <SectionHeading>01 / Work</SectionHeading>
 
-      <div className="flex flex-col">
-        {experiences.map((exp, index) => (
-          <ExperienceItem key={index} exp={exp} />
-        ))}
+        <div className="flex flex-col">
+          {experiences.map((exp, index) => (
+            <ExperienceItem key={index} exp={exp} />
+          ))}
+        </div>
       </div>
     </Container>
   );

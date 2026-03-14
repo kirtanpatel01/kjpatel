@@ -40,18 +40,18 @@ export default function Contact() {
 
   return (
     <Container id="contact">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 lg:gap-24 px-4">
         
         {/* Info Column */}
         <div className="flex flex-col h-full">
-           <div className="mb-12">
+           <div className="mb-8 sm:mb-12">
               <SectionHeading>04 / Contact</SectionHeading>
               <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">
                 GET IN <br/> TOUCH.
               </h1>
            </div>
 
-           <div className="mt-auto space-y-8">
+           <div className="mt-auto space-y-4 sm:space-y-8">
               <div className="flex flex-col gap-1">
                  <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Email</h3>
                  <a href="mailto:kjptel200022@gmail.com" className="hover:underline underline-offset-4 decoration-1">
@@ -80,7 +80,7 @@ export default function Contact() {
               placeholder="mail@example.com"
               value={formData.from_name}
               onChange={handleChange}
-              className="w-full bg-transparent p-6 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-foreground transition-colors" />
           </div>
@@ -92,7 +92,7 @@ export default function Contact() {
               placeholder="Subject"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full bg-transparent p-6 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-foreground transition-colors" />
           </div>
@@ -105,14 +105,14 @@ export default function Contact() {
               placeholder="Message"
               value={formData.message}
               onChange={handleChange}
-              className="w-full h-full bg-transparent p-6 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
+              className="w-full h-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-6 sm:p-8 border-t border-border bg-white dark:bg-black hover:bg-primary flex items-center justify-between cursor-pointer text-black dark:text-white dark:hover:text-black"
+            className="w-full p-4 sm:p-8 border-t border-border bg-white dark:bg-black hover:bg-primary flex items-center justify-between cursor-pointer text-black dark:text-white dark:hover:text-black"
           >
             <span>{loading ? "Sending..." : "Send Message"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

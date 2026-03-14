@@ -41,7 +41,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
     <div
       ref={ref}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-12 transition-colors hover:bg-secondary/20"
+      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 transition-colors hover:bg-secondary/20"
     >
       <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
         {project.year}
@@ -96,11 +96,13 @@ export default function Projects() {
 
   return (
     <Container id="projects">
-      <SectionHeading>02 / Projects</SectionHeading>
-      <div className="flex flex-col divide-y divide-border">
-        {projects.map((project, index) => (
-          <ProjectItem key={index} project={project} />
-        ))}
+      <div className="px-4">
+        <SectionHeading>02 / Projects</SectionHeading>
+        <div className="flex flex-col divide-y divide-border">
+          {projects.map((project, index) => (
+            <ProjectItem key={index} project={project} />
+          ))}
+        </div>
       </div>
     </Container>
   );

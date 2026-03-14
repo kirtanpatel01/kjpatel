@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <Container>
-      <footer className="border-t border-border pt-2 flex flex-col md:flex-row justify-between items-start gap-4 text-xs font-mono tracking-widest text-muted-foreground bg-background">
+      <footer className="border-t border-border pt-2 flex flex-col md:flex-row justify-between items-start gap-4 text-xs font-mono tracking-widest text-muted-foreground bg-background px-4">
         <span>Built with ❤️ by Kirtan Patel</span>
 
         <button
