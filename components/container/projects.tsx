@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef } from "react";
-import SectionHeading from "./section-heading";
-import Container from "./container";
+import SectionHeading from "../section-heading";
+import Container from "../container";
 
 interface Project {
   year: string;
@@ -17,7 +17,6 @@ interface Project {
 const ProjectItem = ({ project }: { project: Project }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  // Magnetic Button Logic
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
@@ -41,7 +40,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
     <div
       ref={ref}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 transition-colors hover:bg-secondary/20"
+      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 px-4 transition-colors hover:bg-secondary/20"
     >
       <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
         {project.year}
@@ -96,13 +95,11 @@ export default function Projects() {
 
   return (
     <Container id="projects">
-      <div className="px-4">
-        <SectionHeading>02 / Projects</SectionHeading>
-        <div className="flex flex-col divide-y divide-border">
-          {projects.map((project, index) => (
-            <ProjectItem key={index} project={project} />
-          ))}
-        </div>
+      <SectionHeading>02 / Projects</SectionHeading>
+      <div className="flex flex-col divide-y divide-border">
+        {projects.map((project, index) => (
+          <ProjectItem key={index} project={project} />
+        ))}
       </div>
     </Container>
   );
