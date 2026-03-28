@@ -108,7 +108,7 @@ export default function Contact() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full p-4 sm:p-8 border-t border-border bg-white dark:bg-black hover:bg-primary flex items-center justify-between cursor-pointer text-black dark:text-white dark:hover:text-black"
+          className="w-full p-4 sm:p-8 border-t border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground"
         >
           <span>{loading ? "Sending..." : "Send Message"}</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

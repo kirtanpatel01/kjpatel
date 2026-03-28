@@ -25,7 +25,7 @@ export default function Header() {
           <Link
             key={item.name}
             href={item.href}
-            className={`text-muted-foreground hover:text-black dark:hover:text-white transition-colors tracking-wider px-2 py-1 ${item.hiddenOnMobile ? "hidden sm:block" : ""
+            className={`text-muted-foreground hover:text-foreground transition-colors tracking-wider px-2 py-1 ${item.hiddenOnMobile ? "hidden sm:block" : ""
               }`}
           >
             {item.name}
