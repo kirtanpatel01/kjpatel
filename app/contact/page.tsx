@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
+import {
+  FlexContainer,
+  PageContainer,
+  PageHeading,
+  ResponsiveText,
+} from "@/components/responsive-wrappers";
 
 
 export default function ContactPage() {
@@ -38,20 +44,21 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-8 xl:p-24 flex flex-col lg:flex-row lg:justify-between gap-12 sm:gap-24">
+    <PageContainer>
+      <FlexContainer direction="row" className="lg:justify-between">
       <div className="flex flex-col">
           <div className="mb-8 sm:mb-12">
-            <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">
+            <PageHeading className="text-5xl sm:text-7xl">
               GET IN <br /> TOUCH.
-            </h1>
+            </PageHeading>
           </div>
 
           <div className="mt-auto space-y-4 sm:space-y-8">
             <div className="flex flex-col gap-1">
               <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Email</h3>
-              <a href="mailto:kjptel200022@gmail.com" className="hover:underline underline-offset-4 decoration-1">
-                kjptel200022@gmail.com
-              </a>
+              <ResponsiveText size="sm" className="hover:underline underline-offset-4 decoration-1">
+                <a href="mailto:kjptel200022@gmail.com">kjptel200022@gmail.com</a>
+              </ResponsiveText>
             </div>
 
             <div className="flex flex-col gap-1">
@@ -112,6 +119,7 @@ export default function ContactPage() {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </form>
-    </div>
+      </FlexContainer>
+    </PageContainer>
   );
 }

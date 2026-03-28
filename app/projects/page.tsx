@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef } from "react";
+import { PageContainer } from "@/components/responsive-wrappers";
 
 interface Project {
   year: string;
@@ -133,10 +134,10 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-[calc(100vh-5.6rem)] p-0 sm:p-6 lg:p-24 flex flex-col divide-y divide-border">
+    <PageContainer className="p-0 sm:p-6 lg:p-24 flex flex-col divide-y divide-border">
       {projects.map((project, index) => (
         <ProjectItem key={index} project={project} />
       ))}
-    </div>
+    </PageContainer>
   );
 }

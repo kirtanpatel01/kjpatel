@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import { PageContainer } from "@/components/responsive-wrappers";
 
-function page() {
+function ShowcasePage() {
   return (
-    <div className='min-h-[calc(100vh-5.6rem)] p-4 sm:p-24 space-y-24'>page</div>
-  )
+    <PageContainer className="space-y-24">page</PageContainer>
+  );
 }
 
-export default page
+export default ShowcasePage;

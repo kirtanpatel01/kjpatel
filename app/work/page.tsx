@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import { PageContainer, ResponsiveText } from "@/components/responsive-wrappers";
 
 const experiences = [
   {
@@ -59,7 +60,9 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
         <div className="lg:col-span-6 space-y-2">
           <span className="font-mono text-sm tracking-widest text-muted-foreground uppercase">ROLE & COMPANY</span>
           <h3 className="text-xl sm:text-4xl font-black uppercase leading-tight">{exp.role}</h3>
-          <p className="text-xl text-foreground/80">{exp.company}</p>
+          <ResponsiveText size="base" className="text-foreground/80">
+            {exp.company}
+          </ResponsiveText>
 
           <ul className="mt-8 space-y-2 list-disc list-inside text-muted-foreground marker:text-foreground">
             {exp.responsibilities.map((resp, i) => (
@@ -79,10 +82,10 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
 
 export default function WorkPage() {
   return (
-    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-8 lg:p-24 flex flex-col divide-y divide-border">
+    <PageContainer className="flex flex-col divide-y divide-border">
       {experiences.map((exp, index) => (
         <ExperienceItem key={index} exp={exp} />
       ))}
-    </div>
+    </PageContainer>
   );
 }
