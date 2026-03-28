@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
-import { div } from "motion/react-client";
+
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-24 flex justify-between">
+    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-8 xl:p-24 flex flex-col lg:flex-row lg:justify-between gap-12 sm:gap-24">
       <div className="flex flex-col">
           <div className="mb-8 sm:mb-12">
             <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">

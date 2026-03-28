@@ -52,7 +52,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
     <div
       ref={ref}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 px-4 transition-colors hover:bg-secondary/20 "
+      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-8 lg:py-12 px-4 transition-colors hover:bg-secondary/20 "
     >
       <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
         {project.year}
@@ -90,7 +90,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
         {project.description}
       </div>
 
-      <div className="md:col-span-1 flex justify-end pt-1">
+      <div className="absolute top-0 right-0 md:relative md:col-span-1 flex justify-end pt-1">
         <motion.div style={{ x: springX, y: springY }}>
           <Link
             href={project.link}
@@ -133,7 +133,7 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-24 flex flex-col divide-y divide-border">
+    <div className="min-h-[calc(100vh-5.6rem)] p-0 sm:p-6 lg:p-24 flex flex-col divide-y divide-border">
       {projects.map((project, index) => (
         <ProjectItem key={index} project={project} />
       ))}

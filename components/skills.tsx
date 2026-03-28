@@ -28,11 +28,11 @@ import {
 
 export default function Skills() {
   return (
-    <div className="my-16 max-w-2xl">
+    <div className="my-8 sm:my-16 max-w-2xl">
       <h3 className="text-xl font-bold font-mono">Tech</h3>
       <p className="mt-2 text-foreground/80">The stack I use to engineer modern, high-performance web experiences.</p>
 
-      <div className="flex flex-wrap items-center mt-8 gap-6 sm:gap-8">
+      <div className="flex flex-wrap items-center mt-6 sm:mt-8 gap-6 sm:gap-8">
         {skills.map((skill) => (
           <Tooltip key={skill.name}>
             <TooltipTrigger asChild>
