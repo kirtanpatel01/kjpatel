@@ -48,7 +48,7 @@
   --border: #e4e4e7; /* Zinc 200 */
   --input: #e4e4e7;
   --ring: #09090b;
-  --radius: 0rem; /* Sharp edges for Swiss style */
+  --radius: 0.5rem; /* Sharp edges for Swiss style */
 }
 
 .dark {

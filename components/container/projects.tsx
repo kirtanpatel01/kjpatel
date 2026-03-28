@@ -10,9 +10,23 @@ interface Project {
   year: string;
   title: string;
   description: string;
-  tech: string;
+  tech: string[];
   link: string;
 }
+
+const techMap: Record<string, { icon?: string; image?: string; color: string }> = {
+  "Next.js": { icon: "devicon-nextjs-plain", color: "#000000" },
+  "NeonDB": { image: "/logos/neon.svg", color: "#00e0d9" },
+  "DrizzleORM": { image: "/logos/drizzle.svg", color: "#c5f74f" },
+  "Supabase": { icon: "devicon-supabase-plain", color: "#3ecf8e" },
+  "TailwindCSS": { icon: "devicon-tailwindcss-original", color: "#06b6d4" },
+  "TypeScript": { icon: "devicon-typescript-plain", color: "#3178c6" },
+  "React.js": { icon: "devicon-react-original", color: "#61dafb" },
+  "Node.js": { icon: "devicon-nodejs-plain", color: "#339933" },
+  "Express.js": { icon: "devicon-express-original", color: "#999999" },
+  "MongoDB": { icon: "devicon-mongodb-plain", color: "#47a248" },
+  "Tanstack Start": { image: "/logos/tanstack.svg", color: "#ffb000" },
+};
 
 const ProjectItem = ({ project }: { project: Project }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,7 +54,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
     <div
       ref={ref}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 px-4 transition-colors hover:bg-secondary/20"
+      className="group relative grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-8 py-4 sm:py-12 px-4 transition-colors hover:bg-secondary/20 "
     >
       <div className="md:col-span-2 text-sm font-mono text-muted-foreground pt-1">
         {project.year}
@@ -51,7 +65,27 @@ const ProjectItem = ({ project }: { project: Project }) => {
           {project.title}
         </h3>
 
-        <span className="text-sm text-muted-foreground">{project.tech}</span>
+        <div className="w-fit flex items-center gap-2 mt-2">
+          {project.tech.map((t) => {
+            const tech = techMap[t];
+            if (!tech) return <span key={t} className="text-xs text-muted-foreground">{t}</span>;
+            
+            return (
+              <div 
+                key={t} 
+                className="group/icon relative flex items-center justify-center p-2 rounded-full border border-border bg-accent/50 hover:bg-accent/60 shadow-sm" 
+                title={t}
+              >
+                 {tech.icon ? (
+                  <i className={`${tech.icon} text-lg`} style={{ color: tech.color }} />
+                ) : tech.image ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={tech.image} alt={t} className="w-4 h-4" />
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="md:col-span-4 text-base leading-relaxed text-secondary-foreground/80">
@@ -76,18 +110,25 @@ const ProjectItem = ({ project }: { project: Project }) => {
 };
 
 export default function Projects() {
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Upcurve",
       description: "Tracking platform for todos, habits, and exercises.",
-      tech: "Next.js / NeonDB / DrizzleORM ",
+      tech: ["Next.js", "NeonDB", "DrizzleORM"],
       link: "https://upcurve-xi.vercel.app",
       year: "2026"
     },
     {
       title: "Morganize",
       description: "ERP + POS + Inventory Management System",
-      tech: "Next.js / Supabase / TailwindCSS ",
+      tech: ["Next.js", "Supabase", "TailwindCSS"],
+      link: "#",
+      year: "2026 (Present)"
+    },
+    {
+      title: "Kivio",
+      description: "Youtube alternative for distraction free watching experience",
+      tech: ["Tanstack Start", "TailwindCSS", "DrizzleORM", "NeonDB"],
       link: "#",
       year: "2026 (Present)"
     },
@@ -95,8 +136,8 @@ export default function Projects() {
 
   return (
     <Container id="projects">
-      <SectionHeading>02 / Projects</SectionHeading>
-      <div className="flex flex-col divide-y divide-border">
+      <SectionHeading>00 / Projects</SectionHeading>
+      <div className="flex flex-col mt-8 divide-y divide-border">
         {projects.map((project, index) => (
           <ProjectItem key={index} project={project} />
         ))}

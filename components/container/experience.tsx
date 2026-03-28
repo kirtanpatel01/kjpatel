@@ -82,7 +82,7 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
 export default function Experience() {
   return (
     <Container id="work">
-      <SectionHeading>01 / Work</SectionHeading>
+      <SectionHeading>02 / Work</SectionHeading>
 
       <div className="flex flex-col">
         {experiences.map((exp, index) => (

@@ -6,15 +6,15 @@ import { ModeToggle } from "./mode-toggle";
 import Image from "next/image";
 
 const navItems = [
-  { name: "Work", href: "#work" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills", hiddenOnMobile: true },
+  { name: "Work", href: "#work" },
   { name: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
   return (
-    <div className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 flex items-center justify-between gap-6 rounded-full bg-background/80 backdrop-blur-md border border-border/50 transition-transform duration-300 px-1.5 py-1">
+    <div className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 flex items-center justify-between gap-6 rounded-full bg-background/80 backdrop-blur-md border border-border transition-transform duration-300 px-1.5 py-1">
 
       <Link href="/">
         <Image src="/logo.svg" alt="KJ_Patel" width={32} height={32} />

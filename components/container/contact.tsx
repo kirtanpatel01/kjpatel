@@ -42,7 +42,7 @@ export default function Contact() {
     <Container id="contact" className="flex flex-col lg:flex-row justify-between gap-8 sm:gap-8 lg:gap-24">
       <div className="flex flex-col">
         <div className="mb-8 sm:mb-12">
-          <SectionHeading>04 / Contact</SectionHeading>
+          <SectionHeading>03 / Contact</SectionHeading>
           <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground text-balance">
             GET IN <br /> TOUCH.
           </h1>
