@@ -3,8 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef } from "react";
-import SectionHeading from "../section-heading";
-import Container from "../container";
 
 interface Project {
   year: string;
@@ -69,14 +67,14 @@ const ProjectItem = ({ project }: { project: Project }) => {
           {project.tech.map((t) => {
             const tech = techMap[t];
             if (!tech) return <span key={t} className="text-xs text-muted-foreground">{t}</span>;
-            
+
             return (
-              <div 
-                key={t} 
-                className="group/icon relative flex items-center justify-center p-2 rounded-full border border-border bg-accent/50 hover:bg-accent/60 shadow-sm" 
+              <div
+                key={t}
+                className="group/icon relative flex items-center justify-center p-2 rounded-full border border-border bg-accent/50 hover:bg-accent/60 shadow-sm"
                 title={t}
               >
-                 {tech.icon ? (
+                {tech.icon ? (
                   <i className={`${tech.icon} text-lg`} style={{ color: tech.color }} />
                 ) : tech.image ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
@@ -109,7 +107,7 @@ const ProjectItem = ({ project }: { project: Project }) => {
   );
 };
 
-export default function Projects() {
+export default function ProjectsPage() {
   const projects: Project[] = [
     {
       title: "Upcurve",
@@ -135,13 +133,10 @@ export default function Projects() {
   ];
 
   return (
-    <Container id="projects">
-      <SectionHeading>00 / Projects</SectionHeading>
-      <div className="flex flex-col mt-8 divide-y divide-border">
-        {projects.map((project, index) => (
-          <ProjectItem key={index} project={project} />
-        ))}
-      </div>
-    </Container>
+    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-24 flex flex-col divide-y divide-border">
+      {projects.map((project, index) => (
+        <ProjectItem key={index} project={project} />
+      ))}
+    </div>
   );
 }

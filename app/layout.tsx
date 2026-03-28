@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import JsonLd from "@/components/json-ld";
 import Footer from "@/components/footer";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const source = Source_Code_Pro({
   subsets: ["latin"],
@@ -72,8 +73,10 @@ export default function RootLayout({
         >
           <Toaster richColors />
           <Header />
-          <JsonLd />
-          {children}
+          <TooltipProvider>
+            <JsonLd />
+            {children}
+          </TooltipProvider>
           <Footer />
           <Analytics />
         </ThemeProvider>

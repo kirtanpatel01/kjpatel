@@ -1,7 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import SectionHeading from "../section-heading";
-import Container from "../container";
 
 const experiences = [
   {
@@ -37,7 +35,7 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative border border-border p-4 sm:p-12 overflow-hidden bg-background mb-4 last:mb-0 transition-colors hover:border-foreground/20"
+      className="group relative p-4 sm:p-12 overflow-hidden bg-background mb-4 last:mb-0 transition-colors hover:border-foreground/20"
     >
       {/* Spotlight Gradient */}
       <div
@@ -79,16 +77,12 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
   );
 };
 
-export default function Experience() {
+export default function WorkPage() {
   return (
-    <Container id="work">
-      <SectionHeading>02 / Work</SectionHeading>
-
-      <div className="flex flex-col">
-        {experiences.map((exp, index) => (
-          <ExperienceItem key={index} exp={exp} />
-        ))}
-      </div>
-    </Container>
+    <div className="min-h-[calc(100vh-5.6rem)] p-4 sm:p-24 flex flex-col">
+      {experiences.map((exp, index) => (
+        <ExperienceItem key={index} exp={exp} />
+      ))}
+    </div>
   );
 }
