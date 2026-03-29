@@ -127,3 +127,12 @@ body {
   @apply bg-background text-foreground;
 }
 }
+
+@layer utilities {
+  .icon-mask {
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    background-color: currentColor;
+  }
+}

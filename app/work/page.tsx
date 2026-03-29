@@ -1,22 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import { PageContainer, ResponsiveText } from "@/components/responsive-wrappers";
+import { experiences, type Experience } from "@/lib/constants.ts";
 
-const experiences = [
-  {
-    period: "JAN 2026 — PRESENT",
-    role: "Full Stack Web Developer",
-    company: "Algorion Research and Analysis Pvt. Ltd.",
-    location: "Remote",
-    responsibilities: [
-      "Building and maintaining full-stack web applications.",
-      "Developing frontend applications using React & Next.js.",
-      "Building ERP + POS + Inventory Management System.",
-    ]
-  }
-];
-
-const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
+const ExperienceItem = ({ exp }: { exp: Experience }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
@@ -36,14 +23,14 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative overflow-hidden bg-background p-0 lg:p-12 transition-colors hover:bg-secondary/10"
+      className="group relative overflow-hidden bg-background sm:p-16 sm:border border-border/45 sm:shadow shadow-primary/5 transition-colors hover:bg-secondary/10"
     >
       {/* Spotlight Gradient */}
       <div
         className="pointer-events-none absolute -inset-px transition opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(120, 120, 120, 0.1), transparent 40%)`
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(67, 45, 215, 0.1), transparent 40%)`
         }}
       />
 
@@ -51,7 +38,7 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
       <div className="absolute top-1/2 -left-3 w-6 h-6 bg-background rounded-full border-r border-border z-10 hidden sm:block" />
       <div className="absolute top-1/2 -right-3 w-6 h-6 bg-background rounded-full border-l border-border z-10 hidden sm:block" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-12 items-start relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-start relative z-10">
         <div className="lg:col-span-3">
           <span className="font-mono text-sm tracking-widest text-muted-foreground block">PERIOD</span>
           <span className="text-sm sm:text-lg font-bold uppercase">{exp.period}</span>
@@ -82,7 +69,7 @@ const ExperienceItem = ({ exp }: { exp: typeof experiences[0] }) => {
 
 export default function WorkPage() {
   return (
-    <PageContainer className="flex flex-col divide-y divide-border">
+    <PageContainer className="flex flex-col sm:items-center sm:justify-center divide-y divide-border">
       {experiences.map((exp, index) => (
         <ExperienceItem key={index} exp={exp} />
       ))}

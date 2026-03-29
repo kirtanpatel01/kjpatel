@@ -1,0 +1,16 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="nextjs-mask">
+      <!-- Base: Everything white will be visible -->
+      <circle cx="50" cy="50" r="48" fill="white" />
+      
+      <!-- Punch-out: Everything black will be a 'hole' -->
+      <!-- These are the paths for the 'N' and the line -->
+      <path d="M79.0766 83.2604 37.1077 29.2h-7.9075v37.5843h6.326V37.2336l38.5846 49.8521c1.7411-1.1651 3.3996-2.444 4.9658-3.8253Z" fill="black" />
+      <path d="M67.3228 29.2h-6.2666v37.5999h6.2666V29.2Z" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- We draw one solid white circle and apply the mask -->
+  <circle cx="50" cy="50" r="48" fill="white" mask="url(#nextjs-mask)" />
+</svg>

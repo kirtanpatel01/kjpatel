@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * PageContainer - Standardized responsive padding for page content
- * Mobile: p-4, Tablet: p-8, Desktop: p-24
+ * Mobile: p-4, Tablet: p-6, Desktop: p-24
  */
 export function PageContainer({
   children,
@@ -13,7 +13,7 @@ export function PageContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("min-h-[calc(100vh-5.6rem)] p-4 sm:p-8 lg:p-24", className)}>
+    <div className={cn("min-h-[calc(100vh-7.1rem)] sm:min-h-[calc(100vh-5.6rem)] p-4 sm:p-6", className)}>
       {children}
     </div>
   );
@@ -89,7 +89,7 @@ export function ResponsiveGrid({
       className={cn(
         "grid grid-cols-1",
         colsClass,
-        "gap-4 sm:gap-6 lg:gap-8",
+        "gap-4 sm:gap-6",
         className
       )}
     >
@@ -118,7 +118,7 @@ export function FlexContainer({
       className={cn(
         "flex flex-col",
         dirClass,
-        "gap-8 sm:gap-12 lg:gap-24",
+        "gap-6",
         className
       )}
     >
@@ -129,7 +129,7 @@ export function FlexContainer({
 
 /**
  * SectionSpacing - Consistent vertical spacing between sections
- * Mobile: py-4, Tablet: py-8, Desktop: py-12
+ * Mobile: py-4, Tablet: py-6, Desktop: py-12
  */
 export function SectionSpacing({
   children,
@@ -139,7 +139,7 @@ export function SectionSpacing({
   className?: string;
 }) {
   return (
-    <section className={cn("py-4 sm:py-8 lg:py-12", className)}>
+    <section className={cn("py-4 sm:py-6", className)}>
       {children}
     </section>
   );

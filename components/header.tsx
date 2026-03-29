@@ -6,37 +6,47 @@ import { ModeToggle } from "./mode-toggle";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
+  { name: "Showcase", href: "/showcase" },
   { name: "Work", href: "/work" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
   const pathname = usePathname();
+  const basePath = `/${pathname.split("/")[1] || ""}`;
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
       <div className="flex items-center gap-10">
         <Link href="/" className="shrink-0 flex items-center justify-center">
-          <Image src="/logo.svg" alt="KJ_Patel" width={32} height={32} />
+          <div 
+            className="w-8 h-8 icon-mask" 
+            style={{ maskImage: "url(/logo.svg)", WebkitMaskImage: "url(/logo.svg)" }} 
+          />
         </Link>
 
+
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = basePath === item.href;
+
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-[15px] px-3 py-1.5 rounded-full tracking-widest transition-colors ${isActive
-                  ? "bg-accent/50 shadow-sm"
-                  : "hover:bg-accent/30"
-                  }`}
+                className={cn("text-[15px] px-3 py-1.5 rounded-full tracking-wider transition-colors", 
+                  isActive
+                    ? "bg-accent/50 shadow-sm text-primary font-semibold"
+                    : "hover:bg-accent/30"
+                )}
               >
                 {item.name}
               </Link>
@@ -63,7 +73,8 @@ export default function Header() {
         <nav className="absolute top-full left-0 right-0 border-b border-border bg-background md:hidden">
           <div className="flex flex-col gap-2 px-3 py-4">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = basePath === item.href;
+
               return (
                 <Link
                   key={item.name}

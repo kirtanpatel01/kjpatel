@@ -9,7 +9,8 @@ import {
   PageHeading,
   ResponsiveText,
 } from "@/components/responsive-wrappers";
-
+import { socialLinks } from "@/lib/constants.ts";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -44,16 +45,16 @@ export default function ContactPage() {
   };
 
   return (
-    <PageContainer>
-      <FlexContainer direction="row" className="lg:justify-between">
-      <div className="flex flex-col">
-          <div className="mb-8 sm:mb-12">
+    <PageContainer className="w-full flex justify-center items-center">
+      <FlexContainer direction="row" className="w-full max-w-6xl mx-auto lg:justify-between">
+        <div className="flex flex-col">
+          <div className="mb-6 sm:mb-12">
             <PageHeading className="text-5xl sm:text-7xl">
               GET IN <br /> TOUCH.
             </PageHeading>
           </div>
 
-          <div className="mt-auto space-y-4 sm:space-y-8">
+          <div className="mt-auto space-y-4 sm:space-y-6">
             <div className="flex flex-col gap-1">
               <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Email</h3>
               <ResponsiveText size="sm" className="hover:underline underline-offset-4 decoration-1">
@@ -63,14 +64,39 @@ export default function ContactPage() {
 
             <div className="flex flex-col gap-1">
               <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Socials</h3>
-              <div className="flex flex-wrap gap-6">
-                <a href="https://linkedin.com/in/kjpatel-dev" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4 decoration-1">LinkedIn</a>
-                <a href="https://github.com/kirtanpatel01" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4 decoration-1">GitHub</a>
-                <a href="https://x.com/kjpatel_dev" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4 decoration-1">Twitter</a>
+              <div className="flex flex-wrap gap-10">
+                {socialLinks.map((link) => (
+                  <Tooltip key={link.name}>
+                    <TooltipTrigger asChild>
+                      <a 
+                        href={link.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
+
+                      >
+
+                        {link.isNeutral ? (
+                          <div 
+                            className="w-8 h-8 icon-mask" 
+                            style={{ maskImage: `url(${link.icon})`, WebkitMaskImage: `url(${link.icon})` }}
+                          />
+                        ) : (
+                          <img src={link.icon} alt={link.name} className="w-8 h-8 object-contain" />
+                        )}
+
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      <p className="font-mono text-xs">{link.username}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
               </div>
             </div>
           </div>
         </div>
+
 
         <form onSubmit={sendEmail} className="w-full max-w-xl flex flex-col border border-border">
           <div className="group relative">
@@ -81,9 +107,9 @@ export default function ContactPage() {
               placeholder="mail@example.com"
               value={formData.from_name}
               onChange={handleChange}
-              className="w-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-foreground transition-colors" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
 
           <div className="group relative">
@@ -93,9 +119,9 @@ export default function ContactPage() {
               placeholder="Subject"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-foreground transition-colors" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
 
           <div className="group relative flex-grow">
@@ -106,14 +132,15 @@ export default function ContactPage() {
               placeholder="Message"
               value={formData.message}
               onChange={handleChange}
-              className="w-full h-full bg-transparent p-4 sm:p-8 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
+              className="w-full h-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
             />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-4 sm:p-8 border-t border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground"
+            className="w-full p-4 sm:p-6 border-t border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground"
           >
             <span>{loading ? "Sending..." : "Send Message"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
