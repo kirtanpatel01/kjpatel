@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { PageContainer, ResponsiveText } from "@/components/responsive-wrappers";
-import { experiences, type Experience } from "@/lib/constants.ts";
+import { experiences, type Experience } from "@/lib/constants";
 
 const ExperienceItem = ({ exp }: { exp: Experience }) => {
   const divRef = useRef<HTMLDivElement>(null);

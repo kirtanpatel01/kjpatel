@@ -1,6 +1,6 @@
 "use client";
 
-import { skills, type SkillCategory } from "@/lib/constants.ts";
+import { skills, type SkillCategory } from "@/lib/constants";
 import {
   Tooltip,
   TooltipContent,

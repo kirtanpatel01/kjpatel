@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef } from "react";
 import { PageContainer } from "@/components/responsive-wrappers";
-import { projects, techMap, type Project } from "@/lib/constants.ts";
+import { projects, techMap, type Project } from "@/lib/constants";
 
 const ProjectItem = ({ project }: { project: Project }) => {
   const ref = useRef<HTMLDivElement>(null);

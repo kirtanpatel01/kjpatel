@@ -1,7 +1,7 @@
 import React from "react";
 import { PageContainer, SectionHeading } from "@/components/responsive-wrappers";
 import Link from "next/link";
-import { showcaseIdeas, type ShowcaseIdea } from "@/lib/constants.ts";
+import { showcaseIdeas, type ShowcaseIdea } from "@/lib/constants";
 
 const ShowcaseItem = ({ idea }: { idea: ShowcaseIdea }) => {
   return (

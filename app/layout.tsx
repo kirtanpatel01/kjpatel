@@ -23,7 +23,7 @@ const outfit = Outfit({
   display: "swap",
 })
 
-import { siteMetadata } from "@/lib/constants.ts";
+import { siteMetadata } from "@/lib/constants";
 
 export const metadata: Metadata = siteMetadata;
 

@@ -9,7 +9,7 @@ import {
   PageHeading,
   ResponsiveText,
 } from "@/components/responsive-wrappers";
-import { socialLinks } from "@/lib/constants.ts";
+import { socialLinks } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function ContactPage() {
