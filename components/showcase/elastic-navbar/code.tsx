@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ModeToggle as ThemeToggle } from "@/components/mode-toggle";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import Browser from "../browser";
+import Browser from "../../browser";
 
 function PageWrapper({ children, className, center = true }: { children: React.ReactNode; className?: string; center?: boolean }) {
   return (
@@ -149,7 +149,15 @@ function ContactPage() {
 
 // --- Combined Simulator ---
 
-export default function ElasticNavbar() {
+export default function ElasticNavbar({
+  stiffness = 250,
+  damping = 35,
+  mass = 2,
+}: {
+  stiffness?: number;
+  damping?: number;
+  mass?: number;
+}) {
   const [currentPath, setCurrentPath] = useState("/");
   const [highlighted, setHighlighted] = useState<string | null>(null);
 
@@ -212,9 +220,9 @@ export default function ElasticNavbar() {
                         )}
                         transition={{
                           type: "spring",
-                          stiffness: 250,
-                          damping: 35,
-                          mass: 2
+                          stiffness,
+                          damping,
+                          mass
                         }}
                       />
                     )}

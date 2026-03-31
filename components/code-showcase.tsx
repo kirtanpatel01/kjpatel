@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react'
 import FileTreeItem, { FileNode } from './file-tree-item'
 import CodeBlock from './code-block'

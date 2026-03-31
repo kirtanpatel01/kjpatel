@@ -10,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
-import CodeShowcase from "@/components/code-showcase";
 import { showcaseIdeas } from "@/lib/constants/showcase-registry";
 
 export default function ShowcaseDetailPage() {
@@ -22,7 +21,7 @@ export default function ShowcaseDetailPage() {
 
   return (
     <PageContainer>
-      <Breadcrumb className="mb-4 border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
+      <Breadcrumb className="mb-8 border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink href="/showcase">Showcase</BreadcrumbLink>
@@ -35,13 +34,10 @@ export default function ShowcaseDetailPage() {
       </Breadcrumb>
 
       {activeIdea ? (
-        <CodeShowcase
-          fileData={activeIdea.fileData}
-          codeMapping={activeIdea.codeMapping}
-          previewComponent={activeIdea.previewComponent}
-          defaultFilePath={activeIdea.defaultFilePath}
-          defaultFileNode={activeIdea.defaultFileNode}
-        />
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          {/* The Content component now handles its own internal layout, including where CodeShowcase goes */}
+          {activeIdea.content}
+        </div>
       ) : (
         <div className="h-[600px] flex items-center justify-center border border-dashed rounded-xl text-muted-foreground italic">
           Coming soon: {slug}
