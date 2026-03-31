@@ -3,16 +3,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Kbd } from "./ui/kbd";
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Showcase", href: "/showcase" },
-  { name: "Work", href: "/work" },
+  // { name: "Work", href: "/work" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -56,7 +56,10 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-3">
-        <ModeToggle />
+        <div className="flex items-center gap-2">
+          <Kbd className="hidden md:flex">d</Kbd>
+          <ModeToggle />
+        </div>
         
         {/* Mobile Menu Button */}
         <button

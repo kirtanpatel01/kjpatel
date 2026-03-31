@@ -11,13 +11,8 @@ const CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database"];
 
 export default function Skills() {
   return (
-    <div className="my-12 max-w-4xl space-y-10">
-      <div className="space-y-1">
-        <h3 className="text-2xl font-bold tracking-tight">Technical Arsenal</h3>
-        <p className="max-w-xl text-muted-foreground leading-relaxed">
-          The stack I use to engineer modern, high-performance web experiences.
-        </p>
-      </div>
+    <div className="my-12 max-w-4xl space-y-4">
+      <h3 className="text-2xl font-mono font-bold">Tech</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
         {CATEGORIES.map((category) => {

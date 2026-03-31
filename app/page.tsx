@@ -1,16 +1,15 @@
 import CodeText from "@/components/code-text";
 import Skills from "@/components/skills";
+import Experience from "@/components/experience";
 import {
   PageContainer,
-  ResponsiveText,
   SectionHeading,
-  SectionSpacing,
 } from "@/components/responsive-wrappers";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
     <PageContainer>
-      {/* Heading */}
       <SectionHeading>Hey, I&apos;m Kirtan Patel!</SectionHeading>
       <div className="mt-2 sm:mt-4 max-w-4xl leading-relaxed font-medium text-foreground/80">
         By passion, I&apos;m a <CodeText>developer</CodeText> who loves building
@@ -19,12 +18,9 @@ export default function Home() {
           Dev</CodeText> and <CodeText>AI/ML</CodeText> fields.
       </div>
 
-      {/* <Link href="/showcase">
-        <Button className="mt-16">Showcase</Button>
-      </Link> */}
-
-      {/* Skills */}
       <Skills />
+
+      <Experience />
     </PageContainer>
   );
 }

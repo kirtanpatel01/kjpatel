@@ -3,19 +3,21 @@ export interface Experience {
   role: string;
   company: string;
   location: string;
+  type: string;
   responsibilities: string[];
 }
 
 export const experiences: Experience[] = [
   {
-    period: "JAN 2026 — PRESENT",
+    period: "January 2026 — March 2026",
+    type: "Internship",
     role: "Full Stack Web Developer",
     company: "Algorion Research and Analysis Pvt. Ltd.",
     location: "Remote",
     responsibilities: [
-      "Building and maintaining full-stack web applications.",
-      "Developing frontend applications using React & Next.js.",
-      "Building ERP + POS + Inventory Management System.",
+      "Build and maintain full-stack web applications.",
+      "Develop frontend applications using React & Next.js.",
+      "Build ERP + POS + Inventory Management System.",
     ]
   }
 ];

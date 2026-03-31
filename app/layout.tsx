@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
       </head>
       <body
-        className={`${outfit.className} ${source.variable} antialiased`}
+        className={`${outfit.className} ${source.variable} antialiased font-mono`}
       >
         <ThemeProvider
           attribute="class"
