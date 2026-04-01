@@ -62,12 +62,12 @@ function CodeShowcase({
         <TabsContent value="preview" className='flex-1 border border-border rounded-xl overflow-hidden bg-background'>
           {previewComponent}
         </TabsContent>
-        <TabsContent value="code" className='flex-1 flex border border-border rounded-xl divide-x divide-border overflow-hidden bg-background'>
+        <TabsContent value="code" className='flex-1 flex flex-col md:flex-row border border-border rounded-xl divide-y md:divide-y-0 md:divide-x divide-border overflow-hidden bg-background'>
           {/* Sidebar */}
-          <div className='w-64 flex flex-col shrink-0'>
+          <div className='w-full md:w-64 flex flex-col shrink-0 border-b md:border-b-0 md:border-r border-border/10'>
             <div className='p-3 border-b text-xs font-bold uppercase tracking-widest text-muted-foreground bg-accent/5'>Files</div>
 
-            <ScrollArea className="flex-1 py-1 [&>[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:hidden">
+            <ScrollArea className="h-40 md:flex-1 py-1 [&>[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:hidden">
               {fileData.map((node) => (
                 <FileTreeItem 
                   key={node.name} 
@@ -80,19 +80,19 @@ function CodeShowcase({
             </ScrollArea>
           </div>
           {/* Code Section */}
-          <div className='flex-1 flex flex-col bg-accent/2 overflow-hidden'>
+          <div className='flex-1 flex flex-col bg-accent/2 overflow-hidden min-h-0'>
             <div className='p-2 border-b bg-background flex items-center justify-between text-xs text-muted-foreground '>
               {activeFile ? (
                 <>
-                  <div className="flex items-center gap-2.5 px-1 text-foreground/80">
+                  <div className="flex items-center gap-2.5 px-1 text-foreground/80 overflow-hidden">
                     {getFileIcon(activeFile.node.name)}
-                    <span className="opacity-90">{activeFile.path}</span>
+                    <span className="opacity-90 truncate">{activeFile.path}</span>
                   </div>
                   <Button 
                     variant="ghost" 
                     size="icon-xs" 
                     onClick={handleCopy}
-                    className="hover:text-foreground"
+                    className="hover:text-foreground shrink-0"
                     title="Copy code"
                   >
                     {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}

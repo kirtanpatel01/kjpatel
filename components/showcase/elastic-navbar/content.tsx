@@ -99,7 +99,7 @@ export function ElasticNavbarContent() {
           <div className="space-y-4 leading-relaxed">
             <p>
               Unlike standard ease curves, <strong>Spring Animations</strong> use physical properties to calculate movement.
-              This makes the UI feel "elastic" and reactive to natural movement.
+              This makes the UI feel &quot;elastic&quot; and reactive to natural movement.
             </p>
             <ul className="space-y-3 pt-2">
               {springGuide.map((item) => (
