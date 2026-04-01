@@ -33,7 +33,6 @@ export const skills: Skill[] = [
   { name: "DrizzleORM", category: "Backend", image: "/logos/drizzle.svg", color: "#c5f74f" },
 
   // Database
-  { name: "PostgreSQL", category: "Database", icon: "devicon-postgresql-plain", color: "#336791" },
   { name: "Supabase", category: "Database", icon: "devicon-supabase-plain", color: "#3ecf8e" },
   { name: "NeonDB", category: "Database", image: "/logos/neon.svg", color: "#00e0d9" },
   { name: "MongoDB", category: "Database", icon: "devicon-mongodb-plain", color: "#47a248" },

@@ -43,14 +43,14 @@ export function ModeToggle() {
   };
 
   // Conditional returns MUST come after ALL hooks are called
-  if (!mounted) return <div className="h-10 w-10 shrink-0" />;
+  if (!mounted) return <div className="h-8 w-8 shrink-0" />;
 
   return (
     <button
       onClick={toggleTheme}
       className="
         relative flex items-center justify-center cursor-pointer shrink-0
-        h-10 w-10 text-slate-800 dark:text-slate-300 rounded-full
+        h-8 w-8 text-slate-800 dark:text-slate-300 rounded-full
         transition-colors duration-300 inset-shadow-xs inset-shadow-slate-500/40 dark:inset-shadow-slate-600 
       "
     >
@@ -64,7 +64,7 @@ export function ModeToggle() {
             transition={{ duration: 0.20, ease: "easeInOut" }}
             className="absolute"
           >
-            <Moon className="h-5 w-5" />
+            <Moon className="h-4 w-4" />
           </motion.span>
         ) : (
           <motion.span
@@ -75,7 +75,7 @@ export function ModeToggle() {
             transition={{ duration: 0.20, ease: "easeInOut" }}
             className="absolute"
           >
-            <Sun className="h-5 w-5" />
+            <Sun className="h-4 w-4" />
           </motion.span>
         )}
       </AnimatePresence>

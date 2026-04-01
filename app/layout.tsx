@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/them-provider";
 import type { Metadata } from "next";
-import { Source_Code_Pro, Outfit } from "next/font/google";
+import { Source_Code_Pro, Outfit, Inter, Unbounded, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
@@ -9,17 +9,10 @@ import JsonLd from "@/components/json-ld";
 import Footer from "@/components/footer";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const source = Source_Code_Pro({
+const DMSans = DM_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-mono",
-  display: "swap",
-})
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-sans",
+  variable: "--font-dm-sans",
   display: "swap",
 })
 
@@ -39,7 +32,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
       </head>
       <body
-        className={`${outfit.className} ${source.variable} antialiased font-mono`}
+        className={`${DMSans.className} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -51,7 +44,9 @@ export default function RootLayout({
           <TooltipProvider>
             <Header />
             <JsonLd />
-            {children}
+            <main className="w-full max-w-4xl border-x border-dashed mx-auto">
+              {children}
+            </main>
             <Footer />
           </TooltipProvider>
           <Analytics />

@@ -43,7 +43,7 @@ const CodeBlock = ({ code, language, showLineNumbers = true }: CodeBlockProps) =
 
   return (
     <ScrollArea className="h-full w-full [&>[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:hidden">
-      <div className="relative flex font-mono text-sm min-w-full">
+      <div className="relative flex  text-sm min-w-full">
         {/* Line Numbers */}
         {showLineNumbers && (
           <div className="sticky left-0 top-0 z-10 w-12 text-right pr-4 text-muted-foreground/20 select-none py-2 border-r border-border/5 shrink-0 bg-background/50 backdrop-blur-sm">

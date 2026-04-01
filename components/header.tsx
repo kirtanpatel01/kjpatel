@@ -10,8 +10,9 @@ import { Kbd } from "./ui/kbd";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
+  // { name: "Projects", href: "/#projects" },
   { name: "Showcase", href: "/showcase" },
+
   // { name: "Work", href: "/work" },
   { name: "Contact", href: "/contact" },
 ];
@@ -23,8 +24,8 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
-      <div className="flex items-center gap-10">
+    <header className="w-full max-w-4xl border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
+      <div className="flex items-center gap-4">
         <Link href="/" className="shrink-0 flex items-center justify-center">
           <div 
             className="w-8 h-8 icon-mask" 
@@ -32,9 +33,8 @@ export default function Header() {
           />
         </Link>
 
-
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4 text-sm">
           {navItems.map((item) => {
             const isActive = basePath === item.href;
 
@@ -42,10 +42,10 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn("text-[15px] px-3 py-1.5 rounded-full tracking-wider transition-colors", 
+                className={cn("px-3 py-1.5 rounded-full tracking-wider", 
                   isActive
-                    ? "bg-accent/50 shadow-sm text-primary font-semibold"
-                    : "hover:bg-accent/30"
+                    ? "bg-accent/50 shadow-sm"
+                    : "hover:bg-accent/30 text-foreground/70"
                 )}
               >
                 {item.name}

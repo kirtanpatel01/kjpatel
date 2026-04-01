@@ -81,7 +81,7 @@ function CodeShowcase({
           </div>
           {/* Code Section */}
           <div className='flex-1 flex flex-col bg-accent/2 overflow-hidden'>
-            <div className='p-2 border-b bg-background flex items-center justify-between text-xs text-muted-foreground font-mono'>
+            <div className='p-2 border-b bg-background flex items-center justify-between text-xs text-muted-foreground '>
               {activeFile ? (
                 <>
                   <div className="flex items-center gap-2.5 px-1 text-foreground/80">

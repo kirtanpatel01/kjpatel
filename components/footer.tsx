@@ -10,15 +10,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border px-3 py-2 flex flex-row justify-between items-end sm:items-center gap-4 text-xs font-mono tracking-widest text-muted-foreground bg-background">
+    <footer className="w-full max-w-4xl border-x border-dashed mx-auto border-t border-border px-3 py-2 flex flex-row justify-between items-end sm:items-center gap-4 text-xs  tracking-widest text-muted-foreground bg-background">
       {/* Left side on desktop: Text and Links grouped together */}
-      <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-6">
+      <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-4">
         <span>
           Built with ❤️ by <span className="text-foreground">Kirtan Patel</span>
         </span>
 
         {/* Social Icons - Left-aligned on Desktop, Above text on Mobile */}
-        <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-6">
+        <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-4">
           {socialLinks.map((link) => (
             <Tooltip key={link.name}>
               <TooltipTrigger asChild>
@@ -43,7 +43,7 @@ export default function Footer() {
                 </a>
               </TooltipTrigger>
               <TooltipContent side="top">
-                <p className="font-mono text-[10px]">{link.username}</p>
+                <p className=" text-[10px]">{link.username}</p>
               </TooltipContent>
             </Tooltip>
           ))}

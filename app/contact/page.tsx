@@ -4,10 +4,9 @@ import emailjs from "emailjs-com";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 import {
-  FlexContainer,
   PageContainer,
-  PageHeading,
   ResponsiveText,
+  SectionContainer,
 } from "@/components/responsive-wrappers";
 import { socialLinks } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -45,59 +44,56 @@ export default function ContactPage() {
   };
 
   return (
-    <PageContainer className="w-full flex justify-center items-center">
-      <FlexContainer direction="row" className="w-full max-w-6xl mx-auto lg:justify-between">
-        <div className="flex flex-col">
-          <div className="mb-6 sm:mb-12">
-            <PageHeading className="text-5xl sm:text-7xl">
-              GET IN <br /> TOUCH.
-            </PageHeading>
+    <PageContainer className="">
+      <SectionContainer className="space-y-4">
+        <h1 className="text-3xl font-bold">
+          GET IN TOUCH.
+        </h1>
+
+        <div className="space-y-4">
+          <div className="w-fit space-y-1">
+            <h3 className="text-sm tracking-widest text-muted-foreground">Email</h3>
+            <ResponsiveText size="sm" className="hover:underline underline-offset-4 decoration-1">
+              <a href="mailto:kjptel200022@gmail.com">kjptel200022@gmail.com</a>
+            </ResponsiveText>
           </div>
 
-          <div className="mt-auto space-y-4 sm:space-y-6">
-            <div className="flex flex-col gap-1">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Email</h3>
-              <ResponsiveText size="sm" className="hover:underline underline-offset-4 decoration-1">
-                <a href="mailto:kjptel200022@gmail.com">kjptel200022@gmail.com</a>
-              </ResponsiveText>
-            </div>
+          <div className="space-y-2">
+            <h3 className="text-sm tracking-widest text-muted-foreground">Socials</h3>
+            <div className="flex gap-6">
+              {socialLinks.map((link) => (
+                <Tooltip key={link.name}>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
 
-            <div className="flex flex-col gap-1">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Socials</h3>
-              <div className="flex flex-wrap gap-10">
-                {socialLinks.map((link) => (
-                  <Tooltip key={link.name}>
-                    <TooltipTrigger asChild>
-                      <a 
-                        href={link.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
+                    >
 
-                      >
+                      {link.isNeutral ? (
+                        <div
+                          className="w-8 h-8 icon-mask"
+                          style={{ maskImage: `url(${link.icon})`, WebkitMaskImage: `url(${link.icon})` }}
+                        />
+                      ) : (
+                        <img src={link.icon} alt={link.name} className="w-8 h-8 object-contain" />
+                      )}
 
-                        {link.isNeutral ? (
-                          <div 
-                            className="w-8 h-8 icon-mask" 
-                            style={{ maskImage: `url(${link.icon})`, WebkitMaskImage: `url(${link.icon})` }}
-                          />
-                        ) : (
-                          <img src={link.icon} alt={link.name} className="w-8 h-8 object-contain" />
-                        )}
-
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">
-                      <p className="font-mono text-xs">{link.username}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
+                    <p className=" text-xs">{link.username}</p>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
             </div>
           </div>
         </div>
+      </SectionContainer>
 
-
+      <SectionContainer>
         <form onSubmit={sendEmail} className="w-full max-w-xl flex flex-col border border-border">
           <div className="group relative">
             <input
@@ -107,7 +103,7 @@ export default function ContactPage() {
               placeholder="mail@example.com"
               value={formData.from_name}
               onChange={handleChange}
-              className="w-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
@@ -119,7 +115,7 @@ export default function ContactPage() {
               placeholder="Subject"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
+              className="w-full bg-transparent p-4 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors"
             />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
@@ -132,7 +128,7 @@ export default function ContactPage() {
               placeholder="Message"
               value={formData.message}
               onChange={handleChange}
-              className="w-full h-full bg-transparent p-4 sm:p-6 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
+              className="w-full h-full bg-transparent p-4 placeholder:text-muted-foreground/50 focus:outline-none focus:bg-secondary/20 transition-colors resize-none"
             />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border group-focus-within:bg-primary transition-colors" />
           </div>
@@ -140,13 +136,13 @@ export default function ContactPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-4 sm:p-6 border-t border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground"
+            className="w-full p-4 border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground"
           >
             <span>{loading ? "Sending..." : "Send Message"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </form>
-      </FlexContainer>
+      </SectionContainer>
     </PageContainer>
   );
 }

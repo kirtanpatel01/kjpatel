@@ -10,7 +10,7 @@ function PageWrapper({ children, className, center = true }: { children: React.R
   return (
     <div className="h-full flex flex-col flex-1 items-center justify-center">
       <main className={cn(
-        "flex flex-1 w-full max-w-4xl flex-col items-center py-10 px-16 border-x border-dashed h-full",
+        "flex flex-1 w-full max-w-4xl flex-col items-center py-10 px-16 h-full",
         center && "text-center",
         className
       )}>
@@ -87,7 +87,7 @@ function ProjectsPage() {
          {projects.map((p, i) => (
            <div key={i} className="flex justify-between items-baseline p-4 border-b border-dashed border-border/50">
               <span className="text-base font-normal">{p.name}</span>
-              <span className="text-base text-muted-foreground italic font-mono opacity-60 underline decoration-dashed decoration-1 underline-offset-4">{p.status}</span>
+              <span className="text-base text-muted-foreground italic  opacity-60 underline decoration-dashed decoration-1 underline-offset-4">{p.status}</span>
            </div>
          ))}
       </div>
@@ -185,7 +185,7 @@ export default function ElasticNavbar({
     <Browser url={`http://localhost:3000${currentPath}`}>
       <div className="flex flex-col h-full overflow-hidden">
         {/* Simulator Navbar - Exactly like user's design */}
-        <div className='w-full px-4 py-2 max-w-4xl mx-auto flex items-center justify-between gap-4 border-b border-x border-dashed sticky top-0 z-50 bg-background'>
+        <div className='w-full px-4 py-2 max-w-4xl mx-auto flex items-center justify-between gap-4 border-b border-dashed sticky top-0 z-50 bg-background'>
           <button 
             onClick={() => setCurrentPath("/")} 
             className='font-bold text-lg'

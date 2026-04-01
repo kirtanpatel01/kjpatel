@@ -11,6 +11,8 @@ import {
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import { showcaseIdeas } from "@/lib/constants/showcase-registry";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export default function ShowcaseDetailPage() {
   const params = useParams();
@@ -21,10 +23,13 @@ export default function ShowcaseDetailPage() {
 
   return (
     <PageContainer>
-      <Breadcrumb className="mb-8 border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
+      <div className="p-4">
+        <Breadcrumb className="border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/showcase">Showcase</BreadcrumbLink>
+            <BreadcrumbLink asChild>
+              <Link href="/showcase">Showcase</Link>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -33,6 +38,7 @@ export default function ShowcaseDetailPage() {
         </BreadcrumbList>
       </Breadcrumb>
 
+      </div>
       {activeIdea ? (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* The Content component now handles its own internal layout, including where CodeShowcase goes */}

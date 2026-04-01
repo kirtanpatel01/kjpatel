@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/code-block";
 import { Copy, Check } from "lucide-react";
+import { SectionContainer } from "@/components/responsive-wrappers";
 
 export function ElasticNavbarContent() {
   const [stiffness, setStiffness] = React.useState(250);
@@ -90,14 +91,14 @@ export function ElasticNavbarContent() {
 }}`;
 
   return (
-    <div className="flex flex-col gap-12 max-w-5xl mx-auto pb-40 px-4">
+    <div className="flex flex-col">
       {/* --- Spring Tweak Laboratory --- */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch py-8 border-y w-full">
-        <div className="flex flex-col gap-6 pr-6">
-          <h2 className="font-medium  tracking-widest text-muted-foreground/60 text-sm">Spring Physics Guide</h2>
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
+      <SectionContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch w-full">
+        <div className="flex flex-col gap-4 pr-6">
+          <h2 className="font-medium tracking-widest text-xs">Spring Physics Guide</h2>
+          <div className="space-y-4 leading-relaxed">
             <p>
-              Unlike standard ease curves, <strong>Spring Animations</strong> use physical properties to calculate movement. 
+              Unlike standard ease curves, <strong>Spring Animations</strong> use physical properties to calculate movement.
               This makes the UI feel "elastic" and reactive to natural movement.
             </p>
             <ul className="space-y-3 pt-2">
@@ -111,83 +112,85 @@ export function ElasticNavbarContent() {
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-secondary/20 flex flex-col gap-8 shadow-sm">
-          <div className="flex items-center justify-between border-b pb-4">
-             <div className="flex flex-col gap-0.5">
-               <h3 className="text-sm font-semibold tracking-widest text-foreground">
-                  Tweak
-               </h3>
-             </div>
-             <div className="flex items-center gap-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button 
-                      onClick={copyTransition}
-                      variant={"ghost"}
-                      size={"icon-sm"}
-                    >
-                      {copied ? <Check className="text-primary" /> : <Copy />}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className=" overflow-hidden">
-                      <CodeBlock
-                        language="tsx"
-                        code={transitionString}
-                        showLineNumbers={false}
-                      />
-                  </TooltipContent>
-                </Tooltip>
-                <Button 
-                  onClick={resetValues}
-                  variant={'secondary'}
-                >
-                  Reset
-                </Button>
-             </div>
+        <div className="p-4 rounded-2xl bg-secondary/20 flex flex-col gap-4 shadow-sm shadow-primary/20">
+          <div className="flex items-start justify-between border-b pb-4">
+            <div className="flex flex-col gap-0.5">
+              {/* <h3 className="font-semibold tracking-widest text-foreground">
+                Tweak
+              </h3> */}
+              <p className="text-sm text-muted-foreground">Play with the values, <br /> See effect in below preview</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={copyTransition}
+                    variant={"ghost"}
+                    size={"icon-sm"}
+                  >
+                    {copied ? <Check className="text-primary" /> : <Copy />}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className=" overflow-hidden">
+                  <CodeBlock
+                    language="tsx"
+                    code={transitionString}
+                    showLineNumbers={false}
+                  />
+                </TooltipContent>
+              </Tooltip>
+              <Button
+                onClick={resetValues}
+                variant={'secondary'}
+              >
+                Reset
+              </Button>
+            </div>
           </div>
 
           <div className="flex flex-col gap-4">
-             <span className="font-semibold text-sm tracking-widest text-muted-foreground/50">Presets</span>
-             <div className="grid grid-cols-3 gap-2">
-                {(Object.keys(presets) as Array<keyof typeof presets>).map((key) => (
-                  <Button
-                    key={key}
-                    onClick={() => applyPreset(key)}
-                    className={`text-sm cursor-pointer
-                      ${activePreset === key 
-                        ? "bg-primary text-primary-foreground border-primary shadow-sm" 
-                        : "bg-background text-muted-foreground border-border hover:border-primary hover:text-foreground"
-                      }
+            <span className="font-semibold text-sm tracking-widest /50">Presets</span>
+            <div className="grid grid-cols-3 gap-2">
+              {(Object.keys(presets) as Array<keyof typeof presets>).map((key) => (
+                <Button
+                  key={key}
+                  onClick={() => applyPreset(key)}
+                  variant={"outline"}
+                  className={`text-sm cursor-pointer
+                      ${activePreset === key
+                      ? "bg-primary text-primary-foreground"
+                      : ""
+                    }
                     `}
-                  >
-                    {presets[key].label}
-                  </Button>
-                ))}
-             </div>
+                >
+                  {presets[key].label}
+                </Button>
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-6 pt-2">
+          <div className="space-y-4 pt-2">
             {controls.map((control) => (
               <div key={control.label} className="flex flex-col gap-3">
                 <div className="flex justify-between items-center text-sm">
                   <label className="font-bold text-foreground">{control.label}</label>
-                  <span className="font-mono px-2 py-0.5 bg-background border rounded-md font-bold">{control.value}</span>
+                  <span className=" px-2 py-0.5 bg-background border rounded-md font-bold">{control.value}</span>
                 </div>
-                <input 
-                  type="range" min={control.min} max={control.max} step={control.step} 
+                <input
+                  type="range" min={control.min} max={control.max} step={control.step}
                   value={control.value} onChange={(e) => {
                     control.setter(Number(e.target.value));
                     setActivePreset(null);
                   }}
-                  className="w-full h-1.5 bg-muted rounded-full appearance-none cursor-pointer accent-primary" 
+                  className="w-full h-1.5 bg-muted rounded-full appearance-none cursor-pointer accent-primary"
                 />
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </SectionContainer>
 
-      <div className="w-full h-full pt-4">
+      <SectionContainer className="w-full h-full">
         <CodeShowcase
           fileData={elasticNavbarFiles}
           codeMapping={dynamicCodeMapping}
@@ -195,7 +198,7 @@ export function ElasticNavbarContent() {
           defaultFilePath="components/navbar.tsx"
           defaultFileNode={{ name: "navbar.tsx", type: "file" }}
         />
-      </div>
+      </SectionContainer>
     </div>
   );
 }

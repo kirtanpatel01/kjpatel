@@ -13,7 +13,7 @@ export function PageContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("min-h-[calc(100vh-7.1rem)] sm:min-h-[calc(100vh-5.6rem)] p-4 sm:p-6", className)}>
+    <div className={cn("min-h-[calc(100vh-7.1rem)] sm:min-h-[calc(100vh-5.6rem)]", className)}>
       {children}
     </div>
   );
@@ -33,115 +33,12 @@ export function SectionHeading({
   return (
     <h2
       className={cn(
-        "font-mono font-bold text-xl sm:text-3xl lg:text-4xl",
+        " font-bold text-xl sm:text-3xl lg:text-4xl",
         className
       )}
     >
       {children}
     </h2>
-  );
-}
-
-/**
- * PageHeading - Large hero-style heading
- * Mobile: text-3xl, Tablet: text-5xl, Desktop: text-7xl
- */
-export function PageHeading({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <h1
-      className={cn(
-        "text-3xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-foreground text-balance",
-        className
-      )}
-    >
-      {children}
-    </h1>
-  );
-}
-
-/**
- * ResponsiveGrid - Grid wrapper with consistent responsive behavior
- * Mobile: 1 column, Tablet: 2 columns, Desktop: customizable
- */
-export function ResponsiveGrid({
-  children,
-  cols = 3,
-  className,
-}: {
-  children: React.ReactNode;
-  cols?: 2 | 3 | 4;
-  className?: string;
-}) {
-  const colsClass = {
-    2: "md:grid-cols-2",
-    3: "md:grid-cols-3",
-    4: "md:grid-cols-4",
-  }[cols];
-
-  return (
-    <div
-      className={cn(
-        "grid grid-cols-1",
-        colsClass,
-        "gap-4 sm:gap-6",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
-/**
- * FlexContainer - Flex wrapper for responsive layouts
- * Common: row on desktop, column on mobile
- */
-export function FlexContainer({
-  children,
-  direction = "row",
-  className,
-}: {
-  children: React.ReactNode;
-  direction?: "row" | "col";
-  className?: string;
-}) {
-  const dirClass = direction === "row" ? "lg:flex-row" : "lg:flex-col";
-
-  return (
-    <div
-      className={cn(
-        "flex flex-col",
-        dirClass,
-        "gap-6",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
-/**
- * SectionSpacing - Consistent vertical spacing between sections
- * Mobile: py-4, Tablet: py-6, Desktop: py-12
- */
-export function SectionSpacing({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <section className={cn("py-4 sm:py-6", className)}>
-      {children}
-    </section>
   );
 }
 
@@ -166,4 +63,20 @@ export function ResponsiveText({
   }[size];
 
   return <p className={cn(sizeClass, className)}>{children}</p>;
+}
+
+export function SectionContainer({
+  children,
+  className,
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}) {
+  return (
+    <div id={id} className={cn("w-full p-4", className)}>
+      {children}
+    </div>
+  );
 }

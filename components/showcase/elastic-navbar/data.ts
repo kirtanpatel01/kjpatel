@@ -414,7 +414,7 @@ export function ModeToggle() {
            {projects.map((p, i) => (
              <div key={i} className="flex justify-between items-baseline p-4 border-b border-dashed border-border/50">
                 <span className="text-base font-normal">{p.name}</span>
-                <span className="text-base text-muted-foreground italic font-mono opacity-60 underline decoration-dashed decoration-1 underline-offset-4">{p.status}</span>
+                <span className="text-base text-muted-foreground italic  opacity-60 underline decoration-dashed decoration-1 underline-offset-4">{p.status}</span>
              </div>
            ))}
         </div>

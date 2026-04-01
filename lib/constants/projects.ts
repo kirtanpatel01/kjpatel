@@ -1,9 +1,13 @@
 export interface Project {
-  year: string;
   title: string;
   description: string;
   tech: string[];
-  link: string;
+  link: string | null;
+  github_link: string | null;
+  images: string[];
+  longDescription: string;
+  purpose: string;
+  features: string[];
 }
 
 export const techMap: Record<string, { icon?: string; image?: string; color: string }> = {
@@ -22,24 +26,71 @@ export const techMap: Record<string, { icon?: string; image?: string; color: str
 
 export const projects: Project[] = [
   {
+    title: "Morganize",
+    description: "ERP + POS + Inventory Management System",
+    tech: ["Next.js", "Supabase", "TailwindCSS"],
+    github_link: null,
+    link: null,
+    images: [
+      "/sites/morganize/admin-dashboard.png",
+      "/sites/morganize/customer-dashboard.png",
+      "/sites/morganize/org-dashboard.png",
+      "/sites/morganize/products.png",
+      "/sites/morganize/customer-orders.png",
+    ],
+    purpose: "Morganize was built to revolutionize how multi-outlet organizations—such as food courts, malls, and campus markets—manage their retail ecosystem. It bridges the gap between complex hardware and fragmented POS systems.",
+    longDescription: "A modern, high-performance POS (Point of Sale) & Multi-Store Management System designed for speed, scalability, and an exceptional user experience.",
+    features: [
+      "Multi-Area Management for grouping stores logically",
+      "Store Vendor Dashboard for products, categories, and stock",
+      "Real-time Order Tracking and automated status updates",
+      "PDF Invoicing generation on-the-fly using jsPDF",
+      "Native Wallet System for frictionless one-click payments",
+      "Integrated Cashfree PG for UPI and Card transactions",
+    ],
+  },
+  {
     title: "Upcurve",
     description: "Tracking platform for todos, habits, and exercises.",
     tech: ["Next.js", "NeonDB", "DrizzleORM"],
     link: "https://upcurve-xi.vercel.app",
-    year: "2026"
-  },
-  {
-    title: "Morganize",
-    description: "ERP + POS + Inventory Management System",
-    tech: ["Next.js", "Supabase", "TailwindCSS"],
-    link: "#",
-    year: "2026 (Present)"
+    github_link: "https://github.com/kirtanpatel01/upcurve",
+    images: [
+      "/sites/upcurve/dashboard.png",
+      "/sites/upcurve/exercise.png",
+      "/sites/upcurve/habits.png",
+      "/sites/upcurve/landing-page.png",
+      "/sites/upcurve/todos.png",
+    ],
+    purpose: "Designed to help users track habits, manage tasks, and monitor physical activity. Built with a focus on speed, aesthetics, and user experience for total life management.",
+    longDescription: "Upcurve is a modern, personal growth and productivity platform that provides a unified interface for tracking daily rituals and task progress.",
+    features: [
+      "Personal Dashboard with unified task and habit progress",
+      "Efficient Task Management with priority levels",
+      "Habit Tracking with consistency history monitoring",
+      "Exercise Logging for tracking workouts and progress over time",
+    ],
   },
   {
     title: "Kivio",
     description: "Youtube alternative for distraction free watching experience",
     tech: ["Tanstack Start", "TailwindCSS", "DrizzleORM", "NeonDB"],
-    link: "#",
-    year: "2026 (Present)"
+    github_link: "https://github.com/kirtanpatel01/kivio",
+    link: "https://kivio.vercel.app",
+    images: [
+      "/sites/kivio/kivio-home.png",
+      "/sites/kivio/kivio-channel.png",
+      "/sites/kivio/kivio-history.png",
+    ],
+    purpose: "Kivio filters the noise of traditional social platforms, removing distracting sidebars and comments to provide a pure, chronological feed of content you choose.",
+    longDescription: "A high-performance, distraction-free YouTube feed aggregator designed for power users who want to take back control of their viewing experience.",
+    features: [
+      "Personalized Video Feed from followed channels",
+      "Channel Management using simple handles",
+      "Private Watch History manager for recently viewed videos",
+      "Smart Metadata Caching for optimized performance",
+      "Better Auth integration with Google OAuth support",
+    ],
   },
 ];
+
