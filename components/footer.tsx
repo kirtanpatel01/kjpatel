@@ -51,13 +51,13 @@ export default function Footer() {
       </div>
 
       {/* Back to Top - Far right side */}
-      <button
+      {/* <button
         onClick={scrollToTop}
         className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer shrink-0"
       >
         <span className="hidden md:block">Back to Top</span>
         <ArrowUp className="w-4 h-4" />
-      </button>
+      </button> */}
     </footer>
   );
 }

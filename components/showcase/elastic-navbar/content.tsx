@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/code-block";
 import { Copy, Check } from "lucide-react";
 import { SectionContainer } from "@/components/responsive-wrappers";
+import Link from "next/link";
+import CodeText from "@/components/code-text";
 
 export function ElasticNavbarContent() {
   const [stiffness, setStiffness] = React.useState(250);
@@ -24,15 +26,18 @@ export function ElasticNavbarContent() {
   const springGuide = [
     {
       title: "Stiffness",
-      desc: "How fast the spring snaps back. Higher values mean more tension and a faster response. Lower values feel \"lazy.\""
+      desc: "How fast the spring snaps back. Higher values mean more tension and a faster response. Lower values feel \"lazy.\"",
+      href: "https://motion.dev/docs/react-transitions#stiffness",
     },
     {
       title: "Damping",
-      desc: "The friction. This controls how much the highlight bounces. Lower damping makes it oscillate longer."
+      desc: "The friction. This controls how much the highlight bounces. Lower damping makes it oscillate longer.",
+      href: "https://motion.dev/docs/react-transitions#damping",
     },
     {
       title: "Mass",
-      desc: "The object's weight. Increasing mass makes it feel heavier, requiring more momentum to start and stop."
+      desc: "The object's weight. Increasing mass makes it feel heavier, requiring more momentum to start and stop.",
+      href: "https://motion.dev/docs/react-transitions#mass",
     }
   ];
 
@@ -95,24 +100,34 @@ export function ElasticNavbarContent() {
       {/* --- Spring Tweak Laboratory --- */}
       <SectionContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch w-full">
         <div className="flex flex-col gap-4 pr-6">
-          <h2 className="font-medium tracking-widest text-xs">Spring Physics Guide</h2>
+          <h2 className="font-medium tracking-widest text-xs">Spring Animation Guide</h2>
           <div className="space-y-4 leading-relaxed">
             <p>
-              Unlike standard ease curves, <strong>Spring Animations</strong> use physical properties to calculate movement.
-              This makes the UI feel &quot;elastic&quot; and reactive to natural movement.
+              Using <Link href={"https://motion.dev/docs/react"} target="_blank" className="text-primary underline underline-offset-2">Motion React</Link> we can easily configure spring animation. So spring animation is basically a type of animation which gives you bouncy effect.
             </p>
+            <p>
+              There're two different way of configuring <Link className="text-primary underline underline-offset-2" href="https://motion.dev/docs/react-transitions#spring" target="_blank">Spring</Link> animation:
+              <ol className="list-decimal list-inside pl-4">
+                <li>Time: In this we can use <CodeText>bounce</CodeText> and <CodeText>duration</CodeText>.</li>
+                <li>Physics: In this we can use <CodeText>stiffness</CodeText>, <CodeText>damping</CodeText> and <CodeText>mass</CodeText>.</li>
+              </ol>
+            </p>
+            <p>In this specific example we'll go with physics way b'coz it gives you more control over the animation.</p>
             <ul className="space-y-3 pt-2">
               {springGuide.map((item) => (
                 <li key={item.title} className="flex flex-col gap-1 group">
-                  <span className="text-foreground font-semibold border-l-2 border-transparent group-hover:border-primary group-hover:pl-3 transition-all pl-0">{item.title}:</span>
-                  <p className="opacity-80">{item.desc}</p>
+                  <Link href={item.href} target="_blank" className="font-semibold text-primary underline underline-offset-2">{item.title}:</Link>
+                  <p>{item.desc}</p>
                 </li>
               ))}
             </ul>
+            <p>
+              There're more than this you can check <Link href="https://motion.dev/docs/react-transitions#velocity" target="_blank" className="text-primary underline underline-offset-2">here</Link>. Below is the practical example of spring animation which I discussed ealier.
+            </p>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-secondary/20 flex flex-col gap-4 shadow-sm shadow-primary/20">
+        <div className="p-4 rounded-2xl bg-secondary/20 flex flex-col gap-4 shadow-sm shadow-primary/20 h-fit">
           <div className="flex items-start justify-between border-b pb-4">
             <div className="flex flex-col gap-0.5">
               {/* <h3 className="font-semibold tracking-widest text-foreground">

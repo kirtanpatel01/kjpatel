@@ -5,8 +5,9 @@ import FileTreeItem, { FileNode } from './file-tree-item'
 import CodeBlock from './code-block'
 import { Button } from './ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs'
-import { FileCode2, FileJson, FileText, Copy, Check } from 'lucide-react'
+import { FileCode2, FileJson, FileText, Copy, Check, Info } from 'lucide-react'
 import { ScrollArea } from './ui/scroll-area'
+import Link from 'next/link'
 
 interface CodeShowcaseProps {
   fileData: FileNode[];
@@ -124,6 +125,7 @@ function CodeShowcase({
           </div>
         </TabsContent>
       </Tabs>
+      <p className='text-muted-foreground text-sm flex items-center justify-end gap-1 mt-2'><Info size={12} className='text-amber-500'/> This code component is inspired from <Link href="https://ui.shadcn.com/blocks#dashboard-01" target="_blank" className="text-primary underline underline-offset-2">shadcn/ui</Link></p>
     </div>
   )
 }
