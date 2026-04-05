@@ -106,13 +106,13 @@ export function ElasticNavbarContent() {
               Using <Link href={"https://motion.dev/docs/react"} target="_blank" className="text-primary underline underline-offset-2">Motion React</Link> we can easily configure spring animation. So spring animation is basically a type of animation which gives you bouncy effect.
             </p>
             <p>
-              There're two different way of configuring <Link className="text-primary underline underline-offset-2" href="https://motion.dev/docs/react-transitions#spring" target="_blank">Spring</Link> animation:
+              There&apos;re two different way of configuring <Link className="text-primary underline underline-offset-2" href="https://motion.dev/docs/react-transitions#spring" target="_blank">Spring</Link> animation:
               <ol className="list-decimal list-inside pl-4">
                 <li>Time: In this we can use <CodeText>bounce</CodeText> and <CodeText>duration</CodeText>.</li>
                 <li>Physics: In this we can use <CodeText>stiffness</CodeText>, <CodeText>damping</CodeText> and <CodeText>mass</CodeText>.</li>
               </ol>
             </p>
-            <p>In this specific example we'll go with physics way b'coz it gives you more control over the animation.</p>
+            <p>In this specific example we&apos;ll go with physics way b&apos;coz it gives you more control over the animation.</p>
             <ul className="space-y-3 pt-2">
               {springGuide.map((item) => (
                 <li key={item.title} className="flex flex-col gap-1 group">
@@ -122,7 +122,7 @@ export function ElasticNavbarContent() {
               ))}
             </ul>
             <p>
-              There're more than this you can check <Link href="https://motion.dev/docs/react-transitions#velocity" target="_blank" className="text-primary underline underline-offset-2">here</Link>. Below is the practical example of spring animation which I discussed ealier.
+              There&apos;re more than this you can check <Link href="https://motion.dev/docs/react-transitions#velocity" target="_blank" className="text-primary underline underline-offset-2">here</Link>. Below is the practical example of spring animation which I discussed ealier.
             </p>
           </div>
         </div>
