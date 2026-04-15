@@ -14,6 +14,7 @@ const navItems = [
   { name: "Showcase", href: "/showcase" },
 
   // { name: "Work", href: "/work" },
+  { name: "News", href: "/news" },
   { name: "Contact", href: "/contact" },
 ];
 

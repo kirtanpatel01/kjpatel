@@ -7,6 +7,7 @@ import {
   PageContainer,
   ResponsiveText,
   SectionContainer,
+  SectionHeading,
 } from "@/components/responsive-wrappers";
 import { socialLinks } from "@/lib/constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -46,9 +47,7 @@ export default function ContactPage() {
   return (
     <PageContainer className="">
       <SectionContainer className="space-y-4">
-        <h1 className="text-3xl font-bold">
-          GET IN TOUCH.
-        </h1>
+        <SectionHeading>Get in Touch.</SectionHeading>
 
         <div className="space-y-4">
           <div className="w-fit space-y-1">

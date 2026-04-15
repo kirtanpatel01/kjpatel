@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { type Highlighter, createHighlighter } from "shiki";
+import { bundledThemes, type Highlighter, createHighlighter } from "shiki";
 
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -10,18 +10,30 @@ interface CodeBlockProps {
   code: string;
   language: string;
   showLineNumbers?: boolean;
+  themes?: {
+    light: string;
+    dark: string;
+  };
 }
 
 let highlighterInstance: Highlighter | null = null;
 
-const CodeBlock = ({ code, language, showLineNumbers = true }: CodeBlockProps) => {
+const CodeBlock = ({
+  code,
+  language,
+  showLineNumbers = true,
+  themes = {
+    light: "vitesse-light",
+    dark: "vitesse-dark",
+  },
+}: CodeBlockProps) => {
   const [highlightedCode, setHighlightedCode] = useState<string>("");
 
   useEffect(() => {
     async function highlight() {
       if (!highlighterInstance) {
         highlighterInstance = await createHighlighter({
-          themes: ["vitesse-dark", "vitesse-light"],
+          themes: Object.keys(bundledThemes),
           langs: ["tsx", "ts", "json", "md", "css", "html", "javascript", "typescript"],
         });
       }
@@ -29,15 +41,15 @@ const CodeBlock = ({ code, language, showLineNumbers = true }: CodeBlockProps) =
       const html = highlighterInstance.codeToHtml(code, {
         lang: language,
         themes: {
-          light: "vitesse-light",
-          dark: "vitesse-dark",
+          light: themes.light,
+          dark: themes.dark,
         },
       });
       setHighlightedCode(html);
     }
 
     highlight();
-  }, [code, language]);
+  }, [code, language, themes]);
 
   const lines = code.trim().split("\n");
 
