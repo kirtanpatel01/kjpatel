@@ -1,7 +1,11 @@
-import React from "react";
-import { PageContainer, SectionContainer, SectionHeading } from "@/components/responsive-wrappers";
 import Link from "next/link";
-import { showcaseIdeas, type ShowcaseIdea } from "@/lib/constants";
+import React from "react";
+import {
+  PageContainer,
+  SectionContainer,
+  SectionHeading,
+} from "@/components/responsive-wrappers";
+import { type ShowcaseIdea, showcaseIdeas } from "@/lib/constants";
 
 const ShowcaseItem = ({ idea }: { idea: ShowcaseIdea }) => {
   return (
@@ -41,9 +45,9 @@ function ShowcasePage() {
       <SectionContainer>
         <SectionHeading>Showcase</SectionHeading>
         <p className="text-muted-foreground leading-relaxed sm:mt-2">
-          An interactive collection of recurring UI/UX patterns, design layouts, and
-          experimental components. A central vault built to capture and reuse attractive
-          structures for future projects in one single place.
+          An interactive collection of recurring UI/UX patterns, design layouts,
+          and experimental components. A central vault built to capture and
+          reuse attractive structures for future projects in one single place.
         </p>
       </SectionContainer>
 

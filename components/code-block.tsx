@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { bundledThemes, type Highlighter, createHighlighter } from "shiki";
-
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { bundledThemes, createHighlighter, type Highlighter } from "shiki";
 import { cn } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 interface CodeBlockProps {
   code: string;
@@ -34,7 +33,16 @@ const CodeBlock = ({
       if (!highlighterInstance) {
         highlighterInstance = await createHighlighter({
           themes: Object.keys(bundledThemes),
-          langs: ["tsx", "ts", "json", "md", "css", "html", "javascript", "typescript"],
+          langs: [
+            "tsx",
+            "ts",
+            "json",
+            "md",
+            "css",
+            "html",
+            "javascript",
+            "typescript",
+          ],
         });
       }
 
@@ -60,16 +68,20 @@ const CodeBlock = ({
         {showLineNumbers && (
           <div className="sticky left-0 top-0 z-10 w-12 text-right pr-4 text-muted-foreground/20 select-none py-2 border-r border-border/5 shrink-0 bg-background/50 backdrop-blur-sm">
             {lines.map((_, i) => (
-              <div key={i} className="leading-6">{i + 1}</div>
+              <div key={i} className="leading-6">
+                {i + 1}
+              </div>
             ))}
           </div>
         )}
-        
+
         {/* Code Content */}
         <div className={cn("flex-1 min-w-0", !showLineNumbers && "px-0")}>
-          <div 
+          <div
             className="shiki-container py-2 px-0 leading-6 [&>pre]:!bg-transparent [&>pre]:!p-0 [&>pre]:!m-0 whitespace-pre"
-            dangerouslySetInnerHTML={{ __html: highlightedCode || `<code>${code}</code>` }} 
+            dangerouslySetInnerHTML={{
+              __html: highlightedCode || `<code>${code}</code>`,
+            }}
           />
         </div>
       </div>

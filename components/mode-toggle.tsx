@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "framer-motion";
+import * as React from "react";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -33,7 +33,7 @@ export function ModeToggle() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleTheme]); 
+  }, [toggleTheme]);
 
   React.useEffect(() => setMounted(true), []);
 
@@ -61,7 +61,7 @@ export function ModeToggle() {
             initial={{ rotate: -90, opacity: 0, scale: 0 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: 90, opacity: 0, scale: 0 }}
-            transition={{ duration: 0.20, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="absolute"
           >
             <Moon className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function ModeToggle() {
             initial={{ rotate: 90, opacity: 0, scale: 0 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: -90, opacity: 0, scale: 0 }}
-            transition={{ duration: 0.20, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="absolute"
           >
             <Sun className="h-4 w-4" />

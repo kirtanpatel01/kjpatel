@@ -1,17 +1,16 @@
-'use client'
+"use client";
 
-import { OrbitControls } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
-import React from 'react'
-import * as THREE from 'three'
-import { SaturnPlanet } from '@/components/git-saturn/git-saturn-planet'
-import { RepoRing } from '@/components/git-saturn/repo-ring'
-import { useThree } from '@react-three/fiber'
-import { GitSaturnRepo } from '@/lib/git-saturn.types'
-import { StarField } from '@/components/git-saturn/star-field'
+import { OrbitControls } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import React from "react";
+import * as THREE from "three";
+import { SaturnPlanet } from "@/components/git-saturn/git-saturn-planet";
+import { RepoRing } from "@/components/git-saturn/repo-ring";
+import { StarField } from "@/components/git-saturn/star-field";
+import type { GitSaturnRepo } from "@/lib/git-saturn.types";
 
 function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value))
+  return Math.min(max, Math.max(min, value));
 }
 
 export function SaturnScene({
@@ -22,53 +21,55 @@ export function SaturnScene({
   onFocusRepo,
   onClearFocus,
 }: {
-  repos: GitSaturnRepo[]
-  interactive: boolean
-  focusedRepo: GitSaturnRepo | null
-  focusLocked: boolean
-  onFocusRepo: (repo: GitSaturnRepo | null, locked?: boolean) => void
-  onClearFocus: (repo: GitSaturnRepo) => void
+  repos: GitSaturnRepo[];
+  interactive: boolean;
+  focusedRepo: GitSaturnRepo | null;
+  focusLocked: boolean;
+  onFocusRepo: (repo: GitSaturnRepo | null, locked?: boolean) => void;
+  onClearFocus: (repo: GitSaturnRepo) => void;
 }) {
-  const systemRef = React.useRef<THREE.Group>(null)
-  const controlsRef = React.useRef<any>(null)
-  const { camera } = useThree()
-  const repoCount = repos.length
-  const ringRadius = 1.95 + clamp(repoCount * 0.02, 0, 0.8)
-  const spinSpeed = 0.08 + repoCount * 0.003
-  const shouldPauseSpin = focusedRepo !== null && !focusLocked
+  const systemRef = React.useRef<THREE.Group>(null);
+  // biome-ignore lint/suspicious/noExplicitAny: ref to OrbitControls instance
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const controlsRef = React.useRef<any>(null);
+  const { camera } = useThree();
+  const repoCount = repos.length;
+  const ringRadius = 1.95 + clamp(repoCount * 0.02, 0, 0.8);
+  const spinSpeed = 0.08 + repoCount * 0.003;
+  const shouldPauseSpin = focusedRepo !== null && !focusLocked;
 
   useFrame(({ clock }, delta) => {
-    if (!systemRef.current) return
+    if (!systemRef.current) return;
 
-    const elapsed = clock.getElapsedTime()
+    const elapsed = clock.getElapsedTime();
     if (interactive && elapsed < 4) {
-      const progress = elapsed / 4
-      const eased = progress * progress * (3 - 2 * progress)
-      const orbitAngle = 0.25 + eased * 1.5
-      const orbitRadius = 7.7 - eased * 1.35
-      const cameraHeight = 1.65 + Math.sin(eased * Math.PI) * 0.35
+      const progress = elapsed / 4;
+      const eased = progress * progress * (3 - 2 * progress);
+      const orbitAngle = 0.25 + eased * 1.5;
+      const orbitRadius = 7.7 - eased * 1.35;
+      const cameraHeight = 1.65 + Math.sin(eased * Math.PI) * 0.35;
 
       camera.position.set(
         Math.cos(orbitAngle) * orbitRadius,
         cameraHeight,
-        Math.sin(orbitAngle) * orbitRadius
-      )
-      camera.lookAt(0, 0.1, 0)
+        Math.sin(orbitAngle) * orbitRadius,
+      );
+      camera.lookAt(0, 0.1, 0);
       if (controlsRef.current) {
-        controlsRef.current.target.set(0, 0.1, 0)
-        controlsRef.current.update()
-        controlsRef.current.enabled = false
+        controlsRef.current.target.set(0, 0.1, 0);
+        controlsRef.current.update();
+        controlsRef.current.enabled = false;
       }
     } else if (controlsRef.current) {
-      controlsRef.current.target.set(0, 0.1, 0)
-      controlsRef.current.enabled = interactive
-      controlsRef.current.update()
+      controlsRef.current.target.set(0, 0.1, 0);
+      controlsRef.current.enabled = interactive;
+      controlsRef.current.update();
     }
 
     if (!shouldPauseSpin) {
-      systemRef.current.rotation.y += delta * spinSpeed
+      systemRef.current.rotation.y += delta * spinSpeed;
     }
-  })
+  });
 
   return (
     <>
@@ -78,7 +79,14 @@ export function SaturnScene({
       <pointLight position={[-3, -1.5, -2]} intensity={0.45} color="#93c5fd" />
       <pointLight position={[0, 3, 1]} intensity={0.18} color="#67e8f9" />
 
-      <group ref={systemRef} rotation={[THREE.MathUtils.degToRad(-18), THREE.MathUtils.degToRad(24), 0]}>
+      <group
+        ref={systemRef}
+        rotation={[
+          THREE.MathUtils.degToRad(-18),
+          THREE.MathUtils.degToRad(24),
+          0,
+        ]}
+      >
         <SaturnPlanet radius={1.22} />
         <RepoRing
           repos={repos}
@@ -103,5 +111,5 @@ export function SaturnScene({
         />
       ) : null}
     </>
-  )
+  );
 }

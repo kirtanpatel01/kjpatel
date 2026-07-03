@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { Github, Globe, Maximize2 } from "lucide-react";
-import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import Image from "next/image";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { techMap, type Project } from "@/lib/constants";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { type Project, techMap } from "@/lib/constants";
 
 interface ProjectDialogProps {
   project: Project;
@@ -159,7 +163,12 @@ export const ProjectDialog = ({
                           />
                         )}
                         {tech?.image && (
-                          <Image src={tech.image} alt={t} width={14} height={14} />
+                          <Image
+                            src={tech.image}
+                            alt={t}
+                            width={14}
+                            height={14}
+                          />
                         )}
                         {t}
                       </Badge>

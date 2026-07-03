@@ -1,9 +1,16 @@
 "use client";
 
+import {
+  Check,
+  Code2,
+  Copy,
+  FileCode2,
+  FileJson,
+  FileText,
+} from "lucide-react";
 import React, { useMemo, useState } from "react";
-import { Check, Code2, Copy, FileCode2, FileJson, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/code-block";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface NewsCodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,7 +27,9 @@ function extractCodeText(children: React.ReactNode): string {
   }
 
   if (React.isValidElement(children)) {
-    const element = children as React.ReactElement<{ children?: React.ReactNode }>;
+    const element = children as React.ReactElement<{
+      children?: React.ReactNode;
+    }>;
     return extractCodeText(element.props.children);
   }
 
@@ -36,7 +45,9 @@ function extractLanguage(children: React.ReactNode): string {
       return match[1];
     }
 
-    return extractLanguage((children.props as { children?: React.ReactNode }).children);
+    return extractLanguage(
+      (children.props as { children?: React.ReactNode }).children,
+    );
   }
 
   if (Array.isArray(children)) {
@@ -51,11 +62,18 @@ function extractLanguage(children: React.ReactNode): string {
   return "";
 }
 
-export default function NewsCodeBlock({ children, className, ...props }: NewsCodeBlockProps) {
+export default function NewsCodeBlock({
+  children,
+  className,
+  ...props
+}: NewsCodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const code = useMemo(() => extractCodeText(children).trimEnd(), [children]);
 
-  const rawLanguage = useMemo(() => extractLanguage(children) || "text", [children]);
+  const rawLanguage = useMemo(
+    () => extractLanguage(children) || "text",
+    [children],
+  );
 
   const syntaxLanguage = useMemo(() => {
     if (rawLanguage === "tsx") return "tsx";
@@ -77,7 +95,8 @@ export default function NewsCodeBlock({ children, className, ...props }: NewsCod
 
   const languageIcon = useMemo(() => {
     if (rawLanguage === "json") return FileJson;
-    if (rawLanguage === "md" || rawLanguage === "mdx" || rawLanguage === "txt") return FileText;
+    if (rawLanguage === "md" || rawLanguage === "mdx" || rawLanguage === "txt")
+      return FileText;
     if (
       rawLanguage === "ts" ||
       rawLanguage === "tsx" ||
@@ -124,7 +143,11 @@ export default function NewsCodeBlock({ children, className, ...props }: NewsCod
           className="shrink-0"
           aria-label="Copy code"
         >
-          {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+          {copied ? (
+            <Check size={14} className="text-green-500" />
+          ) : (
+            <Copy size={14} />
+          )}
         </Button>
       </div>
 

@@ -1,18 +1,18 @@
 "use client";
 
-import { skills, type SkillCategory } from "@/lib/constants";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { type SkillCategory, skills } from "@/lib/constants";
 import { SectionContainer } from "./responsive-wrappers";
 
 const CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database"];
 
 export default function Skills() {
   return (
-    <SectionContainer className="space-y-2">
+    <SectionContainer id="skills" className="space-y-2">
       <h3 className="text-2xl font-bold">Tech</h3>
       <div className="flex flex-col gap-4 ml-1">
         {CATEGORIES.map((category) => {
@@ -34,7 +34,7 @@ export default function Skills() {
                             className="w-6 h-6 sm:w-8 sm:h-8 icon-mask"
                             style={{
                               maskImage: `url(${skill.image})`,
-                              WebkitMaskImage: `url(${skill.image})`
+                              WebkitMaskImage: `url(${skill.image})`,
                             }}
                           />
                         ) : skill.icon ? (
@@ -52,9 +52,7 @@ export default function Skills() {
                         ) : null}
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
-                      {skill.name}
-                    </TooltipContent>
+                    <TooltipContent side="top">{skill.name}</TooltipContent>
                   </Tooltip>
                 ))}
               </div>

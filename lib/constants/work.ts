@@ -18,6 +18,6 @@ export const experiences: Experience[] = [
       "Build and maintain full-stack web applications.",
       "Develop frontend applications using React & Next.js.",
       "Build ERP + POS + Inventory Management System.",
-    ]
-  }
+    ],
+  },
 ];

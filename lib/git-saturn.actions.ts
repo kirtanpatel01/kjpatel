@@ -1,65 +1,71 @@
-'use server'
+"use server";
 
-import { mapGitHubDataToGitSaturn } from '@/lib/git-saturn.utils'
 import type {
   FetchGitHubSaturnDataOptions,
   GetGitSaturnDataActionOptions,
   GitHubRepoApiItem,
   GitHubSaturnRawData,
   GitHubViewer,
-} from '@/lib/git-saturn.types'
+} from "@/lib/git-saturn.types";
+import { mapGitHubDataToGitSaturn } from "@/lib/git-saturn.utils";
 
-const DEFAULT_API_BASE = 'https://api.github.com'
+const DEFAULT_API_BASE = "https://api.github.com";
 
 function parseLastPageFromLinkHeader(linkHeader: string | null): number | null {
-  if (!linkHeader) return null
+  if (!linkHeader) return null;
 
-  const lastMatch = linkHeader.match(/<[^>]*[?&]page=(\d+)[^>]*>;\s*rel="last"/)
-  if (!lastMatch) return null
+  const lastMatch = linkHeader.match(
+    /<[^>]*[?&]page=(\d+)[^>]*>;\s*rel="last"/,
+  );
+  if (!lastMatch) return null;
 
-  const page = Number.parseInt(lastMatch[1], 10)
-  return Number.isFinite(page) ? page : null
+  const page = Number.parseInt(lastMatch[1], 10);
+  return Number.isFinite(page) ? page : null;
 }
 
 function isValidUsername(username: string) {
-  return /^[a-zA-Z0-9-]{1,39}$/.test(username)
+  return /^[a-zA-Z0-9-]{1,39}$/.test(username);
 }
 
 function getToken() {
-  return process.env.GITHUB_TOKEN || process.env.GITHUB_FINE_GRAINED_TOKEN || ''
+  return (
+    process.env.GITHUB_TOKEN || process.env.GITHUB_FINE_GRAINED_TOKEN || ""
+  );
 }
 
 function createHeaders(token: string): HeadersInit {
   return {
-    Accept: 'application/vnd.github+json',
+    Accept: "application/vnd.github+json",
     Authorization: `Bearer ${token}`,
-    'X-GitHub-Api-Version': '2022-11-28',
-  }
+    "X-GitHub-Api-Version": "2022-11-28",
+  };
 }
 
 async function fetchJson<T>(
   url: string,
   headers: HeadersInit,
-  requestTimeoutMs: number
+  requestTimeoutMs: number,
 ): Promise<{ data: T; response: Response }> {
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), requestTimeoutMs)
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), requestTimeoutMs);
 
   try {
     const response = await fetch(url, {
       headers,
       signal: controller.signal,
-    })
+    });
 
     if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`GitHub API error ${response.status} at ${url}: ${errorText}`)
+      const errorText = await response.text();
+      throw new Error(
+        `GitHub API error ${response.status} at ${url}: ${errorText}`,
+      );
     }
 
-    const data = (await response.json()) as T
-    return { data, response }
+    const data = (await response.json()) as T;
+    return { data, response };
   } finally {
-    clearTimeout(timer)
+    clearTimeout(timer);
   }
 }
 
@@ -68,33 +74,42 @@ async function fetchUserRepos(
   headers: HeadersInit,
   requestTimeoutMs: number,
   apiBaseUrl: string,
-  useAuthenticatedOwnerEndpoint: boolean
+  useAuthenticatedOwnerEndpoint: boolean,
 ) {
   const firstUrl = useAuthenticatedOwnerEndpoint
     ? `${apiBaseUrl}/user/repos?sort=updated&per_page=100&page=1&visibility=all&affiliation=owner`
-    : `${apiBaseUrl}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=100&page=1&type=owner`
-  const firstPage = await fetchJson<GitHubRepoApiItem[]>(firstUrl, headers, requestTimeoutMs)
+    : `${apiBaseUrl}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=100&page=1&type=owner`;
+  const firstPage = await fetchJson<GitHubRepoApiItem[]>(
+    firstUrl,
+    headers,
+    requestTimeoutMs,
+  );
 
-  const lastPage = parseLastPageFromLinkHeader(firstPage.response.headers.get('link')) ?? 1
-  const repos = [...firstPage.data]
+  const lastPage =
+    parseLastPageFromLinkHeader(firstPage.response.headers.get("link")) ?? 1;
+  const repos = [...firstPage.data];
 
   if (lastPage > 1) {
-    const pagePromises: Promise<GitHubRepoApiItem[]>[] = []
+    const pagePromises: Promise<GitHubRepoApiItem[]>[] = [];
     for (let page = 2; page <= lastPage; page += 1) {
       const url = useAuthenticatedOwnerEndpoint
         ? `${apiBaseUrl}/user/repos?sort=updated&per_page=100&page=${page}&visibility=all&affiliation=owner`
-        : `${apiBaseUrl}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=100&page=${page}&type=owner`
-      const pagePromise = fetchJson<GitHubRepoApiItem[]>(url, headers, requestTimeoutMs).then((result) => result.data)
-      pagePromises.push(pagePromise)
+        : `${apiBaseUrl}/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=100&page=${page}&type=owner`;
+      const pagePromise = fetchJson<GitHubRepoApiItem[]>(
+        url,
+        headers,
+        requestTimeoutMs,
+      ).then((result) => result.data);
+      pagePromises.push(pagePromise);
     }
 
-    const restPages = await Promise.all(pagePromises)
+    const restPages = await Promise.all(pagePromises);
     for (const pageItems of restPages) {
-      repos.push(...pageItems)
+      repos.push(...pageItems);
     }
   }
 
-  return repos
+  return repos;
 }
 
 async function fetchCommitCountForRepo(
@@ -103,38 +118,38 @@ async function fetchCommitCountForRepo(
   defaultBranch: string,
   headers: HeadersInit,
   requestTimeoutMs: number,
-  apiBaseUrl: string
+  apiBaseUrl: string,
 ): Promise<number | null> {
-  const url = `${apiBaseUrl}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}/commits?per_page=1&sha=${encodeURIComponent(defaultBranch)}`
+  const url = `${apiBaseUrl}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}/commits?per_page=1&sha=${encodeURIComponent(defaultBranch)}`;
 
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), requestTimeoutMs)
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), requestTimeoutMs);
 
   try {
-    const response = await fetch(url, { headers, signal: controller.signal })
+    const response = await fetch(url, { headers, signal: controller.signal });
 
     if (!response.ok) {
-      return null
+      return null;
     }
 
-    const linkHeader = response.headers.get('link')
-    const lastPage = parseLastPageFromLinkHeader(linkHeader)
+    const linkHeader = response.headers.get("link");
+    const lastPage = parseLastPageFromLinkHeader(linkHeader);
     if (lastPage !== null) {
-      return lastPage
+      return lastPage;
     }
 
-    const data = (await response.json()) as Array<{ sha: string }>
-    return data.length
+    const data = (await response.json()) as Array<{ sha: string }>;
+    return data.length;
   } catch {
-    return null
+    return null;
   } finally {
-    clearTimeout(timer)
+    clearTimeout(timer);
   }
 }
 
 async function fetchGitHubSaturnData(
   token: string,
-  options: FetchGitHubSaturnDataOptions = {}
+  options: FetchGitHubSaturnDataOptions = {},
 ): Promise<GitHubSaturnRawData> {
   const {
     username,
@@ -143,39 +158,47 @@ async function fetchGitHubSaturnData(
     includePrivateRepos = true,
     requestTimeoutMs = 10_000,
     githubApiBaseUrl = DEFAULT_API_BASE,
-  } = options
+  } = options;
 
   if (!token.trim()) {
-    throw new Error('token is required')
+    throw new Error("token is required");
   }
 
-  const headers = createHeaders(token)
-  const viewer = await fetchJson<GitHubViewer>(`${githubApiBaseUrl}/user`, headers, requestTimeoutMs)
-  const configuredUsername = username?.trim() || process.env.GITHUB_USERNAME?.trim() || viewer.data.login
+  const headers = createHeaders(token);
+  const viewer = await fetchJson<GitHubViewer>(
+    `${githubApiBaseUrl}/user`,
+    headers,
+    requestTimeoutMs,
+  );
+  const configuredUsername =
+    username?.trim() ||
+    process.env.GITHUB_USERNAME?.trim() ||
+    viewer.data.login;
 
   if (!configuredUsername) {
-    throw new Error('Unable to resolve GitHub username from token')
+    throw new Error("Unable to resolve GitHub username from token");
   }
 
   if (!isValidUsername(configuredUsername)) {
-    throw new Error('Invalid GitHub username')
+    throw new Error("Invalid GitHub username");
   }
 
   const useAuthenticatedOwnerEndpoint =
-    includePrivateRepos && viewer.data.login.toLowerCase() === configuredUsername.toLowerCase()
+    includePrivateRepos &&
+    viewer.data.login.toLowerCase() === configuredUsername.toLowerCase();
 
   const repoApiItems = await fetchUserRepos(
     configuredUsername,
     headers,
     requestTimeoutMs,
     githubApiBaseUrl,
-    useAuthenticatedOwnerEndpoint
-  )
+    useAuthenticatedOwnerEndpoint,
+  );
 
   const selected =
-    typeof maxRepos === 'number' && Number.isFinite(maxRepos)
+    typeof maxRepos === "number" && Number.isFinite(maxRepos)
       ? repoApiItems.slice(0, Math.max(1, maxRepos))
-      : repoApiItems
+      : repoApiItems;
 
   if (!includeCommitCounts) {
     return {
@@ -187,7 +210,7 @@ async function fetchGitHubSaturnData(
         defaultBranch: repo.default_branch,
         commitCount: null,
       })),
-    }
+    };
   }
 
   const reposWithCounts = await Promise.all(
@@ -198,8 +221,8 @@ async function fetchGitHubSaturnData(
         repo.default_branch,
         headers,
         requestTimeoutMs,
-        githubApiBaseUrl
-      )
+        githubApiBaseUrl,
+      );
 
       return {
         name: repo.name,
@@ -207,35 +230,35 @@ async function fetchGitHubSaturnData(
         pushedAt: repo.pushed_at,
         defaultBranch: repo.default_branch,
         commitCount,
-      }
-    })
-  )
+      };
+    }),
+  );
 
   return {
     username: configuredUsername,
     repos: reposWithCounts,
-  }
+  };
 }
 
 export async function getGitSaturnDataAction(
-  options: GetGitSaturnDataActionOptions = {}
+  options: GetGitSaturnDataActionOptions = {},
 ) {
-  const token = getToken()
+  const token = getToken();
   if (!token) {
-    throw new Error('Missing GITHUB_TOKEN in server environment')
+    throw new Error("Missing GITHUB_TOKEN in server environment");
   }
 
   const maxRepos =
-    typeof options.maxRepos === 'number' && Number.isFinite(options.maxRepos)
+    typeof options.maxRepos === "number" && Number.isFinite(options.maxRepos)
       ? Math.max(1, options.maxRepos)
-      : undefined
-  const includeCommitCounts = options.includeCommitCounts ?? true
+      : undefined;
+  const includeCommitCounts = options.includeCommitCounts ?? true;
 
   const raw = await fetchGitHubSaturnData(token, {
     username: options.username,
     maxRepos,
     includeCommitCounts,
-  })
+  });
 
-  return mapGitHubDataToGitSaturn(raw, { maxRepos })
+  return mapGitHubDataToGitSaturn(raw, { maxRepos });
 }

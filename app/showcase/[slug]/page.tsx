@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { PageContainer } from "@/components/responsive-wrappers";
 import {
@@ -8,11 +9,9 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { showcaseIdeas } from "@/lib/constants/showcase-registry";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 
 export default function ShowcaseDetailPage() {
   const params = useParams();
@@ -25,19 +24,20 @@ export default function ShowcaseDetailPage() {
     <PageContainer>
       <div className="p-4">
         <Breadcrumb className="border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/showcase">Showcase</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage className="capitalize">{slug.split("-").join(" ")}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/showcase">Showcase</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="capitalize">
+                {slug.split("-").join(" ")}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
       {activeIdea ? (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">

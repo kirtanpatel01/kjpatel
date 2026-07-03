@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
-import Image from "next/image";
 import { Maximize2 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface ProjectImageSliderProps {
@@ -32,7 +32,7 @@ export const ProjectImageSlider = ({
       paginate(nextIndex);
     }, 4500);
     return () => clearInterval(timer);
-  }, [images.length, isHovered, currentIndex]);
+  }, [images.length, isHovered, currentIndex, paginate]);
 
   const variants = {
     enter: (direction: number) => ({

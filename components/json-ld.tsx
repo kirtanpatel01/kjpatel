@@ -4,25 +4,32 @@ export default function JsonLd() {
     "@graph": [
       {
         "@type": "Person",
-        "name": "Kirtan Patel",
-        "jobTitle": "Full Stack Developer",
-        "url": "https://kjpatel.vercel.app",
-        "sameAs": [
+        name: "Kirtan Patel",
+        jobTitle: "Full Stack Developer",
+        url: "https://kjpatel.vercel.app",
+        sameAs: [
           "https://github.com/kirtanpatel01",
-          "https://linkedin.com/in/kjpatel" 
+          "https://linkedin.com/in/kjpatel",
         ],
-        "knowsAbout": ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "Supabase"]
+        knowsAbout: [
+          "React",
+          "Next.js",
+          "Node.js",
+          "TypeScript",
+          "MongoDB",
+          "Supabase",
+        ],
       },
       {
         "@type": "WebSite",
-        "name": "Kirtan Patel Portfolio",
-        "url": "https://kjpatel.vercel.app",
-        "author": {
+        name: "Kirtan Patel Portfolio",
+        url: "https://kjpatel.vercel.app",
+        author: {
           "@type": "Person",
-          "name": "Kirtan Patel"
-        }
-      }
-    ]
+          name: "Kirtan Patel",
+        },
+      },
+    ],
   };
 
   return (

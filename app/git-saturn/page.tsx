@@ -1,6 +1,6 @@
-import React from 'react'
-import GitSaturn from '@/components/git-saturn'
-import { getGitSaturnDataAction } from '@/lib/git-saturn.actions'
+import React from "react";
+import GitSaturn from "@/components/git-saturn";
+import { getGitSaturnDataAction } from "@/lib/git-saturn.actions";
 
 async function page() {
   const saturnData = await getGitSaturnDataAction({
@@ -17,7 +17,7 @@ async function page() {
         repos={saturnData.repos}
       />
     </div>
-  )
+  );
 }
 
-export default page
+export default page;

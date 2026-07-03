@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -13,7 +13,12 @@ export function PageContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("min-h-[calc(100vh-7.1rem)] sm:min-h-[calc(100vh-5.6rem)]", className)}>
+    <div
+      className={cn(
+        "min-h-[calc(100vh-7.1rem)] sm:min-h-[calc(100vh-5.6rem)]",
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -31,12 +36,7 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <h2
-      className={cn(
-        " font-bold text-xl sm:text-3xl lg:text-4xl",
-        className
-      )}
-    >
+    <h2 className={cn(" font-bold text-xl sm:text-3xl lg:text-4xl", className)}>
       {children}
     </h2>
   );

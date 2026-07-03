@@ -1,9 +1,6 @@
-export * from "./skills";
+export * from "./metadata";
 export * from "./projects";
 export * from "./showcase-registry";
-export * from "./work";
-export * from "./metadata";
+export * from "./skills";
 export * from "./socials";
-
-
-
+export * from "./work";

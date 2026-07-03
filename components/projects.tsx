@@ -1,18 +1,18 @@
 "use client";
 
-import { projects } from "@/lib/constants";
 import { X } from "lucide-react";
-import { useState } from "react";
 import Image from "next/image";
-import { SectionContainer } from "./responsive-wrappers";
+import { useState } from "react";
 import { Dialog, DialogOverlay, DialogPortal } from "@/components/ui/dialog";
+import { projects } from "@/lib/constants";
 import { ProjectCard } from "./projects/project-card";
+import { SectionContainer } from "./responsive-wrappers";
 
 export default function Projects() {
   const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);
 
   return (
-    <SectionContainer id="projects" className="space-y-4">
+    <SectionContainer id="projects" className="space-y-4 scroll-pt-4">
       <h3 className="text-2xl font-bold">Projects</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -21,12 +21,14 @@ export default function Projects() {
             key={index}
             project={project}
             onExpand={(url) => setFullScreenImage(url)}
-            isFullScreenOpen={!!fullScreenImage}
           />
         ))}
       </div>
 
-      <Dialog open={!!fullScreenImage} onOpenChange={() => setFullScreenImage(null)}>
+      <Dialog
+        open={!!fullScreenImage}
+        onOpenChange={() => setFullScreenImage(null)}
+      >
         <DialogPortal>
           <DialogOverlay
             className="bg-black/90 z-[110]"

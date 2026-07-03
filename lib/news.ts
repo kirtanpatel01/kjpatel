@@ -28,7 +28,9 @@ function ensureNewsDirectory() {
 
   return fs
     .readdirSync(newsDirectory)
-    .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"));
+    .filter(
+      (fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"),
+    );
 }
 
 function fileNameToSlug(fileName: string) {
@@ -59,7 +61,9 @@ export function getAllNewsPosts(): NewsListItem[] {
 
 export function getNewsPostBySlug(slug: string): NewsPost | null {
   const files = ensureNewsDirectory();
-  const matchedFile = files.find((fileName) => fileNameToSlug(fileName) === slug);
+  const matchedFile = files.find(
+    (fileName) => fileNameToSlug(fileName) === slug,
+  );
 
   if (!matchedFile) {
     return null;

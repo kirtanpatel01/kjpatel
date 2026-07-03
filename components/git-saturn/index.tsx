@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { cn } from '@/lib/utils'
-import { Canvas } from '@react-three/fiber'
-import React from 'react'
-import { GitSaturnProps, GitSaturnRepo } from '@/lib/git-saturn.types'
-import { SaturnScene } from '@/components/git-saturn/saturn-scene'
+import { Canvas } from "@react-three/fiber";
+import React from "react";
+import { SaturnScene } from "@/components/git-saturn/saturn-scene";
+import type { GitSaturnProps, GitSaturnRepo } from "@/lib/git-saturn.types";
+import { cn } from "@/lib/utils";
 
 export default function GitSaturn({
   repos,
-  username = 'developer',
+  username = "developer",
   width = 720,
   height = 420,
   interactive = true,
@@ -17,37 +17,52 @@ export default function GitSaturn({
   showStats = true,
   showRepoDetails = true,
 }: GitSaturnProps) {
-  const [focusState, setFocusState] = React.useState<{ repo: GitSaturnRepo | null; locked: boolean }>({
+  const [focusState, setFocusState] = React.useState<{
+    repo: GitSaturnRepo | null;
+    locked: boolean;
+  }>({
     repo: null,
     locked: false,
-  })
-  const repoCount = repos.length
-  const totalCommits = repos.reduce((sum, repo) => sum + repo.commits, 0)
+  });
+  const repoCount = repos.length;
+  const totalCommits = repos.reduce((sum, repo) => sum + repo.commits, 0);
 
-  const focusedRepo = focusState.repo
+  const focusedRepo = focusState.repo;
 
   function formatStars(repo: GitSaturnRepo) {
-    return repo.stars ?? Math.max(18, Math.round(repo.commits * 1.35 + (repo.name.length % 9) * 11))
+    return (
+      repo.stars ??
+      Math.max(
+        18,
+        Math.round(repo.commits * 1.35 + (repo.name.length % 9) * 11),
+      )
+    );
   }
 
   function formatLastActivity(repo: GitSaturnRepo) {
-    if (repo.lastActivity) return repo.lastActivity
+    if (repo.lastActivity) return repo.lastActivity;
 
-    const recency = Math.max(1, Math.round(180 / Math.max(18, repo.commits / 2)))
-    return `${recency} days ago`
+    const recency = Math.max(
+      1,
+      Math.round(180 / Math.max(18, repo.commits / 2)),
+    );
+    return `${recency} days ago`;
   }
 
   return (
-    <div 
-      className={cn('w-(--git-saturn-width) h-(--git-saturn-height)', className)}
-      style={{ 
-        '--git-saturn-width': `${width}px`, 
-        '--git-saturn-height': `${height}px` 
-      } as React.CSSProperties}
+    <div
+      className={cn(
+        "w-(--git-saturn-width) h-(--git-saturn-height)",
+        className,
+      )}
+      style={
+        {
+          "--git-saturn-width": `${width}px`,
+          "--git-saturn-height": `${height}px`,
+        } as React.CSSProperties
+      }
     >
-      <div
-        className="relative w-full h-full overflow-hidden rounded-2xl border bg-linear-to-b from-slate-950 to-slate-900"
-      >
+      <div className="relative w-full h-full overflow-hidden rounded-2xl border bg-linear-to-b from-slate-950 to-slate-900">
         <Canvas
           camera={{ position: [0, 0, 6], fov: 48 }}
           onPointerMissed={() => setFocusState({ repo: null, locked: false })}
@@ -57,10 +72,12 @@ export default function GitSaturn({
             interactive={interactive}
             focusedRepo={focusedRepo}
             focusLocked={focusState.locked}
-            onFocusRepo={(repo, locked = false) => setFocusState({ repo, locked })}
+            onFocusRepo={(repo, locked = false) =>
+              setFocusState({ repo, locked })
+            }
             onClearFocus={(repo) => {
               if (!focusState.locked && focusState.repo?.name === repo.name) {
-                setFocusState({ repo: null, locked: false })
+                setFocusState({ repo: null, locked: false });
               }
             }}
           />
@@ -81,7 +98,9 @@ export default function GitSaturn({
         {showRepoDetails && focusedRepo ? (
           <div className="cursor-pointer absolute right-4 top-4 rounded-2xl border bg-background/90 px-3 py-2 text-left shadow-sm backdrop-blur">
             <div className="mt-1 text-sm font-medium">{focusedRepo.name}</div>
-            <div className="text-xs text-muted-foreground">{focusedRepo.commits.toLocaleString()} commits</div>
+            <div className="text-xs text-muted-foreground">
+              {focusedRepo.commits.toLocaleString()} commits
+            </div>
             <div className="mt-2 grid gap-1 text-xs text-muted-foreground">
               <div>{formatStars(focusedRepo).toLocaleString()} stars</div>
               <div>Last activity {formatLastActivity(focusedRepo)}</div>
@@ -90,5 +109,5 @@ export default function GitSaturn({
         ) : null}
       </div>
     </div>
-  )
+  );
 }

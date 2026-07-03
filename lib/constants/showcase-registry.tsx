@@ -1,5 +1,5 @@
+import type React from "react";
 import { ElasticNavbarContent } from "@/components/showcase/elastic-navbar/content";
-import React from "react";
 
 export interface ShowcaseIdea {
   title: string;
@@ -12,7 +12,8 @@ export interface ShowcaseIdea {
 export const showcaseIdeas: ShowcaseIdea[] = [
   {
     title: "Elastic Follower Navbar",
-    description: "A navigation bar where the active link highlight flows toward your cursor with magnetic elasticity. Built with three different state strategies.",
+    description:
+      "A navigation bar where the active link highlight flows toward your cursor with magnetic elasticity. Built with three different state strategies.",
     slug: "elastic-navbar",
     content: <ElasticNavbarContent />,
   },

@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { PageContainer, SectionContainer } from "@/components/responsive-wrappers";
 import NewsCodeBlock from "@/components/news-code-block";
+import {
+  PageContainer,
+  SectionContainer,
+} from "@/components/responsive-wrappers";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -56,7 +59,10 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         </h1>
 
         <article className="space-y-4 leading-relaxed text-foreground/90 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-6 [&_p]:text-base [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:underline [&_a]:underline-offset-4">
-          <MDXRemote source={newsPost.content} components={{ pre: NewsCodeBlock }} />
+          <MDXRemote
+            source={newsPost.content}
+            components={{ pre: NewsCodeBlock }}
+          />
         </article>
       </SectionContainer>
     </PageContainer>
