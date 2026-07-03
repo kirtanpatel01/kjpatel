@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Dialog, DialogOverlay, DialogPortal } from "@/components/ui/dialog";
 import { projects } from "@/lib/constants";
-import { ProjectCard } from "./projects/project-card";
-import { SectionContainer } from "./responsive-wrappers";
+import { ProjectCard } from "../projects/project-card";
+import { SectionContainer } from "../responsive-wrappers";
 
 export default function Projects() {
   const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);

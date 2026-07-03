@@ -1,8 +1,8 @@
 "use client";
 
 import { experiences } from "@/lib/constants";
-import { SectionContainer } from "./responsive-wrappers";
-import { Badge } from "./ui/badge";
+import { SectionContainer } from "../responsive-wrappers";
+import { Badge } from "../ui/badge";
 
 export default function Experience() {
   return (

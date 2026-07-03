@@ -6,7 +6,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { type SkillCategory, skills } from "@/lib/constants";
-import { SectionContainer } from "./responsive-wrappers";
+import { SectionContainer } from "../responsive-wrappers";
 
 const CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database"];
 
