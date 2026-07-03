@@ -12,7 +12,7 @@ import { Kbd } from "./ui/kbd";
 
 const navItems = [
   { name: "Home", id: "home", href: "#home" },
-  { name: "Projects", id: "projects", href: "#projects" },
+  { name: "Work", id: "work", href: "#work" },
   { name: "Tech", id: "skills", href: "#skills" },
   { name: "Experience", id: "experience", href: "#experience" },
   { name: "Contact", id: "contact", href: "#contact" },
@@ -86,7 +86,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full max-w-4xl border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
+    <header className="w-full max-w-4xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
       <div className="flex items-center gap-4">
         <Link href="/" className="shrink-0 flex items-center justify-center">
           <div
@@ -100,7 +100,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden md:flex items-center gap-1.5 text-sm"
+          className="hidden md:flex items-center gap-1.5"
           onMouseLeave={() => setHoveredSection(null)}
         >
           {navItems.map((item) => {
@@ -115,10 +115,10 @@ export default function Header() {
                 href={isHomePage ? item.href : `/${item.href}`}
                 onClick={(e) => handleClick(e, item.href)}
                 className={cn(
-                  "relative px-4 py-1.5 rounded-full tracking-widest text-[13px] font-medium transition-colors duration-200 cursor-pointer select-none",
+                  "relative px-4 py-1.5 rounded-full tracking-widest transition-colors duration-200 cursor-pointer select-none text-sm font-semibold",
                   isActive
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? ""
+                    : "text-zinc-400 hover:text-secondary-foreground",
                 )}
                 onMouseEnter={() => setHoveredSection(item.id)}
               >
@@ -126,10 +126,8 @@ export default function Header() {
                   <motion.div
                     layoutId="header-nav-pill"
                     className={cn(
-                      "absolute inset-0 rounded-full border border-dashed -z-10 shadow-sm",
-                      isActive
-                        ? "bg-accent/80 border-primary/20"
-                        : "bg-accent/40 border-transparent",
+                      "absolute inset-0 rounded-full -z-10 shadow-sm",
+                      isActive ? "bg-secondary/80" : "bg-secondary/40",
                     )}
                     transition={{
                       type: "spring",
@@ -146,7 +144,7 @@ export default function Header() {
         </nav>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         <div className="flex items-center gap-2">
           <Kbd className="hidden md:flex">d</Kbd>
           <ModeToggle />
@@ -164,8 +162,8 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="absolute top-full left-0 right-0 border-b border-border bg-background md:hidden">
-          <div className="flex flex-col gap-2 px-3 py-4">
+        <nav className="absolute top-full left-0 right-0 border-b border-border bg-background md:hidden pb-2">
+          <div className="flex flex-col gap-2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id && isHomePage;
 
@@ -178,10 +176,10 @@ export default function Header() {
                     setIsOpen(false);
                   }}
                   className={cn(
-                    "w-fit text-[15px] px-4 py-2 rounded-full tracking-widest transition-colors font-medium",
+                    "w-full px-4 py-2 tracking-widest text-sm font-medium",
                     isActive
-                      ? "bg-accent/80 border border-dashed border-primary/20"
-                      : "hover:bg-accent/30 text-muted-foreground hover:text-foreground",
+                      ? "bg-foreground text-background"
+                      : "",
                   )}
                 >
                   {item.name}

@@ -3,7 +3,7 @@ import React from "react";
 import {
   PageContainer,
   SectionContainer,
-  SectionHeading,
+  SectionTitle,
 } from "@/components/responsive-wrappers";
 import { type ShowcaseIdea, showcaseIdeas } from "@/lib/constants";
 
@@ -43,7 +43,7 @@ function ShowcasePage() {
   return (
     <PageContainer>
       <SectionContainer>
-        <SectionHeading>Showcase</SectionHeading>
+        <SectionTitle>Showcase</SectionTitle>
         <p className="text-muted-foreground leading-relaxed sm:mt-2">
           An interactive collection of recurring UI/UX patterns, design layouts,
           and experimental components. A central vault built to capture and

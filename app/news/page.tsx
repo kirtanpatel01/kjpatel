@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   PageContainer,
   SectionContainer,
-  SectionHeading,
+  SectionTitle,
 } from "@/components/responsive-wrappers";
 import { getAllNewsPosts } from "@/lib/news";
 
@@ -12,7 +12,7 @@ export default function NewsPage() {
   return (
     <PageContainer>
       <SectionContainer>
-        <SectionHeading>News</SectionHeading>
+        <SectionTitle>News</SectionTitle>
         <p className="text-muted-foreground leading-relaxed sm:mt-2">
           Market updates, product shifts, and important changes people should be
           aware of.

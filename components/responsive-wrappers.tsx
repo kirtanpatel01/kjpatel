@@ -25,6 +25,24 @@ export function PageContainer({
 }
 
 /**
+ * SectionTitle - Responsive heading with consistent scaling
+ * Mobile: text-xl, Tablet: text-3xl, Desktop: text-4xl
+ */
+export function SectionTitle({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <h2 className={cn("font-bold text-xl sm:text-3xl lg:text-4xl", className)}>
+      {children}
+    </h2>
+  );
+}
+
+/**
  * SectionHeading - Responsive heading with consistent scaling
  * Mobile: text-xl, Tablet: text-3xl, Desktop: text-4xl
  */
@@ -36,9 +54,13 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <h2 className={cn(" font-bold text-xl sm:text-3xl lg:text-4xl", className)}>
-      {children}
-    </h2>
+    <div className={cn("my-0 border-y border-dashed border-border/70", className)}>
+      <div className="h-3 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]" />
+      <div className="px-3 py-2 border-y border-dashed bg-accent/40 text-accent-foreground font-bold text-lg sm:text-2xl leading-tight">
+        {children}
+      </div>
+      <div className="h-3 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]"/>
+    </div>
   );
 }
 
@@ -75,7 +97,7 @@ export function SectionContainer({
   id?: string;
 }) {
   return (
-    <div id={id} className={cn("w-full p-4", className)}>
+    <div id={id} className={cn("w-full", className)}>
       {children}
     </div>
   );

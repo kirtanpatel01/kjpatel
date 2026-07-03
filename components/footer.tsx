@@ -7,8 +7,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { socialLinks } from "@/lib/constants";
+import { ArrowUp } from "lucide-react";
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <footer className="w-full max-w-4xl border-x border-dashed mx-auto border-t border-border px-3 py-2 flex flex-row justify-between items-end sm:items-center gap-4 text-xs  tracking-widest text-muted-foreground bg-background">
       {/* Left side on desktop: Text and Links grouped together */}
@@ -18,7 +25,7 @@ export default function Footer() {
         </span>
 
         {/* Social Icons - Left-aligned on Desktop, Above text on Mobile */}
-        <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-4">
+        {/* <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-4">
           {socialLinks.map((link) => (
             <Tooltip key={link.name}>
               <TooltipTrigger asChild>
@@ -50,17 +57,17 @@ export default function Footer() {
               </TooltipContent>
             </Tooltip>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Back to Top - Far right side */}
-      {/* <button
+      <button
         onClick={scrollToTop}
         className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer shrink-0"
       >
         <span className="hidden md:block">Back to Top</span>
         <ArrowUp className="w-4 h-4" />
-      </button> */}
+      </button>
     </footer>
   );
 }

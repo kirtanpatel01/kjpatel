@@ -1,20 +1,14 @@
 "use client";
 
 import emailjs from "emailjs-com";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Globe, Mail, Clock } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
-  ResponsiveText,
   SectionContainer,
   SectionHeading,
 } from "@/components/responsive-wrappers";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { socialLinks } from "@/lib/constants";
 
 export default function Contact() {
@@ -55,67 +49,85 @@ export default function Contact() {
 
   return (
     <SectionContainer id="contact" className="space-y-6">
-      <SectionHeading>Get in Touch.</SectionHeading>
+      <SectionHeading>Get in Touch</SectionHeading>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 items-stretch p-4 sm:p-8">
         {/* Info Column */}
-        <div className="space-y-6">
-          <div className="w-fit space-y-1">
-            <h3 className="text-sm tracking-widest text-muted-foreground uppercase">
-              Email
+        <div className="flex flex-col justify-end py-2 gap-3 sm:gap-6">
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold tracking-tight text-secondary-foreground">
+              Let&apos;s Build Something.
             </h3>
-            <ResponsiveText
-              size="sm"
-              className="hover:underline underline-offset-4 decoration-1 font-medium"
-            >
-              <a href="mailto:kjptel200022@gmail.com">kjptel200022@gmail.com</a>
-            </ResponsiveText>
+            <p className="font-desc text-sm sm:text-base text-foreground/80 leading-relaxed max-w-sm">
+              I&apos;m currently looking for full stack engineering role and
+              startup opportunities.
+            </p>
           </div>
 
-          <div className="space-y-3">
-            <h3 className="text-sm tracking-widest text-muted-foreground uppercase">
-              Socials
-            </h3>
-            <div className="flex gap-6">
-              {socialLinks.map((link) => (
-                <Tooltip key={link.name}>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
-                    >
-                      {link.isNeutral ? (
-                        <div
-                          className="w-8 h-8 icon-mask bg-foreground"
-                          style={{
-                            maskImage: `url(${link.icon})`,
-                            WebkitMaskImage: `url(${link.icon})`,
-                          }}
-                        />
-                      ) : (
-                        <img
-                          src={link.icon}
-                          alt={link.name}
-                          className="w-8 h-8 object-contain"
-                        />
-                      )}
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent side="top">
-                    <p className="text-xs">{link.username}</p>
-                  </TooltipContent>
-                </Tooltip>
-              ))}
+          {/* <div className="border-t border-dashed border-border/50 my-2" /> */}
+
+          <div className="space-y-2.5 text-sm sm:text-base font-desc">
+            <div className="flex items-center gap-3 text-foreground/90">
+              <MapPin className="w-5 h-5 shrink-0 stroke-1" />
+              <div>
+                Vadodara,{" "}
+                <span className="text-muted-foreground">Gujarat, India</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-foreground/90">
+              <Globe className="w-5 h-5 shrink-0 stroke-1" />
+              <span>Remote Friendly</span>
+            </div>
+            <div className="flex items-center gap-3 text-foreground/95 hover:text-foreground">
+              <Mail className="w-5 h-5 shrink-0 stroke-1" />
+              <a
+                href="mailto:kjptel200022@gmail.com"
+                className="hover:underline underline-offset-4 font-semibold"
+              >
+                kjptel200022@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center gap-3 text-foreground/90">
+              <Clock className="w-5 h-5 shrink-0 stroke-1" />
+              <span>Usually replies within 24 hours</span>
             </div>
           </div>
+
+          {/* <div className="border-t border-dashed border-border/50 my-2" /> */}
+
+          {/* <div className="flex gap-4 items-center pt-2">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-foreground/80 hover:text-foreground hover:border-border/80 group transition-all duration-200"
+              >
+                {link.isNeutral ? (
+                  <div
+                    className="w-6 h-6 icon-mask bg-foreground/80 group-hover:bg-foreground"
+                    style={{
+                      maskImage: `url(${link.icon})`,
+                      WebkitMaskImage: `url(${link.icon})`,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={link.icon}
+                    alt={link.name}
+                    className="w-6 h-6 object-contain"
+                  />
+                )}
+              </a>
+            ))}
+          </div> */}
         </div>
 
         {/* Form Column */}
         <form
           onSubmit={sendEmail}
-          className="w-full flex flex-col border border-border rounded-xl overflow-hidden bg-muted/5"
+          className="w-full flex flex-col border border-border overflow-hidden bg-muted/5"
         >
           <div className="group relative">
             <input

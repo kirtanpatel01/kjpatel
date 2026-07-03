@@ -44,6 +44,9 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --font-heading: var(--font-chivo); 
+  --font-desc: var(--font-signika);
 }
 
 :root {
@@ -135,4 +138,14 @@
 
 @utility link-underline {
     @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
+}
+
+@utility bg-diagonal-lines {
+  background-color: var(--border);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 0 L8 8 M-2 6 L2 10 M6 -2 L10 2' fill='none' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 0 L8 8 M-2 6 L2 10 M6 -2 L10 2' fill='none' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
+  -webkit-mask-size: 8px 8px;
+  mask-size: 8px 8px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
 }

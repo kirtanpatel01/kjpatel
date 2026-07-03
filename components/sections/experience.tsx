@@ -1,20 +1,17 @@
 "use client";
 
 import { experiences } from "@/lib/constants";
-import { SectionContainer } from "../responsive-wrappers";
+import { SectionContainer, SectionHeading } from "../responsive-wrappers";
 import { Badge } from "../ui/badge";
 
 export default function Experience() {
   return (
     <SectionContainer id="experience" className="space-y-2">
-      <h3 className="text-2xl font-bold">Experience</h3>
+      <SectionHeading>Experience</SectionHeading>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 p-4 sm:p-8">
         {experiences.map((exp, index) => (
-          <div
-            key={index}
-            className="space-y-2 p-4 rounded-2xl text-secondary-foreground shadow shadow-primary/20 dark:shadow-transparent bg-muted/10 relative overflow-hidden dark:border border-border/50"
-          >
+          <div key={index} className="space-y-2">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="">
                 <h4 className="text-lg font-semibold space-x-2">
@@ -30,9 +27,9 @@ export default function Experience() {
               <Badge variant="secondary">{exp.period}</Badge>
             </div>
 
-            <ul className="space-y-2 pl-2">
+            <ul className="space-y-2 pl-2 font-desc">
               {exp.responsibilities.map((resp, i) => (
-                <li key={i} className="flex gap-2 leading-relaxed">
+                <li key={i} className="flex gap-2 leading-relaxed text-sm sm:text-base">
                   <span className="text-muted-foreground">-</span>
                   <span>{resp}</span>
                 </li>
