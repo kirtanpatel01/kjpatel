@@ -57,6 +57,7 @@ export default function Footer() {
       {/* Back to Top - Far right side */}
       <button
         onClick={scrollToTop}
+        aria-label="Back to top"
         className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer shrink-0"
       >
         <span className="hidden md:block">Back to Top</span>

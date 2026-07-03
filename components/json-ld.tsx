@@ -6,7 +6,7 @@ export default function JsonLd() {
         "@type": "Person",
         name: "Kirtan Patel",
         jobTitle: "Full Stack Developer",
-        url: "https://kjpatel.vercel.app",
+        url: "https://kjpate.me",
         sameAs: [
           "https://github.com/kirtanpatel01",
           "https://linkedin.com/in/kjpatel",
@@ -23,7 +23,7 @@ export default function JsonLd() {
       {
         "@type": "WebSite",
         name: "Kirtan Patel Portfolio",
-        url: "https://kjpatel.vercel.app",
+        url: "https://kjpate.me",
         author: {
           "@type": "Person",
           name: "Kirtan Patel",

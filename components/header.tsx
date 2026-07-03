@@ -88,7 +88,11 @@ export default function Header() {
   return (
     <header className="w-full max-w-4xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
       <div className="flex items-center gap-4">
-        <Link href="/" className="shrink-0 flex items-center justify-center">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="shrink-0 flex items-center justify-center"
+        >
           <div
             className="w-8 h-8 icon-mask bg-foreground"
             style={{

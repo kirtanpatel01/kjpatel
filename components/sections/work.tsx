@@ -10,9 +10,11 @@ import { work } from "@/lib/constants/work";
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   TypeScript: Icons.TS,
   JavaScript: Icons.JS,
+  React: Icons.React,
   "React.js": Icons.React,
   "Next.js": Icons.Nextjs,
   "TanStack Start": Icons.TanstackStart,
+  Tailwind: Icons.Tailwind,
   "Tailwind CSS": Icons.Tailwind,
   "Shadcn/ui": Icons.Shadcn,
   "Node.js": Icons.Nodejs,
@@ -86,6 +88,12 @@ export default function Work() {
               <p className="text-sm sm:text-base leading-relaxed text-desc">
                 {project.description}
               </p>
+              {project.role && (
+                <p className="text-sm sm:text-base leading-relaxed text-foreground/80 mt-2">
+                  <span className="font-semibold text-foreground">Role: </span>
+                  {project.role}
+                </p>
+              )}
             </div>
 
             <div className="space-y-4 pt-2">
@@ -109,17 +117,16 @@ export default function Work() {
               <div className="flex flex-wrap gap-4 mt-2">
                 {project.tech.map((t) => {
                   const IconComponent = ICON_MAP[t];
-                  if (!IconComponent) return null;
                   return (
                     <div
                       key={t}
                       className="w-fit flex justify-center items-center gap-2.5 px-2.5 py-1.5 rounded-full border border-border/20 bg-accent/20 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default"
                     >
-                      {IconComponent ? (
+                      {IconComponent && (
                         <div className="flex items-center justify-center w-5 h-5 shrink-0 transition-transform duration-200 group-hover:rotate-4">
                           <IconComponent className="w-full h-full" />
                         </div>
-                      ) : null}
+                      )}
                       <span className="text-xs sm:text-sm font-medium tracking-wide text-foreground/80 group-hover:text-foreground">
                         {t}
                       </span>

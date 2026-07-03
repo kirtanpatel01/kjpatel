@@ -3,6 +3,7 @@ export interface Project {
   subtitle: string;
   description: string;
   badge: "Solo Built" | "Team Project";
+  role?: string;
   keyContributions: string[];
   tech: string[];
   link: string | null;
@@ -14,16 +15,32 @@ export const work: Project[] = [
     title: "Morganize",
     subtitle: "Production ERP & POS Platform",
     description:
-      "Production ERP and POS platform for organizations managing multiple stores, vendors, digital wallets, and customer operations through a unified interface.",
+      "Production-ready ERP and POS platform built for organizations managing multiple stores, vendors, digital wallets, inventory, orders, and customer operations through a unified system.",
     badge: "Solo Built",
+    role: "Full Stack Developer (Solo Project) — Designed and developed the platform end-to-end, including frontend architecture, backend business logic, database design, server actions, realtime synchronization, authentication, and third-party integrations.",
     keyContributions: [
-      "Built the entire frontend architecture as the sole developer from concept to production.",
-      "Developed multi-store POS, inventory, organization dashboards, and customer interfaces.",
-      "Implemented real-time synchronization using Supabase Realtime and React Query.",
-      "Built wallet management, Cashfree payment integration, and PDF invoice generation.",
-      "Designed high-density analytics dashboards with optimized rendering and reusable components.",
+      "Architected and built the complete application using Next.js App Router and TypeScript.",
+      "Designed and implemented relational database schemas, business workflows, and optimized Supabase queries.",
+      "Developed organization, admin, vendor, store, and customer modules with role-based access.",
+      "Built multi-store POS, inventory management, wallet system, order management, and analytics dashboards.",
+      "Implemented realtime synchronization using Supabase Realtime with React Query cache invalidation.",
+      "Integrated Cashfree Payment Gateway for wallet top-ups and payment processing.",
+      "Built server actions, authentication flows, reusable APIs, and secure backend logic.",
+      "Generated dynamic PDF invoices with automated calculations and downloadable receipts.",
+      "Optimized application performance using lazy loading, optimistic updates, and efficient data fetching patterns.",
     ],
-    tech: ["Next.js", "React.js", "TypeScript", "Supabase", "Tailwind CSS"],
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "React Query",
+      "Tailwind CSS",
+      "Zustand",
+      "Cashfree",
+      "jsPDF",
+    ],
     link: "https://moreganise.in",
     githubLink: null,
   },
@@ -31,16 +48,18 @@ export const work: Project[] = [
     title: "Algorion AI",
     subtitle: "Company Website & AI Platform",
     description:
-      "Official company website and AI platform where I contributed as a Frontend Developer.",
+      "Official website and AI platform developed as part of my internship at Algorion Research and Analysis Pvt. Ltd.",
     badge: "Team Project",
+    role: "Frontend Developer (Team Project) — Worked with designers and backend developers to build responsive, production-ready interfaces and reusable frontend components.",
     keyContributions: [
-      "Developed responsive landing pages and production-ready UI sections.",
-      "Built reusable components used across multiple pages.",
+      "Developed responsive landing pages and marketing sections.",
+      "Built reusable UI components shared across multiple pages.",
       "Implemented animations and interactive user experiences.",
-      "Optimized responsiveness and frontend performance.",
-      "Collaborated with designers and engineers to prepare production deployments.",
+      "Improved responsiveness, accessibility, and frontend performance.",
+      "Collaborated with designers and engineers throughout development and deployment.",
+      "Maintained consistent UI patterns and design system components.",
     ],
-    tech: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     link: "https://algorion.in",
     githubLink: null,
   },

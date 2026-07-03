@@ -27,16 +27,20 @@ export default async function Home() {
         <h3 className="font-bold text-xl sm:text-3xl">
           Full Stack Engineer building production software
         </h3>
-        <div className="mt-1 max-w-4xl leading-relaxed font-desc text-accent-foreground tracking-wide">
-          I&apos;m{" "}
-          <span className="text-primary font-mono tracking-tight">
-            Kirtan Patel
-          </span>
-          , a Full Stack Developer focused on building scalable web
-          applications, modern frontend experiences, and production software.
-          Recently, I&apos;ve contributed to two production products at an
-          early-stage startup, delivering performant interfaces and maintainable
-          systems.
+        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed font-desc text-accent-foreground tracking-wide text-sm sm:text-base">
+          <p>
+            I&apos;m{" "}
+            <span className="text-primary font-mono tracking-tight">
+              Kirtan Patel
+            </span>
+            , a Full Stack Developer specializing in modern web technologies, with a strong focus on building production-ready applications using Next.js, TypeScript, and Supabase.
+          </p>
+          <p>
+            I enjoy solving complex engineering problems across both frontend and backend—from designing database schemas and implementing business logic to creating responsive user interfaces and optimizing application performance. My experience includes building enterprise ERP systems, realtime applications, payment integrations, analytics dashboards, and scalable architectures that support real-world business workflows.
+          </p>
+          <p>
+            I&apos;m continuously exploring better software architecture, developer experience, and modern technologies to build reliable and maintainable products.
+          </p>
         </div>
 
         <Suspense fallback={<GitHubContributionsFallback />}>

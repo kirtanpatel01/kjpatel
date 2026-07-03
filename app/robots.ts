@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://kjpatel.vercel.app/sitemap.xml",
+    sitemap: "https://kjpate.me/sitemap.xml",
   };
 }

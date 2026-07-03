@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const siteMetadata: Metadata = {
-  metadataBase: new URL("https://kjpatel.vercel.app"),
+  metadataBase: new URL("https://kjpate.me"),
   title: {
     default: "Kirtan Patel",
     template: "%s | Kirtan Patel",
@@ -16,12 +16,12 @@ export const siteMetadata: Metadata = {
     "Portfolio",
     "Kirtan Patel",
   ],
-  authors: [{ name: "Kirtan Patel", url: "https://kjpatel.vercel.app" }],
+  authors: [{ name: "Kirtan Patel", url: "https://kjpate.me" }],
   creator: "Kirtan Patel",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kjpatel.vercel.app",
+    url: "https://kjpate.me",
     title: "Kirtan Patel | Full Stack Developer",
     description:
       "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman.",
