@@ -2,7 +2,7 @@
 
 import React from "react";
 import { type SkillCategory, skills } from "@/lib/constants";
-import * as Icons from "@/lib/constants/skills-assets";
+import * as Icons from "@/lib/constants/icons";
 import { SectionContainer, SectionHeading } from "../responsive-wrappers";
 
 const CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database"];

@@ -1,12 +1,10 @@
 "use client";
 
-import { Github } from "@/lib/constants";
-import * as Icons from "@/lib/constants/skills-assets";
+import * as Icons from "@/lib/constants/icons";
 import { SectionContainer, SectionHeading } from "../responsive-wrappers";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { Link2 } from "lucide-react";
 import { work } from "@/lib/constants/work";
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -74,7 +72,7 @@ export default function Work() {
                   >
                     <Button variant={"outline"} size={"sm"}>
                       GitHub
-                      <Github />
+                      <Icons.Github />
                     </Button>
                   </Link>
                 )}

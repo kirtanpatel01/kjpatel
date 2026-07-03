@@ -1,12 +1,6 @@
 "use client";
 
 import React from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { socialLinks } from "@/lib/constants";
 import { ArrowUp } from "lucide-react";
 
 export default function Footer() {

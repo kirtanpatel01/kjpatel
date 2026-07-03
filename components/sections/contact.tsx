@@ -10,6 +10,11 @@ import {
   SectionHeading,
 } from "@/components/responsive-wrappers";
 import { socialLinks } from "@/lib/constants";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
@@ -93,35 +98,30 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* <div className="border-t border-dashed border-border/50 my-2" /> */}
+          <div className="border-t border-dashed border-border/50 my-2" />
 
-          {/* <div className="flex gap-4 items-center pt-2">
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-foreground/80 hover:text-foreground hover:border-border/80 group transition-all duration-200"
-              >
-                {link.isNeutral ? (
-                  <div
-                    className="w-6 h-6 icon-mask bg-foreground/80 group-hover:bg-foreground"
-                    style={{
-                      maskImage: `url(${link.icon})`,
-                      WebkitMaskImage: `url(${link.icon})`,
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={link.icon}
-                    alt={link.name}
-                    className="w-6 h-6 object-contain"
-                  />
-                )}
-              </a>
-            ))}
-          </div> */}
+          <div className="flex gap-4 items-center pt-2">
+            {socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Tooltip key={link.name}>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-foreground/80 hover:text-foreground hover:border-border/80 group transition-all duration-200"
+                    >
+                      <Icon className="w-6 h-6 text-foreground/80 group-hover:text-foreground group-hover:scale-105 transition-all duration-200" />
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" sideOffset={6}>
+                    <p className="text-[11px] font-medium">{link.username}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
         </div>
 
         {/* Form Column */}
@@ -170,7 +170,7 @@ export default function Contact() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-4 border-t border-border bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground font-medium transition-colors"
+            className="w-full p-4 bg-background hover:bg-primary flex items-center justify-between cursor-pointer text-foreground hover:text-primary-foreground font-medium transition-colors"
           >
             <span>{loading ? "Sending..." : "Send Message"}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
