@@ -75,7 +75,7 @@ export const ProjectImageSlider = ({
             src={images[currentIndex]}
             alt={`${title} - image ${currentIndex + 1}`}
             fill
-            className="object-cover object-top"
+            className="object-cover object-top group-hover:scale-[1.04] transition-transform duration-500 ease-out"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
@@ -84,11 +84,12 @@ export const ProjectImageSlider = ({
       {/* Expand Icon */}
       {onExpand && (
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             onExpand(images[currentIndex]);
           }}
-          className="absolute top-2 right-2 z-30 p-1.5 rounded-full bg-black/50 text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+          className="absolute top-2 right-2 z-30 p-1.5 rounded-full bg-black/50 text-white opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70 cursor-pointer"
           aria-label="Expand image"
         >
           <Maximize2 size={14} />

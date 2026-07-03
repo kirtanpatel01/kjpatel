@@ -5,9 +5,11 @@ export interface Project {
   link: string | null;
   github_link: string | null;
   images: string[];
-  longDescription: string;
   purpose: string;
-  features: string[];
+  longDescription: string;
+  problem: string;
+  solution: string;
+  impact: string;
 }
 
 export const techMap: Record<
@@ -15,23 +17,20 @@ export const techMap: Record<
   { icon?: string; image?: string; color: string }
 > = {
   "Next.js": { icon: "devicon-nextjs-plain", color: "#000000" },
-  NeonDB: { image: "/logos/neon.svg", color: "#00e0d9" },
-  DrizzleORM: { image: "/logos/drizzle.svg", color: "#c5f74f" },
-  Supabase: { icon: "devicon-supabase-plain", color: "#3ecf8e" },
-  TailwindCSS: { icon: "devicon-tailwindcss-original", color: "#06b6d4" },
+  React: { icon: "devicon-react-original", color: "#61dafb" },
   TypeScript: { icon: "devicon-typescript-plain", color: "#3178c6" },
-  "React.js": { icon: "devicon-react-original", color: "#61dafb" },
-  "Node.js": { icon: "devicon-nodejs-plain", color: "#339933" },
-  "Express.js": { icon: "devicon-express-original", color: "#999999" },
-  MongoDB: { icon: "devicon-mongodb-plain", color: "#47a248" },
-  "Tanstack Start": { image: "/logos/tanstack.svg", color: "#ffb000" },
+  Supabase: { icon: "devicon-supabase-plain", color: "#3ecf8e" },
+  "React Query": { icon: "devicon-react-original", color: "#ff4154" },
+  Zustand: { icon: "devicon-react-original", color: "#453423" },
+  TailwindCSS: { icon: "devicon-tailwindcss-original", color: "#06b6d4" },
+  "Framer Motion": { icon: "devicon-react-original", color: "#e11d48" },
 };
 
 export const projects: Project[] = [
   {
     title: "Morganize",
-    description: "ERP + POS + Inventory Management System",
-    tech: ["Next.js", "Supabase", "TailwindCSS"],
+    description: "Production ERP and POS platform designed for organizations managing multiple stores, vendors, inventory, digital wallets, and customer operations through a unified interface.",
+    tech: ["Next.js", "React", "TypeScript", "Supabase", "React Query", "Zustand"],
     github_link: null,
     link: null,
     images: [
@@ -42,63 +41,28 @@ export const projects: Project[] = [
       "/sites/morganize/customer-orders.png",
     ],
     purpose:
-      "Morganize was built to revolutionize how multi-outlet organizations—such as food courts, malls, and campus markets—manage their retail ecosystem. It bridges the gap between complex hardware and fragmented POS systems.",
+      "Consolidates POS, inventory, digital wallets, and payouts under a unified interface.",
     longDescription:
-      "A modern, high-performance POS (Point of Sale) & Multi-Store Management System designed for speed, scalability, and an exceptional user experience.",
-    features: [
-      "Multi-Area Management for grouping stores logically",
-      "Store Vendor Dashboard for products, categories, and stock",
-      "Real-time Order Tracking and automated status updates",
-      "PDF Invoicing generation on-the-fly using jsPDF",
-      "Native Wallet System for frictionless one-click payments",
-      "Integrated Cashfree PG for UPI and Card transactions",
-    ],
+      "A multi-outlet ERP & POS platform built to eliminate administrative friction in campus and food-court style operations.",
+    problem: "Organizations managed inventory, vendors, and POS systems across multiple stores with fragmented tools.",
+    solution: "Built a unified ERP platform integrating inventory, POS, digital wallets, analytics, and real-time operations.",
+    impact: "Reduced workflow complexity through a centralized interface and production-ready dashboard.",
   },
   {
-    title: "Upcurve",
-    description: "Tracking platform for todos, habits, and exercises.",
-    tech: ["Next.js", "NeonDB", "DrizzleORM"],
-    link: "https://upcurve-xi.vercel.app",
-    github_link: "https://github.com/kirtanpatel01/upcurve",
+    title: "Algorion AI",
+    description: "Built the production frontend for the company's public website, developing reusable UI components, responsive layouts, animations, and performance-focused user experiences alongside a small engineering team.",
+    tech: ["Next.js", "React", "TailwindCSS", "Framer Motion"],
+    github_link: null,
+    link: "https://algorion.com",
     images: [
-      "/sites/upcurve/dashboard.png",
-      "/sites/upcurve/exercise.png",
-      "/sites/upcurve/habits.png",
-      "/sites/upcurve/landing-page.png",
-      "/sites/upcurve/todos.png",
+      "/sites/algorion-home.png",
     ],
     purpose:
-      "Designed to help users track habits, manage tasks, and monitor physical activity. Built with a focus on speed, aesthetics, and user experience for total life management.",
+      "Led client UI/UX implementation and frontend landing-page deployment to support Algorion's AI solutions catalog.",
     longDescription:
-      "Upcurve is a modern, personal growth and productivity platform that provides a unified interface for tracking daily rituals and task progress.",
-    features: [
-      "Personal Dashboard with unified task and habit progress",
-      "Efficient Task Management with priority levels",
-      "Habit Tracking with consistency history monitoring",
-      "Exercise Logging for tracking workouts and progress over time",
-    ],
-  },
-  {
-    title: "Kivio",
-    description: "Youtube alternative for distraction free watching experience",
-    tech: ["Tanstack Start", "TailwindCSS", "DrizzleORM", "NeonDB"],
-    github_link: "https://github.com/kirtanpatel01/kivio",
-    link: "https://kivio.vercel.app",
-    images: [
-      "/sites/kivio/kivio-home.png",
-      "/sites/kivio/kivio-channel.png",
-      "/sites/kivio/kivio-history.png",
-    ],
-    purpose:
-      "Kivio filters the noise of traditional social platforms, removing distracting sidebars and comments to provide a pure, chronological feed of content you choose.",
-    longDescription:
-      "A high-performance, distraction-free YouTube feed aggregator designed for power users who want to take back control of their viewing experience.",
-    features: [
-      "Personalized Video Feed from followed channels",
-      "Channel Management using simple handles",
-      "Private Watch History manager for recently viewed videos",
-      "Smart Metadata Caching for optimized performance",
-      "Better Auth integration with Google OAuth support",
-    ],
+      "Developed high-conversion product landing pages, fluid framer-motion micro-interactions, and a standardized reusable component system.",
+    problem: "The startup needed high-performance, visually striking landing views to launch product offerings without hurting page load.",
+    solution: "Developed a lightweight frontend landing page utilizing reusable React components and performance-optimized animations.",
+    impact: "Secured responsive experience consistency across all viewports alongside a small engineering team.",
   },
 ];

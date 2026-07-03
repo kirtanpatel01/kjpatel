@@ -10,15 +10,17 @@ import { socialLinks } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="w-full max-w-4xl border-x border-dashed mx-auto border-t border-border px-3 py-2 flex flex-row justify-between items-end sm:items-center gap-4 text-xs  tracking-widest text-muted-foreground bg-background">
-      {/* Left side on desktop: Text and Links grouped together */}
-      <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-4">
+    <footer className="w-full max-w-5xl border-x border-dashed mx-auto border-t border-border px-4 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs tracking-widest text-muted-foreground bg-background">
+      {/* Left side: Copyright & Socials */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <span>
-          Built with ❤️ by <span className="text-foreground">Kirtan Patel</span>
+          © 2026{" "}
+          <span className="text-foreground font-semibold">Kirtan Patel</span>.
+          Building products. Solving real problems.
         </span>
 
-        {/* Social Icons - Left-aligned on Desktop, Above text on Mobile */}
-        <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-4">
+        {/* Social Icons */}
+        <div className="flex items-center gap-4 sm:border-l sm:border-border sm:pl-4">
           {socialLinks.map((link) => (
             <Tooltip key={link.name}>
               <TooltipTrigger asChild>
@@ -30,7 +32,7 @@ export default function Footer() {
                 >
                   {link.isNeutral ? (
                     <div
-                      className="w-4 h-4 icon-mask"
+                      className="w-4 h-4 icon-mask bg-muted-foreground group-hover:bg-foreground transition-all duration-300"
                       style={{
                         maskImage: `url(${link.icon})`,
                         WebkitMaskImage: `url(${link.icon})`,
@@ -46,21 +48,17 @@ export default function Footer() {
                 </a>
               </TooltipTrigger>
               <TooltipContent side="top">
-                <p className=" text-[10px]">{link.username}</p>
+                <p className="text-[10px]">{link.username}</p>
               </TooltipContent>
             </Tooltip>
           ))}
         </div>
       </div>
 
-      {/* Back to Top - Far right side */}
-      {/* <button
-        onClick={scrollToTop}
-        className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer shrink-0"
-      >
-        <span className="hidden md:block">Back to Top</span>
-        <ArrowUp className="w-4 h-4" />
-      </button> */}
+      {/* Right side: Internship availability statement */}
+      <span className="text-muted-foreground/80 font-medium">
+        Currently available for internships & freelance opportunities.
+      </span>
     </footer>
   );
 }

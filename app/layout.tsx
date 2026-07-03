@@ -44,7 +44,7 @@ export default function RootLayout({
           <TooltipProvider>
             <Header />
             <JsonLd />
-            <main className="w-full max-w-4xl border-x border-dashed mx-auto">
+            <main className="w-full max-w-5xl border-x border-dashed mx-auto">
               {children}
             </main>
             <Footer />

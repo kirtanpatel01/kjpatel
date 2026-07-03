@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Contact from "@/components/sections/contact";
 import { PageContainer } from "@/components/responsive-wrappers";
+import Contact from "@/components/sections/contact";
 
 export default function ContactPage() {
   return (
