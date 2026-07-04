@@ -12,7 +12,7 @@ export interface Project {
 
 export const work: Project[] = [
   {
-    title: "Morganize",
+    title: "Moreganise",
     subtitle: "Production ERP & POS Platform",
     description:
       "Production-ready ERP and POS platform built for organizations managing multiple stores, vendors, digital wallets, inventory, orders, and customer operations through a unified system.",
