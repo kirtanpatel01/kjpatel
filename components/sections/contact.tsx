@@ -89,7 +89,7 @@ export default function Contact() {
                 href="mailto:kjptel200022@gmail.com"
                 className="hover:underline underline-offset-4 font-semibold"
               >
-                kjptel200022@gmail.com
+                kjpatel200022@gmail.com
               </a>
             </div>
             <div className="flex items-center gap-3 text-foreground/90">
