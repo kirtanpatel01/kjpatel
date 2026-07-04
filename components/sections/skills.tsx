@@ -5,7 +5,14 @@ import { type SkillCategory, skills } from "@/lib/constants";
 import * as Icons from "@/lib/constants/icons";
 import { SectionContainer, SectionHeading } from "../responsive-wrappers";
 
-const CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database"];
+const CATEGORIES: SkillCategory[] = [
+  "Languages",
+  "Frameworks",
+  "Backend",
+  "Database",
+  "DevOps",
+  "Tools",
+];
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   TypeScript: Icons.TS,
@@ -26,6 +33,10 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Supabase: Icons.Supabase,
   Prisma: Icons.Prisma,
   NeonDB: Icons.NeonDB,
+  "React Query": Icons.ReactQuery,
+  "Motion": Icons.Motion,
+  "Vercel": Icons.Vercel,
+  "Render": Icons.Render
 };
 
 export default function Skills() {
@@ -33,30 +44,33 @@ export default function Skills() {
     <SectionContainer id="skills">
       <SectionHeading>Tech</SectionHeading>
 
-      <div className="grid grid-cols-3 divide-x">
+      <div className="flex flex-col border-y border-dashed border-border/70 divide-y divide-dashed divide-border/40">
         {CATEGORIES.map((category) => {
           const categorySkills = skills.filter((s) => s.category === category);
 
           return (
-            <div key={category} className="sm:space-y-6">
-              <h4 className="text-center text-accent-foreground font-semibold border-b py-2 sm:py-4">
-                {category}
+            <div
+              key={category}
+              className="flex flex-col sm:flex-row sm:items-center gap-4 py-4 px-4 sm:px-6"
+            >
+              <h4 className="w-full sm:w-28 shrink-0 text-accent-foreground font-semibold text-sm sm:text-base sm:pr-2">
+                {category}:
               </h4>
-              <div className="flex flex-col items-center gap-4 sm:px-8 sm:pb-8 p-4">
+              <div className="flex flex-wrap gap-2.5 items-center">
                 {categorySkills.map((skill) => {
                   const IconComponent = ICON_MAP[skill.name];
 
                   return (
                     <div
                       key={skill.name}
-                      className="h-10 w-10 sm:w-fit flex justify-center items-center gap-2.5 px-2.5 py-1.5 rounded-full border border-border/20 bg-accent/20 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default"
+                      className="h-9 sm:h-10 flex justify-center items-center gap-2.5 px-3 py-1.5 rounded-full border border-border/20 bg-accent/20 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default"
                     >
                       {IconComponent ? (
-                        <div className="flex items-center justify-center w-6 h-6 sm:w-5 sm:h-5 shrink-0 transition-transform duration-200 group-hover:rotate-4">
+                        <div className="flex items-center justify-center w-5 h-5 shrink-0 transition-transform duration-200 group-hover:rotate-4">
                           <IconComponent className="w-full h-full" />
                         </div>
                       ) : null}
-                      <span className="text-sm font-medium tracking-wide text-foreground/80 group-hover:text-foreground hidden sm:block">
+                      <span className="text-xs sm:text-sm font-medium tracking-wide text-foreground/80 group-hover:text-foreground">
                         {skill.name}
                       </span>
                     </div>

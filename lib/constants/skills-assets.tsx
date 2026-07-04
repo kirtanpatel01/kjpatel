@@ -1,4 +1,4 @@
-export type SkillCategory = "Frontend" | "Backend" | "Database";
+export type SkillCategory = "Languages" | "Frameworks" | "Backend" | "Database" | "DevOps" | "Tools";
 
 export interface Skill {
   name: string;
@@ -8,34 +8,32 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  // Frontend
+  // Languages
   {
     name: "TypeScript",
-    category: "Frontend",
+    category: "Languages",
   },
   {
     name: "JavaScript",
-    category: "Frontend",
+    category: "Languages",
   },
+
+  // Frameworks
   {
     name: "React.js",
-    category: "Frontend",
+    category: "Frameworks",
   },
   {
     name: "Next.js",
-    category: "Frontend",
-  },
-  {
-    name: "Tailwind CSS",
-    category: "Frontend",
-  },
-  {
-    name: "Shadcn/ui",
-    category: "Frontend",
+    category: "Frameworks",
   },
   {
     name: "TanStack Start",
-    category: "Frontend",
+    category: "Frameworks",
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frameworks",
   },
 
   // Backend
@@ -49,14 +47,6 @@ export const skills: Skill[] = [
   },
   {
     name: "DrizzleORM",
-    category: "Backend",
-  },
-  {
-    name: "Git",
-    category: "Backend",
-  },
-  {
-    name: "GitHub",
     category: "Backend",
   },
   {
@@ -84,5 +74,37 @@ export const skills: Skill[] = [
   {
     name: "NeonDB",
     category: "Database",
+  },
+
+  // DevOps
+  {
+    name: "Vercel",
+    category: "DevOps",
+  },
+  {
+    name: "Render",
+    category: "DevOps",
+  },
+
+  // Tools
+  {
+    name: "Git",
+    category: "Tools",
+  },
+  {
+    name: "GitHub",
+    category: "Tools",
+  },
+  {
+    name: "Shadcn/ui",
+    category: "Tools",
+  },
+  {
+    name: "React Query",
+    category: "Tools",
+  },
+  {
+    name: "Motion",
+    category: "Tools",
   },
 ];
