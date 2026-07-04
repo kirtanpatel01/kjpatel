@@ -5,18 +5,20 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Kbd } from "./ui/kbd";
 
 const navItems = [
   { name: "Home", id: "home", href: "#home" },
-  { name: "Work", id: "work", href: "#work" },
   { name: "Tech", id: "skills", href: "#skills" },
+  { name: "Work", id: "work", href: "#work" },
   { name: "Experience", id: "experience", href: "#experience" },
   { name: "Contact", id: "contact", href: "#contact" },
 ];
+
+const HEADER_OFFSET = 48;
 
 export default function Header() {
   const pathname = usePathname();
@@ -26,40 +28,47 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
+  const isManualScrollRef = useRef(false);
+
   // Active section tracking on scroll
   useEffect(() => {
-    if (!isHomePage) return;
-
     const handleScroll = () => {
-      const scrollPosition = window.scrollY; // Offset adjusted for header height
+      if (isManualScrollRef.current) return;
 
       // Check if at the bottom of the page
       const isAtBottom =
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 15;
+        document.documentElement.scrollHeight - 0;
       if (isAtBottom) {
         setActiveSection("contact");
         return;
       }
 
+      const headerElement = document.querySelector("header");
+      const headerHeight = headerElement
+        ? headerElement.offsetHeight
+        : HEADER_OFFSET;
+
+      let currentSection = "home";
       for (const item of navItems) {
         const element = document.getElementById(item.id);
         if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(item.id);
-            break;
+          const rect = element.getBoundingClientRect();
+          // If the top of the section touches or goes behind the bottom of the header (with 2px sub-pixel tolerance)
+          if (rect.top <= headerHeight + 2) {
+            currentSection = item.id;
           }
         }
       }
+
+      setActiveSection(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // Run once initially
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, []);
 
   // Smooth scroll handler
   const handleClick = (
@@ -71,16 +80,26 @@ export default function Header() {
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
-        const headerOffset = 44;
+        const headerElement = document.querySelector("header");
+        const headerHeight = headerElement
+          ? headerElement.offsetHeight
+          : HEADER_OFFSET;
         const elementPosition =
           element.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - headerOffset;
+        const offsetPosition = elementPosition - headerHeight;
+
+        isManualScrollRef.current = true;
+        setActiveSection(targetId);
 
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth",
         });
         window.history.pushState(null, "", href);
+
+        setTimeout(() => {
+          isManualScrollRef.current = false;
+        }, 800);
       }
     }
   };
@@ -119,7 +138,7 @@ export default function Header() {
                 href={isHomePage ? item.href : `/${item.href}`}
                 onClick={(e) => handleClick(e, item.href)}
                 className={cn(
-                  "relative px-4 py-1.5 rounded-full tracking-widest transition-colors duration-200 cursor-pointer select-none text-sm font-semibold",
+                  "relative px-4 py-1.5 rounded-full transition-colors duration-200 cursor-pointer select-none text-sm font-medium",
                   isActive
                     ? ""
                     : "text-zinc-400 hover:text-secondary-foreground",
@@ -135,9 +154,8 @@ export default function Header() {
                     )}
                     transition={{
                       type: "spring",
-                      stiffness: 250,
-                      damping: 35,
-                      mass: 2,
+                      stiffness: 380,
+                      damping: 30,
                     }}
                   />
                 )}
@@ -181,9 +199,7 @@ export default function Header() {
                   }}
                   className={cn(
                     "w-full px-4 py-2 tracking-widest text-sm font-medium",
-                    isActive
-                      ? "bg-foreground text-background"
-                      : "",
+                    isActive ? "bg-foreground text-background" : "",
                   )}
                 >
                   {item.name}

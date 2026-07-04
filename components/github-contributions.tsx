@@ -43,7 +43,7 @@ export function GitHubContributions({
       }}
     >
       <ContributionGraphCalendar
-        className="no-scrollbar px-2"
+        className="no-scrollbar px-0"
         title="GitHub Contributions"
       >
         {({ activity, dayIndex, weekIndex }) => (

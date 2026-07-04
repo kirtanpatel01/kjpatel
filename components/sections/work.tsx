@@ -28,6 +28,8 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Supabase: Icons.Supabase,
   Prisma: Icons.Prisma,
   NeonDB: Icons.NeonDB,
+  "React Query": Icons.ReactQuery,
+  "Motion": Icons.Motion
 };
 
 export default function Work() {
