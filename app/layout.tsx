@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Signika_Negative, Chivo } from "next/font/google";
 import Header from "@/components/header";
+import SidebarTOC from "@/components/sidebar-toc";
 import { ThemeProvider } from "@/components/them-provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -61,6 +62,9 @@ export default function RootLayout({
             <main className="w-full max-w-4xl sm:border-x border-dashed mx-auto">
               {children}
             </main>
+            <aside className="hidden xl:block fixed xl:right-4 2xl:right-8 top-24 w-44 2xl:w-48 z-40">
+              <SidebarTOC />
+            </aside>
             <Footer />
           </TooltipProvider>
           <Analytics />

@@ -39,7 +39,11 @@ export default function Work() {
 
       <div className="flex flex-col divide-y divide-dashed">
         {work.map((project, index) => (
-          <div key={index} className="space-y-4 p-4 sm:p-8">
+          <div
+            key={index}
+            id={`work-${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+            className="space-y-4 p-4 sm:p-8 scroll-mt-20"
+          >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div className="flex items-center gap-3 flex-wrap">
                 <h3 className="text-2xl font-bold tracking-tight text-foreground">

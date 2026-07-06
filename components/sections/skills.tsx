@@ -51,7 +51,8 @@ export default function Skills() {
           return (
             <div
               key={category}
-              className="flex flex-col sm:flex-row sm:items-center gap-4 py-4 px-4 sm:px-6"
+              id={`skills-${category.toLowerCase()}`}
+              className="flex flex-col sm:flex-row sm:items-center gap-4 py-4 px-4 scroll-mt-20"
             >
               <h4 className="w-full sm:w-28 shrink-0 text-accent-foreground font-semibold text-sm sm:text-base sm:pr-2">
                 {category}:
