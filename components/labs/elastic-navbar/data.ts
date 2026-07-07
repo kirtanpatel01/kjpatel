@@ -1,4 +1,4 @@
-import type { FileNode } from "@/components/file-tree-item";
+import type { FileNode } from "@/components/stage";
 
 export const elasticNavbarFiles: FileNode[] = [
   {

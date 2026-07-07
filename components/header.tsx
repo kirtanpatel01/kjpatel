@@ -38,7 +38,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden md:flex xl:hidden items-center gap-1.5"
+          className="hidden md:flex items-center gap-1.5"
           onMouseLeave={() => setHoveredSection(null)}
         >
           {navItems.map((item) => {

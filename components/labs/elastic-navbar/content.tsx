@@ -1,8 +1,7 @@
 import { Check, Copy } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import CodeBlock from "@/components/code-block";
-import CodeShowcase from "@/components/code-showcase";
+import { CodeShowcase, CodeBlock } from "@/components/stage";
 import CodeText from "@/components/code-text";
 import { SectionContainer } from "@/components/responsive-wrappers";
 import ElasticNavbar from "@/components/labs/elastic-navbar/code";

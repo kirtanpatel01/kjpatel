@@ -22,8 +22,8 @@ export default function LabsDetailPage() {
 
   return (
     <PageContainer>
-      <div className="p-4">
-        <Breadcrumb className="border border-border/30 bg-secondary/20 text-secondary-foreground rounded-full w-fit px-3 py-2">
+      <div className="px-4 py-3">
+        <Breadcrumb className="">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>

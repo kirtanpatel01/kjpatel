@@ -64,7 +64,7 @@ export default function Skills() {
                   return (
                     <div
                       key={skill.name}
-                      className="h-9 sm:h-10 flex justify-center items-center gap-2.5 px-3 py-1 rounded-full border border-border/20 bg-accent/20 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default"
+                      className="flex justify-center items-center gap-1.5 px-3.5 py-2 rounded-full border-0 border-foreground/10 bg-accent/60 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default inset-shadow-sm inset-shadow-foreground/15"
                     >
                       {IconComponent ? (
                         <div className="flex items-center justify-center w-4 h-4 shrink-0 transition-transform duration-200 group-hover:rotate-4">
