@@ -5,12 +5,12 @@ import {
   SectionContainer,
   SectionTitle,
 } from "@/components/responsive-wrappers";
-import { type ShowcaseIdea, showcaseIdeas } from "@/lib/constants";
+import { type LabIdea, labIdeas } from "@/lib/constants";
 
-const ShowcaseItem = ({ idea }: { idea: ShowcaseIdea }) => {
+const LabItem = ({ idea }: { idea: LabIdea }) => {
   return (
     <Link
-      href={`/showcase/${idea.slug}`}
+      href={`/labs/${idea.slug}`}
       className="max-w-lg mx-auto group block overflow-hidden border border-dotted hover:border-solid rounded-xl transition-all duration-300"
     >
       {/* Video / Preview Stage */}
@@ -39,22 +39,21 @@ const ShowcaseItem = ({ idea }: { idea: ShowcaseIdea }) => {
   );
 };
 
-function ShowcasePage() {
+function LabsPage() {
   return (
     <PageContainer>
-      <SectionContainer>
-        <SectionTitle>Showcase</SectionTitle>
-        <p className="text-muted-foreground leading-relaxed sm:mt-2">
-          An interactive collection of recurring UI/UX patterns, design layouts,
-          and experimental components. A central vault built to capture and
-          reuse attractive structures for future projects in one single place.
-        </p>
+      <SectionContainer className="p-4">
+        <p className="text-lg font-medium">Labs is a home of a different types components which is used by me.</p>
+        <ul className="list-disc list-inside text-foreground/80">
+          <li>Some are my own creation,</li>
+          <li>Some are inspired from different platforms along with my little tweak</li>
+          <li>Some of them are completely copy pasted <i className="font-medium text-black">not code but the design :)</i></li>
+        </ul>
       </SectionContainer>
-
-      <SectionContainer>
+      <SectionContainer className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {showcaseIdeas.map((idea) => (
-            <ShowcaseItem key={idea.slug} idea={idea} />
+          {labIdeas.map((idea) => (
+            <LabItem key={idea.slug} idea={idea} />
           ))}
         </div>
       </SectionContainer>
@@ -62,4 +61,4 @@ function ShowcasePage() {
   );
 }
 
-export default ShowcasePage;
+export default LabsPage;

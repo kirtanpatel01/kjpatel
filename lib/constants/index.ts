@@ -1,6 +1,6 @@
 export * from "./metadata";
 export * from "./experience";
-export * from "./showcase-registry";
+export * from "./labs-registry";
 export * from "./skills-assets";
 export * from "./socials";
 export * from "./experience";

@@ -5,11 +5,11 @@ import CodeBlock from "@/components/code-block";
 import CodeShowcase from "@/components/code-showcase";
 import CodeText from "@/components/code-text";
 import { SectionContainer } from "@/components/responsive-wrappers";
-import ElasticNavbar from "@/components/showcase/elastic-navbar/code";
+import ElasticNavbar from "@/components/labs/elastic-navbar/code";
 import {
   elasticNavbarCode,
   elasticNavbarFiles,
-} from "@/components/showcase/elastic-navbar/data";
+} from "@/components/labs/elastic-navbar/data";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,

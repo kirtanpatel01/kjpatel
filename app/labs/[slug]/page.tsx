@@ -11,14 +11,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { showcaseIdeas } from "@/lib/constants/showcase-registry";
+import { labIdeas } from "@/lib/constants/labs-registry";
 
-export default function ShowcaseDetailPage() {
+export default function LabsDetailPage() {
   const params = useParams();
   const slug = params?.slug as string;
 
   // Find the experiment in our central data list
-  const activeIdea = showcaseIdeas.find((idea) => idea.slug === slug);
+  const activeIdea = labIdeas.find((idea) => idea.slug === slug);
 
   return (
     <PageContainer>
@@ -27,7 +27,7 @@ export default function ShowcaseDetailPage() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/showcase">Showcase</Link>
+                <Link href="/labs">Labs</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -41,7 +41,7 @@ export default function ShowcaseDetailPage() {
       </div>
       {activeIdea ? (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-          {/* The Content component now handles its own internal layout, including where CodeShowcase goes */}
+          {/* The Content component handles its own layout, including CodeShowcase */}
           {activeIdea.content}
         </div>
       ) : (
