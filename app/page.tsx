@@ -33,13 +33,23 @@ export default async function Home() {
             <span className="text-primary font-mono tracking-tight">
               Kirtan Patel
             </span>
-            , a Full Stack Developer specializing in modern web technologies, with a strong focus on building production-ready applications using Next.js, TypeScript, and Supabase.
+            , a Full Stack Developer specializing in modern web technologies,
+            with a strong focus on building production-ready applications using
+            Next.js, TypeScript, and Supabase.
           </p>
           <p>
-            I enjoy solving complex engineering problems across both frontend and backend—from designing database schemas and implementing business logic to creating responsive user interfaces and optimizing application performance. My experience includes building enterprise ERP systems, realtime applications, payment integrations, analytics dashboards, and scalable architectures that support real-world business workflows.
+            I enjoy solving complex engineering problems across both frontend
+            and backend—from designing database schemas and implementing
+            business logic to creating responsive user interfaces and optimizing
+            application performance. My experience includes building enterprise
+            ERP systems, realtime applications, payment integrations, analytics
+            dashboards, and scalable architectures that support real-world
+            business workflows.
           </p>
           <p>
-            I&apos;m continuously exploring better software architecture, developer experience, and modern technologies to build reliable and maintainable products.
+            I&apos;m continuously exploring better software architecture,
+            developer experience, and modern technologies to build reliable and
+            maintainable products.
           </p>
         </div>
 

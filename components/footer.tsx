@@ -15,9 +15,22 @@ export default function Footer() {
       {/* Left side on desktop: Text and Links grouped together */}
       <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-4">
         <div className="flex flex-wrap items-center gap-x-2">
-          <span>Built with ❤️ by <span className="text-foreground">Kirtan Patel</span></span>
+          <span>
+            Built with ❤️ by{" "}
+            <span className="text-foreground">Kirtan Patel</span>
+          </span>
           <span className="text-border">|</span>
-          <span>Inspired by <a href="https://chanhdai.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors text-primary">chanhdai.com</a></span>
+          <span>
+            Inspired by{" "}
+            <a
+              href="https://chanhdai.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors text-primary"
+            >
+              chanhdai.com
+            </a>
+          </span>
         </div>
 
         {/* Social Icons - Left-aligned on Desktop, Above text on Mobile */}
