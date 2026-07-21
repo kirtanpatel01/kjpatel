@@ -41,7 +41,7 @@ export const work: Project[] = [
       // "Cashfree",
       // "jsPDF",
     ],
-    link: "https://moreganise.in",
+    link: null,
     githubLink: null,
   },
   {

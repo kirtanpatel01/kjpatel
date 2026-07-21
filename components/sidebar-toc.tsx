@@ -1,9 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useRef } from "react";
+import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useMotionValue, animate } from "motion/react";
+import { motion, useMotionValue, animate, MotionValue } from "motion/react";
 import { AlignLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,11 +36,11 @@ interface TOCContextType {
   containerRef: React.RefObject<HTMLDivElement | null>;
   
   // Motion values
-  diamondX: any;
-  diamondY: any;
-  tailX: any;
-  tailY: any;
-  strokeDashoffset: any;
+  diamondX: MotionValue<number>;
+  diamondY: MotionValue<number>;
+  tailX: MotionValue<number>;
+  tailY: MotionValue<number>;
+  strokeDashoffset: MotionValue<number>;
   strokeDasharray: string;
 
   // Configuration
@@ -57,6 +57,73 @@ function useTOC() {
   }
   return context;
 }
+
+// Helper functions for path calculations
+const getSegmentLength = (p1: { x: number; y: number }, p2: { x: number; y: number }) => {
+  if (Math.abs(p1.x - p2.x) < 1) {
+    return Math.abs(p2.y - p1.y);
+  } else {
+    const dy = p2.y - p1.y;
+    const transitionHeight = Math.min(14, dy * 0.4);
+    const yMid = p1.y + dy * 0.5;
+    const yStart = yMid - transitionHeight * 0.5;
+    const yEnd = yMid + transitionHeight * 0.5;
+    
+    const v1 = yStart - p1.y;
+    const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
+    const v2 = p2.y - yEnd;
+    return v1 + diag + v2;
+  }
+};
+
+const getPointOnPath = (dist: number, pts: { x: number; y: number }[]) => {
+  if (pts.length === 0) return { x: 0, y: 0 };
+  if (dist <= 0) return { ...pts[0] };
+
+  let accumulatedDist = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const p1 = pts[i - 1];
+    const p2 = pts[i];
+    const segLen = getSegmentLength(p1, p2);
+    
+    if (accumulatedDist + segLen >= dist) {
+      const localDist = dist - accumulatedDist;
+      
+      if (Math.abs(p1.x - p2.x) < 1) {
+        const ratio = localDist / segLen;
+        return {
+          x: p1.x,
+          y: p1.y + (p2.y - p1.y) * ratio
+        };
+      } else {
+        const dy = p2.y - p1.y;
+        const transitionHeight = Math.min(14, dy * 0.4);
+        const yMid = p1.y + dy * 0.5;
+        const yStart = yMid - transitionHeight * 0.5;
+        const yEnd = yMid + transitionHeight * 0.5;
+        
+        const v1 = yStart - p1.y;
+        const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
+        
+        if (localDist <= v1) {
+          return { x: p1.x, y: p1.y + localDist };
+        } else if (localDist <= v1 + diag) {
+          const diagDist = localDist - v1;
+          const ratio = diagDist / diag;
+          return {
+            x: p1.x + (p2.x - p1.x) * ratio,
+            y: yStart + (yEnd - yStart) * ratio
+          };
+        } else {
+          const v2Dist = localDist - v1 - diag;
+          return { x: p2.x, y: yEnd + v2Dist };
+        }
+      }
+    }
+    accumulatedDist += segLen;
+  }
+  return { ...pts[pts.length - 1] };
+};
 
 interface TOCProps {
   children: React.ReactNode;
@@ -158,7 +225,7 @@ function TOC({
   }, [isHomePage, items, focusLine]);
 
   // Measure dot coordinates relative to the container
-  const updatePoints = () => {
+  const updatePoints = useCallback(() => {
     if (!containerRef.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
 
@@ -186,7 +253,7 @@ function TOC({
     });
 
     setPoints(relativePoints);
-  };
+  }, [items]);
 
   useEffect(() => {
     updatePoints();
@@ -205,7 +272,7 @@ function TOC({
       observer.disconnect();
       window.removeEventListener("load", updatePoints);
     };
-  }, [items]);
+  }, [updatePoints]);
 
   // Smooth scroll handler
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, targetId: string) => {
@@ -231,24 +298,6 @@ function TOC({
           isManualScrollRef.current = false;
         }, 800);
       }
-    }
-  };
-
-  // Segment length helper
-  const getSegmentLength = (p1: { x: number; y: number }, p2: { x: number; y: number }) => {
-    if (Math.abs(p1.x - p2.x) < 1) {
-      return Math.abs(p2.y - p1.y);
-    } else {
-      const dy = p2.y - p1.y;
-      const transitionHeight = Math.min(14, dy * 0.4);
-      const yMid = p1.y + dy * 0.5;
-      const yStart = yMid - transitionHeight * 0.5;
-      const yEnd = yMid + transitionHeight * 0.5;
-      
-      const v1 = yStart - p1.y;
-      const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
-      const v2 = p2.y - yEnd;
-      return v1 + diag + v2;
     }
   };
 
@@ -285,61 +334,6 @@ function TOC({
       strokeDashoffset.set(tailLength);
     }
   }, [points, diamondX, diamondY, tailX, tailY, strokeDashoffset, distanceMotionValue, tailLength]);
-
-  // Pure JS geometry interpolator to calculate (x, y) coordinates at any distance along the path
-  const getPointOnPath = (dist: number, pts: { x: number; y: number }[]) => {
-    if (pts.length === 0) return { x: 0, y: 0 };
-    if (dist <= 0) return { ...pts[0] };
-
-    let accumulatedDist = 0;
-    for (let i = 1; i < pts.length; i++) {
-      const p1 = pts[i - 1];
-      const p2 = pts[i];
-      const segLen = getSegmentLength(p1, p2);
-      
-      if (accumulatedDist + segLen >= dist) {
-        const localDist = dist - accumulatedDist;
-        
-        if (Math.abs(p1.x - p2.x) < 1) {
-          // Vertical segment
-          const ratio = localDist / segLen;
-          return {
-            x: p1.x,
-            y: p1.y + (p2.y - p1.y) * ratio
-          };
-        } else {
-          // Stepped diagonal transition
-          const dy = p2.y - p1.y;
-          const transitionHeight = Math.min(14, dy * 0.4);
-          const yMid = p1.y + dy * 0.5;
-          const yStart = yMid - transitionHeight * 0.5;
-          const yEnd = yMid + transitionHeight * 0.5;
-          
-          const v1 = yStart - p1.y;
-          const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
-          
-          if (localDist <= v1) {
-            // First vertical segment
-            return { x: p1.x, y: p1.y + localDist };
-          } else if (localDist <= v1 + diag) {
-            // Diagonal segment
-            const diagDist = localDist - v1;
-            const ratio = diagDist / diag;
-            return {
-              x: p1.x + (p2.x - p1.x) * ratio,
-              y: yStart + (yEnd - yStart) * ratio
-            };
-          } else {
-            // Second vertical segment
-            const v2Dist = localDist - v1 - diag;
-            return { x: p2.x, y: yEnd + v2Dist };
-          }
-        }
-      }
-      accumulatedDist += segLen;
-    }
-    return { ...pts[pts.length - 1] };
-  };
 
   // Animate the active distance value and update diamond & tail positions along path geometry
   const activeIndex = items.findIndex((item) => item.id === activeSection);

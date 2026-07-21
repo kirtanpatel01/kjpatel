@@ -5,6 +5,12 @@ import {
   SectionContainer,
 } from "@/components/responsive-wrappers";
 import { type LabIdea, labIdeas } from "@/lib/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Labs",
+  description: "Labs is a home of a different types components which is used by me.",
+};
 
 const LabItem = ({ idea }: { idea: LabIdea }) => {
   return (

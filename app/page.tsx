@@ -14,6 +14,7 @@ import {
 import { getCachedContributions } from "@/lib/get-cached-contributions";
 import { cn } from "@/lib/utils";
 import Work from "@/components/sections/work";
+import SidebarTOC from "@/components/sidebar-toc";
 
 const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
@@ -81,6 +82,10 @@ export default async function Home() {
 
       {/* Contact Section */}
       <Contact />
+
+      <aside className="hidden xl:block fixed xl:right-14 top-12 z-40">
+        <SidebarTOC />
+      </aside>
     </PageContainer>
   );
 }

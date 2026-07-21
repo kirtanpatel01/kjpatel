@@ -44,7 +44,7 @@ export default function Skills() {
     <SectionContainer id="skills">
       <SectionHeading>Tech</SectionHeading>
 
-      <div className="flex flex-col border-y border-dashed border-border/70 divide-y divide-dashed divide-border/40">
+      <div className="flex flex-col divide-y divide-dotted divide-border/70">
         {CATEGORIES.map((category) => {
           const categorySkills = skills.filter((s) => s.category === category);
 
@@ -64,10 +64,10 @@ export default function Skills() {
                   return (
                     <div
                       key={skill.name}
-                      className="flex justify-center items-center gap-1.5 px-3.5 py-2 rounded-full border-0 border-foreground/10 bg-accent/60 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default inset-shadow-sm inset-shadow-foreground/15"
+                      className="flex justify-center items-center gap-1.5 px-3.5 py-2 rounded-full  group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
                     >
                       {IconComponent ? (
-                        <div className="flex items-center justify-center w-4 h-4 shrink-0 transition-transform duration-200 group-hover:rotate-4">
+                        <div className="flex items-center justify-center w-4.5 h-4.5 shrink-0 transition-transform duration-200 group-hover:rotate-7">
                           <IconComponent className="w-full h-full" />
                         </div>
                       ) : null}
