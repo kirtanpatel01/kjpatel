@@ -46,7 +46,7 @@ export default function Work() {
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div className="flex items-center gap-3 flex-wrap">
-                <h3 className="text-2xl font-bold tracking-tight text-foreground">
+                <h3 className="text-xl font-bold tracking-tight text-foreground">
                   {project.title}
                 </h3>
                 <Badge
@@ -100,14 +100,14 @@ export default function Work() {
             </div>
 
             <div className="space-y-4 pt-2">
-              <span className="font-medium font-heading tracking-wide">
+              <span className="font-semibold">
                 Key Contributions:
               </span>
-              <ul className="space-y-1 list-inside list-disc text-sm sm:text-base">
+              <ul className="list-inside list-disc text-sm sm:text-[15px]">
                 {project.keyContributions.map((bullet, idx) => (
                   <li
                     key={idx}
-                    className="leading-relaxed font-desc"
+                    className="leading-relaxed font-des"
                   >
                     {bullet}
                   </li>

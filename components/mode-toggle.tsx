@@ -5,14 +5,23 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import * as React from "react";
 
+import { clickSoftSound } from "@/lib/click-soft";
+
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
+  const playSound = React.useCallback(() => {
+    if (typeof window === "undefined") return;
+
+    const audio = new Audio(clickSoftSound.dataUri);
+    void audio.play().catch(() => {});
+  }, []);
+
   const toggleTheme = React.useCallback(() => {
     setTheme(theme === "dark" ? "light" : "dark");
     playSound();
-  }, [theme, setTheme]);
+  }, [theme, setTheme, playSound]);
 
   // Handle 'D' key shortcut
   React.useEffect(() => {
@@ -36,11 +45,6 @@ export function ModeToggle() {
   }, [toggleTheme]);
 
   React.useEffect(() => setMounted(true), []);
-
-  const playSound = () => {
-    const audio = new Audio("/sounds/computer-mouse-click.mp3");
-    audio.play();
-  };
 
   // Conditional returns MUST come after ALL hooks are called
   if (!mounted) return <div className="h-8 w-8 shrink-0" />;

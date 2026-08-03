@@ -27,9 +27,9 @@ export default function Experience() {
               <Badge variant="secondary">{exp.period}</Badge>
             </div>
 
-            <ul className="space-y-2 pl-2 font-desc">
+            <ul className="pl-2 font-des">
               {exp.responsibilities.map((resp, i) => (
-                <li key={i} className="flex gap-2 leading-relaxed text-sm sm:text-base">
+                <li key={i} className="flex gap-2 leading-relaxed text-sm">
                   <span className="text-muted-foreground">-</span>
                   <span>{resp}</span>
                 </li>

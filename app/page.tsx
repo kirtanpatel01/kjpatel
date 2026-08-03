@@ -33,7 +33,7 @@ export default async function Home() {
         <h3 className="font-bold text-xl sm:text-2xl">
           Full Stack Engineer building production software
         </h3>
-        <div className="mt-4 max-w-3xl space-y-4 leading-relaxed font-desc text-accent-foreground tracking-wide text-sm sm:text-base">
+        <div className="mt-4 max-w-3xl space-y-2 leading-relaxed font-des text-accent-foreground tracking-wide text-sm sm:text-base">
           <p>
             I&apos;m{" "}
             <span className="text-primary font-mono tracking-tight">
@@ -64,7 +64,7 @@ export default async function Home() {
             contributions={contributions}
             githubProfileUrl={GITHUB_PROFILE_URL}
             className={cn(
-              "mt-8",
+              "mt-4",
               // GitHub Default Theme
               // '**:data-[level="0"]:fill-[#eff2f5] dark:**:data-[level="0"]:fill-[#151b23]',
               // '**:data-[level="1"]:fill-[#aceebb] dark:**:data-[level="1"]:fill-[#033a16]',

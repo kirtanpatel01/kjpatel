@@ -56,7 +56,7 @@ export function SectionHeading({
   return (
     <div className={cn("my-0 border-y border-dashed border-border/70", className)}>
       <div className="h-2 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]" />
-      <div className="px-3 py-2 border-y border-dashed bg-accent/40 text-accent-foreground font-bold text-lg sm:text-xl leading-tight">
+      <div className="px-3 py-2 border-y border-dashed bg-accent/40 text-accent-foreground font-bold text-lg sm:text-2xl leading-tight">
         {children}
       </div>
       <div className="h-2 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]"/>

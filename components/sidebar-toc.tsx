@@ -582,7 +582,7 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
         href={isHomePage ? href : `/${href}`}
         onClick={(e) => handleClick(e, href, id)}
         className={cn(
-          "text-sm tracking-wide font-desc transition-colors duration-200 py-0.5",
+          "text-sm tracking-wide font-des transition-colors duration-200 py-0.5",
           isActive
             ? "font-semibold text-foreground"
             : "text-muted-foreground hover:text-foreground"

@@ -57,14 +57,14 @@ export default function Skills() {
               <h4 className="w-full sm:w-28 shrink-0 text-accent-foreground font-semibold text-sm sm:text-base sm:pr-2">
                 {category}:
               </h4>
-              <div className="flex flex-wrap gap-2.5 items-center">
+              <div className="flex flex-wrap gap-2 items-center">
                 {categorySkills.map((skill) => {
                   const IconComponent = ICON_MAP[skill.name];
 
                   return (
                     <div
                       key={skill.name}
-                      className="flex justify-center items-center gap-1.5 px-3.5 py-2 rounded-full  group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
+                      className="flex justify-center items-center gap-1.5 px-3 py-2 rounded-full  group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
                     >
                       {IconComponent ? (
                         <div className="flex items-center justify-center w-4.5 h-4.5 shrink-0 transition-transform duration-200 group-hover:rotate-7">

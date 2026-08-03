@@ -63,7 +63,7 @@ export default function Contact() {
             <h3 className="text-xl font-semibold tracking-tight text-secondary-foreground">
               Let&apos;s Build Something.
             </h3>
-            <p className="font-desc text-sm sm:text-base text-foreground/80 leading-relaxed max-w-sm">
+            <p className="font-des text-sm sm:text-base text-foreground/80 leading-relaxed max-w-sm">
               I&apos;m currently looking for full stack engineering role and
               startup opportunities.
             </p>
@@ -71,7 +71,7 @@ export default function Contact() {
 
           {/* <div className="border-t border-dashed border-border/50 my-2" /> */}
 
-          <div className="space-y-2.5 text-sm sm:text-base font-desc">
+          <div className="space-y-2.5 text-sm sm:text-base font-des">
             <div className="flex items-center gap-3 text-foreground/90">
               <MapPin className="w-5 h-5 shrink-0 stroke-1" />
               <div>
