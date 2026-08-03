@@ -19,16 +19,21 @@ import SidebarTOC from "@/components/sidebar-toc";
 const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
 
+export const metadata = {
+  title: "Home | Kirtan Patel",
+  description: "Welcome to small world!"
+}
+
 export default async function Home() {
   const contributions = getCachedContributions(GITHUB_USERNAME);
   return (
     <PageContainer>
       {/* Hero Section */}
-      <SectionContainer id="home" className="p-4 sm:p-8">
-        <h3 className="font-bold text-xl sm:text-3xl">
+      <SectionContainer id="home" className="p-4">
+        <h3 className="font-bold text-xl sm:text-2xl">
           Full Stack Engineer building production software
         </h3>
-        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed font-desc text-accent-foreground tracking-wide text-sm sm:text-base">
+        <div className="mt-4 max-w-3xl space-y-4 leading-relaxed font-desc text-accent-foreground tracking-wide text-sm sm:text-base">
           <p>
             I&apos;m{" "}
             <span className="text-primary font-mono tracking-tight">

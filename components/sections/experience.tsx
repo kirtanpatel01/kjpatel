@@ -9,7 +9,7 @@ export default function Experience() {
     <SectionContainer id="experience" className="space-y-2">
       <SectionHeading>Experience</SectionHeading>
 
-      <div className="flex flex-col gap-4 p-4 sm:p-8">
+      <div className="flex flex-col gap-4 p-4">
         {experiences.map((exp, index) => (
           <div key={index} className="space-y-2">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

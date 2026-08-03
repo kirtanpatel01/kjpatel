@@ -59,7 +59,7 @@ export default function RootLayout({
           <TooltipProvider>
             <Header />
             <JsonLd />
-            <main className="w-full max-w-4xl sm:border-x border-dashed mx-auto">
+            <main className="min-h-[calc(100vh-5.25rem)] relative w-full max-w-3xl sm:border-x border-dashed mx-auto">
               {children}
             </main>
             <Footer />

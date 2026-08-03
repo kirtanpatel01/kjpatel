@@ -11,7 +11,7 @@ import { Kbd } from "./ui/kbd";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Labs", href: "/labs" },
+  { name: "Blogs", href: "/blogs" },
 ];
 
 export default function Header() {
@@ -20,7 +20,7 @@ export default function Header() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   return (
-    <header className="w-full max-w-4xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 py-2">
+    <header className="w-full max-w-3xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 h-14">
       <div className="flex items-center gap-4">
         <Link
           href="/"

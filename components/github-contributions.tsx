@@ -35,9 +35,9 @@ export function GitHubContributions({
     <ContributionGraph
       className={cn("py-2", className)}
       data={data}
-      blockSize={12}
-      blockMargin={3}
-      blockRadius={2}
+      blockSize={11}
+      blockMargin={2.2}
+      blockRadius={2.5}
       style={{
         
       }}

@@ -56,7 +56,7 @@ export default function Contact() {
     <SectionContainer id="contact" className="space-y-6">
       <SectionHeading>Get in Touch</SectionHeading>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 items-stretch p-4 sm:p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 items-stretch p-4">
         {/* Info Column */}
         <div className="flex flex-col justify-end py-2 gap-3 sm:gap-6">
           <div className="space-y-2">

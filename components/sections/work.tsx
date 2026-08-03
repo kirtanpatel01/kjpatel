@@ -42,7 +42,7 @@ export default function Work() {
           <div
             key={index}
             id={`work-${project.title.toLowerCase().replace(/\s+/g, "-")}`}
-            className="space-y-4 p-4 sm:p-8 scroll-mt-20"
+            className="space-y-1 p-4 scroll-mt-20"
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div className="flex items-center gap-3 flex-wrap">
@@ -88,18 +88,15 @@ export default function Work() {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-lg font-semibold tracking-wide">
-                {project.subtitle}
-              </h4>
               <p className="text-sm sm:text-base leading-relaxed text-desc">
                 {project.description}
               </p>
-              {project.role && (
-                <p className="text-sm sm:text-base leading-relaxed text-foreground/80 mt-2">
+              {/* {project.role && (
+                <p className="text-sm sm:text-base leading-relaxed mt-2 font-heading">
                   <span className="font-semibold text-foreground">Role: </span>
                   {project.role}
                 </p>
-              )}
+              )} */}
             </div>
 
             <div className="space-y-4 pt-2">
@@ -110,7 +107,7 @@ export default function Work() {
                 {project.keyContributions.map((bullet, idx) => (
                   <li
                     key={idx}
-                    className="leading-relaxed font-desc text-foreground/80"
+                    className="leading-relaxed font-desc"
                   >
                     {bullet}
                   </li>
@@ -120,20 +117,20 @@ export default function Work() {
 
             <div className="pt-3 space-y-2">
               <span className="font-semibold">Tech Stack:</span>
-              <div className="flex flex-wrap gap-4 mt-2">
+              <div className="flex flex-wrap gap-3 mt-2">
                 {project.tech.map((t) => {
                   const IconComponent = ICON_MAP[t];
                   return (
                     <div
                       key={t}
-                      className="w-fit flex justify-center items-center gap-2.5 px-2.5 py-1.5 rounded-full border border-border/20 bg-accent/20 hover:bg-accent/40 transition-all duration-200 hover:border-border/60 group select-none cursor-default"
+                      className="flex justify-center items-center gap-1.5 px-2 py-1 rounded-full group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
                     >
-                      {IconComponent && (
-                        <div className="flex items-center justify-center w-5 h-5 shrink-0 transition-transform duration-200 group-hover:rotate-4">
+                      {IconComponent ? (
+                        <div className="flex items-center justify-center w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover:rotate-7">
                           <IconComponent className="w-full h-full" />
                         </div>
-                      )}
-                      <span className="text-xs sm:text-sm font-medium tracking-wide text-foreground/80 group-hover:text-foreground">
+                      ) : null}
+                      <span className="text-xs font-medium tracking-wide text-foreground/80 group-hover:text-foreground">
                         {t}
                       </span>
                     </div>
