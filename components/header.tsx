@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Kbd } from "./ui/kbd";
 
-const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Blogs", href: "/blogs" },
+const navItems: { name: string; href: string }[] = [
+  // { name: "Home", href: "/" },
+  // { name: "Blogs", href: "/blogs" },
+  
 ];
 
 export default function Header() {
@@ -101,7 +102,7 @@ export default function Header() {
       {isOpen && (
         <nav className="absolute top-full left-0 right-0 border-b border-border bg-background md:hidden pb-2">
           <div className="flex flex-col gap-2">
-            {navItems.map((item) => {
+            {navItems && navItems.map((item) => {
               const isActive =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
 

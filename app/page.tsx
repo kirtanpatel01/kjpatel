@@ -20,7 +20,7 @@ const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
 
 export const metadata = {
-  title: "Home | Kirtan Patel",
+  title: "Kirtan Patel",
   description: "Welcome to small world!"
 }
 
@@ -39,23 +39,12 @@ export default async function Home() {
             <span className="text-primary font-mono tracking-tight">
               Kirtan Patel
             </span>
-            , a Full Stack Developer specializing in modern web technologies,
-            with a strong focus on building production-ready applications using
-            Next.js, TypeScript, and Supabase.
+            , a Full Stack Developer building production-ready web applications
+            with Next.js, TypeScript, and modern cloud tooling.
           </p>
           <p>
-            I enjoy solving complex engineering problems across both frontend
-            and backend—from designing database schemas and implementing
-            business logic to creating responsive user interfaces and optimizing
-            application performance. My experience includes building enterprise
-            ERP systems, realtime applications, payment integrations, analytics
-            dashboards, and scalable architectures that support real-world
-            business workflows.
-          </p>
-          <p>
-            I&apos;m continuously exploring better software architecture,
-            developer experience, and modern technologies to build reliable and
-            maintainable products.
+            I enjoy solving practical engineering problems across the full stack,
+            from product design to implementation and delivery.
           </p>
         </div>
 
