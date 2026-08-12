@@ -20,9 +20,13 @@ const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
 
 export const metadata = {
-  title: "Kirtan Patel",
-  description: "Welcome to small world!"
-}
+  title: "Kirtan Patel | Full Stack Developer",
+  description:
+    "Full Stack Engineer building production-ready web applications with Next.js, TypeScript, and modern cloud tooling.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const contributions = getCachedContributions(GITHUB_USERNAME);

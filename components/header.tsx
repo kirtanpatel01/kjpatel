@@ -12,7 +12,6 @@ import { Kbd } from "./ui/kbd";
 const navItems: { name: string; href: string }[] = [
   // { name: "Home", href: "/" },
   // { name: "Blogs", href: "/blogs" },
-  
 ];
 
 export default function Header() {
@@ -26,7 +25,7 @@ export default function Header() {
         <Link
           href="/"
           aria-label="Home"
-          className="shrink-0 flex items-center justify-center"
+          className="shrink-0 flex items-center justify-center gap-3"
         >
           <div
             className="w-8 h-8 icon-mask bg-foreground"
@@ -35,6 +34,7 @@ export default function Header() {
               WebkitMaskImage: "url(/logo.svg)",
             }}
           />
+          <h3 className="text-xl font-mono tracking-wider">kjpatel</h3>
         </Link>
 
         {/* Desktop Navigation */}
