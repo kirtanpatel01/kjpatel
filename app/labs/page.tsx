@@ -8,7 +8,7 @@ import { type LabIdea, labIdeas } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Labs | Kirtan Patel",
+  title: "Labs",
   description:
     "Creative experiments, UI patterns, and frontend prototypes built by Kirtan Patel.",
   alternates: {
@@ -37,12 +37,12 @@ const LabItem = ({ idea }: { idea: LabIdea }) => {
 function LabsPage() {
   return (
     <PageContainer>
-      <SectionContainer className="p-4 sm:p-6">
+      <SectionContainer className="p-4">
         <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="text-sm tracking-[0.2em] text-muted-foreground">
             Playground update
           </p>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             My lab is coming soon.
           </h1>
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">

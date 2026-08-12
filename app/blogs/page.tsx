@@ -5,7 +5,7 @@ import {
 } from "@/components/responsive-wrappers";
 
 export const metadata = {
-  title: "Blog | Kirtan Patel",
+  title: "Blog",
   description:
     "Thoughts, notes, and engineering writing by Kirtan Patel on product, software, and web development.",
   alternates: {
@@ -16,12 +16,12 @@ export const metadata = {
 function BlogPage() {
   return (
     <PageContainer>
-      <SectionContainer className="p-4 sm:p-6">
+      <SectionContainer className="p-4">
         <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="text-sm tracking-[0.2em] text-muted-foreground">
             Writing in progress
           </p>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
+          <h1 className="text-3xl font-bold tracking-tight">
             My blog is coming soon.
           </h1>
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
