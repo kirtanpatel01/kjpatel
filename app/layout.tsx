@@ -45,6 +45,11 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="ACDKFde7zAoz6IilNdO13g"
+          async
+        />
       </head>
       <body
         className={`${DMSans.className} ${Signika.variable} ${chivo.variable} antialiased`}
