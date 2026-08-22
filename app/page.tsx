@@ -34,9 +34,9 @@ export default async function Home() {
     <PageContainer>
       {/* Hero Section */}
       <SectionContainer id="home" className="p-4">
-        <h3 className="font-bold text-xl sm:text-2xl">
-          Full Stack Engineer building production software
-        </h3>
+        <h1 className="font-bold text-xl sm:text-2xl">
+          Kirtan Patel — Full Stack Developer
+        </h1>
         <div className="mt-4 max-w-3xl space-y-2 leading-relaxed font-des text-accent-foreground tracking-wide text-sm sm:text-base">
           <p>
             I&apos;m{" "}
