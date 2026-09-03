@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import Footer from "@/components/footer";
 import JsonLd from "@/components/json-ld";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AccentThemeRail } from "@/components/accent-theme-rail";
 
 const DMSans = DM_Sans({
   subsets: ["latin"],
@@ -47,6 +48,11 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
         <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var a=localStorage.getItem('accent_theme');if(a&&a!=='zinc'){document.documentElement.setAttribute('data-accent',a);}}catch(e){}})();`,
+          }}
+        />
+        <script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="ACDKFde7zAoz6IilNdO13g"
           async
@@ -65,6 +71,7 @@ export default function RootLayout({
           <TooltipProvider>
             <Header />
             <JsonLd />
+            <AccentThemeRail />
             <main className="min-h-[calc(100vh-5.25rem)] relative w-full max-w-3xl sm:border-x border-dashed mx-auto">
               {children}
             </main>

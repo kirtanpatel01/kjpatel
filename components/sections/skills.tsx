@@ -34,9 +34,9 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Prisma: Icons.Prisma,
   NeonDB: Icons.NeonDB,
   "React Query": Icons.ReactQuery,
-  "Motion": Icons.Motion,
-  "Vercel": Icons.Vercel,
-  "Render": Icons.Render
+  Motion: Icons.Motion,
+  Vercel: Icons.Vercel,
+  Render: Icons.Render,
 };
 
 export default function Skills() {
@@ -64,7 +64,7 @@ export default function Skills() {
                   return (
                     <div
                       key={skill.name}
-                      className="flex justify-center items-center gap-1.5 px-3 py-2 rounded-full  group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
+                      className="flex justify-center items-center gap-1.5 px-3 py-1.5 rounded-full group select-none cursor-default border border-border/50 bg-gradient-to-b from-accent/60 to-accent/20 shadow-xs transition-colors"
                     >
                       {IconComponent ? (
                         <div className="flex items-center justify-center w-4.5 h-4.5 shrink-0 transition-transform duration-200 group-hover:rotate-7">

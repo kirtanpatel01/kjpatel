@@ -32,7 +32,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "React Query": Icons.ReactQuery,
   Firebase: Icons.Firebase,
   "Backblaze B2": Icons.Backblaze,
-  "Motion": Icons.Motion
+  Motion: Icons.Motion,
 };
 
 export default function Work() {
@@ -103,15 +103,10 @@ export default function Work() {
             </div>
 
             <div className="space-y-4 pt-2">
-              <span className="font-semibold">
-                Key Contributions:
-              </span>
+              <span className="font-semibold">Key Contributions:</span>
               <ul className="list-inside list-disc text-sm sm:text-[15px]">
                 {project.keyContributions.map((bullet, idx) => (
-                  <li
-                    key={idx}
-                    className="leading-relaxed font-des"
-                  >
+                  <li key={idx} className="leading-relaxed font-des">
                     {bullet}
                   </li>
                 ))}
@@ -126,7 +121,7 @@ export default function Work() {
                   return (
                     <div
                       key={t}
-                      className="flex justify-center items-center gap-1.5 px-2 py-1 rounded-full group select-none cursor-default inset-shadow-xs inset-shadow-foreground/7 bg-gradient-to-b from-foreground/7 to-accent/20 shadow-xs dark:shadow-none shadow-foreground/7"
+                      className="flex justify-center items-center gap-1.5 px-2.5 py-1 rounded-full group select-none cursor-default border border-border/50 bg-gradient-to-b from-accent/60 to-accent/20 shadow-xs transition-colors"
                     >
                       {IconComponent ? (
                         <div className="flex items-center justify-center w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover:rotate-7">

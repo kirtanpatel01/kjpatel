@@ -11,7 +11,7 @@ export default function Footer() {
     });
   };
   return (
-    <footer className="w-full max-w-3xl border-x border-dashed mx-auto border-t border-border px-3 flex flex-row justify-between items-end sm:items-center gap-4 text-xs tracking-widest text-muted-foreground bg-background sticky bottom-0 z-50 h-7">
+    <footer className="w-full max-w-3xl border-x border-dashed mx-auto border-t border-border py-1.5 px-3 flex flex-row justify-between items-end sm:items-center gap-4 text-xs tracking-widest text-muted-foreground bg-background sticky bottom-0 z-50 h-7">
       {/* Left side on desktop: Text and Links grouped together */}
       <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-4">
         <div className="flex flex-wrap items-center gap-x-2">

@@ -487,8 +487,8 @@ function TOCConnector() {
           x2={diamondX}
           y2={diamondY}
         >
-          <stop offset="0%" stopColor="var(--foreground)" stopOpacity="0" />
-          <stop offset="100%" stopColor="var(--foreground)" stopOpacity="1" />
+          <stop offset="0%" stopColor="var(--primary)" stopOpacity="0" />
+          <stop offset="100%" stopColor="var(--primary)" stopOpacity="1" />
         </motion.linearGradient>
       </defs>
 
@@ -497,7 +497,7 @@ function TOCConnector() {
         <path
           d={backgroundPath}
           fill="none"
-          className="stroke-zinc-200 dark:stroke-zinc-800"
+          className="stroke-border"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
@@ -524,7 +524,7 @@ function TOCConnector() {
           cx={points[points.length - 1].x}
           cy={points[points.length - 1].y}
           r="2"
-          className="fill-zinc-300 dark:fill-zinc-700"
+          className="fill-border"
         />
       )}
 
@@ -532,7 +532,7 @@ function TOCConnector() {
       {totalPathLength > 0 && (
         <motion.polygon
           points="-4,0 0,-4 4,0 0,4"
-          className="fill-foreground z-10"
+          className="fill-primary z-10"
           style={{
             x: diamondX,
             y: diamondY,
@@ -584,10 +584,10 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
         href={isHomePage ? href : `/${href}`}
         onClick={(e) => handleClick(e, href, id)}
         className={cn(
-          "text-sm tracking-wide font-des transition-colors duration-200 py-0.5",
+          "text-sm tracking-wide font-des font-medium transition-colors duration-200 py-0.5",
           isActive
-            ? "font-semibold text-foreground"
-            : "text-muted-foreground hover:text-foreground"
+            ? "text-foreground"
+            : "text-muted-foreground/70 hover:text-foreground"
         )}
       >
         {children}

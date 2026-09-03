@@ -1,12 +1,13 @@
 "use client";
 
-import { Menu, X, FileText, ArrowUpRight } from "lucide-react";
+import { FileText, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
+import { AccentThemePopover } from "./accent-theme-rail";
 import { Kbd } from "./ui/kbd";
 import { Button } from "./ui/button";
 
@@ -17,7 +18,6 @@ const navItems: { name: string; href: string }[] = [
 
 export default function Header() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   return (
@@ -95,43 +95,9 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Kbd className="hidden md:flex">d</Kbd>
           <ModeToggle />
+          <AccentThemePopover className="flex xl:hidden" />
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-full hover:bg-accent/30 transition-colors"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <nav className="absolute top-full left-0 right-0 border-b border-border bg-background md:hidden pb-2">
-          <div className="flex flex-col gap-2">
-            {navItems && navItems.map((item) => {
-              const isActive =
-                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "w-full px-4 py-2 tracking-widest text-sm font-medium",
-                    isActive ? "bg-foreground text-background" : "",
-                  )}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </div>
-        </nav>
-      )}
     </header>
   );
 }
