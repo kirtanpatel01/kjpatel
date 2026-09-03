@@ -10,8 +10,8 @@ import { ModeToggle } from "./mode-toggle";
 import { Kbd } from "./ui/kbd";
 
 const navItems: { name: string; href: string }[] = [
-  { name: "Home", href: "/" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Home", href: "/" },
+  // { name: "Blog", href: "/blog" },
 ];
 
 export default function Header() {
@@ -34,7 +34,7 @@ export default function Header() {
               WebkitMaskImage: "url(/logo.svg)",
             }}
           />
-          <h3 className="text-xl font-mono tracking-wider">kjpatel</h3>
+          <h3 className="text-xl font-mono font-semibold tracking-wider">kjpatel</h3>
         </Link>
 
         {/* Desktop Navigation */}

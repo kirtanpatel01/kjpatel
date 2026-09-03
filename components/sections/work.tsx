@@ -17,6 +17,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Tailwind: Icons.Tailwind,
   "Tailwind CSS": Icons.Tailwind,
   "Shadcn/ui": Icons.Shadcn,
+  "Shadcn UI": Icons.Shadcn,
   "Node.js": Icons.Nodejs,
   "Express.js": Icons.Express,
   DrizzleORM: Icons.Drizzle,
@@ -29,6 +30,8 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Prisma: Icons.Prisma,
   NeonDB: Icons.NeonDB,
   "React Query": Icons.ReactQuery,
+  Firebase: Icons.Firebase,
+  "Backblaze B2": Icons.Backblaze,
   "Motion": Icons.Motion
 };
 
