@@ -1,3 +1,5 @@
+import { FileText, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Contact from "@/components/sections/contact";
 import Experience from "@/components/sections/experience";
 
@@ -50,6 +52,16 @@ export default async function Home() {
             I enjoy solving practical engineering problems across the full stack,
             from product design to implementation and delivery.
           </p>
+        </div>
+
+        <div className="mt-4 flex items-center gap-3">
+          <Button variant="outline" size="sm" asChild>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <FileText className="w-4 h-4" />
+              <span>View Resume</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
+            </a>
+          </Button>
         </div>
 
         <Suspense fallback={<GitHubContributionsFallback />}>

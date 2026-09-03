@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Kbd } from "./ui/kbd";
+import { Button } from "./ui/button";
 
 const navItems: { name: string; href: string }[] = [
   // { name: "Home", href: "/" },
@@ -83,6 +84,14 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <Button variant="outline" size="xs" asChild>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <FileText />
+            <span>Resume</span>
+            <ArrowUpRight />
+          </a>
+        </Button>
+
         <div className="flex items-center gap-2">
           <Kbd className="hidden md:flex">d</Kbd>
           <ModeToggle />
