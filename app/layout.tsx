@@ -17,6 +17,7 @@ const DMSans = DM_Sans({
 });
 
 const Signika = Signika_Negative({
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-signika",
   display: "swap",

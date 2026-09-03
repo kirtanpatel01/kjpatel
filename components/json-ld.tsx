@@ -9,7 +9,8 @@ export default function JsonLd() {
         url: "https://kjpatel.me",
         sameAs: [
           "https://github.com/kirtanpatel01",
-          "https://linkedin.com/in/kjpatel",
+          "https://linkedin.com/in/kjpatel-dev",
+          "https://x.com/kjpatel_dev",
         ],
         knowsAbout: [
           "React",

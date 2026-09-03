@@ -32,7 +32,7 @@ export const siteMetadata: Metadata = {
     title: "Kirtan Patel | Full Stack Developer",
     description:
       "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman.",
-    creator: "@kjpatel",
+    creator: "@kjpatel_dev",
   },
   alternates: {
     canonical: "/",

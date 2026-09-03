@@ -1,24 +1,30 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = getAllPosts();
+  const baseUrl = "https://kjpatel.me";
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.frontmatter.updated || post.frontmatter.date),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   return [
     {
-      url: "https://kjpatel.me/",
+      url: `${baseUrl}/`,
       lastModified: new Date(),
-      changeFrequency: "yearly",
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://kjpatel.me/blogs",
+      url: `${baseUrl}/blog`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
+      changeFrequency: "daily",
+      priority: 0.9,
     },
-    {
-      url: "https://kjpatel.me/labs",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
+    ...postEntries,
   ];
 }

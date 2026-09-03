@@ -10,8 +10,8 @@ import { ModeToggle } from "./mode-toggle";
 import { Kbd } from "./ui/kbd";
 
 const navItems: { name: string; href: string }[] = [
-  // { name: "Home", href: "/" },
-  // { name: "Blogs", href: "/blogs" },
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export default function Header() {
