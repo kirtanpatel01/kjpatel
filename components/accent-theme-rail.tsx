@@ -58,8 +58,8 @@ export function AccentThemeRail() {
                 className={cn(
                   "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-all duration-200 outline-none",
                   isActive
-                    ? "scale-110"
-                    : "hover:scale-110 opacity-70 hover:opacity-100"
+                    ? "opacity-100"
+                    : "opacity-60 hover:opacity-100"
                 )}
               >
                 <span
@@ -122,7 +122,7 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
             aria-label={`Select ${theme.label} theme`}
             className={cn(
               "p-0.5 rounded-full cursor-pointer transition-all duration-200 outline-none",
-              isActive ? "scale-110" : "opacity-60 hover:opacity-100"
+              isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
             )}
           >
             <span
@@ -187,7 +187,7 @@ export function AccentThemePopover({ className }: { className?: string }) {
           type="button"
           aria-label="Change Accent Theme"
           className={cn(
-            "relative flex items-center justify-center cursor-pointer shrink-0 h-8 w-8 text-foreground/80 hover:text-primary rounded-full transition-colors duration-200 inset-shadow-xs inset-shadow-zinc-500/40 dark:inset-shadow-zinc-600 outline-none",
+            "relative flex items-center justify-center cursor-pointer shrink-0 text-muted-foreground hover:text-foreground transition-colors duration-150 p-1 outline-none",
             className
           )}
         >
@@ -211,7 +211,7 @@ export function AccentThemePopover({ className }: { className?: string }) {
                 aria-label={`Select ${theme.label} theme`}
                 className={cn(
                   "p-0.5 rounded-full cursor-pointer transition-all duration-200 outline-none",
-                  isActive ? "scale-110" : "opacity-60 hover:opacity-100"
+                  isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
               >
                 <span

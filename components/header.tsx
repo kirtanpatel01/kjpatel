@@ -1,99 +1,63 @@
 "use client";
 
-import { FileText, ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { AccentThemePopover } from "./accent-theme-rail";
-import { Kbd } from "./ui/kbd";
-import { Button } from "./ui/button";
 
 const navItems: { name: string; href: string }[] = [
-  // { name: "Home", href: "/" },
-  // { name: "Blog", href: "/blog" },
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export default function Header() {
   const pathname = usePathname();
-  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   return (
-    <header className="w-full max-w-3xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-3 h-14">
-      <div className="flex items-center gap-4">
-        <Link
-          href="/"
-          aria-label="Home"
-          className="shrink-0 flex items-center justify-center gap-3"
-        >
-          <div
-            className="w-8 h-8 icon-mask bg-foreground"
-            style={{
-              maskImage: "url(/logo.svg)",
-              WebkitMaskImage: "url(/logo.svg)",
-            }}
-          />
-          <h3 className="text-xl font-mono font-semibold tracking-wider">kjpatel</h3>
-        </Link>
+    <header className="w-full max-w-3xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-2.5 h-11 sm:h-12">
+      <Link
+        href="/"
+        aria-label="Home"
+        className="shrink-0 flex items-center justify-center gap-2.5"
+      >
+        <div
+          className="w-7 h-7 icon-mask bg-foreground"
+          style={{
+            maskImage: "url(/logo.svg)",
+            WebkitMaskImage: "url(/logo.svg)",
+          }}
+        />
+        <h3 className="text-lg font-semibold tracking-wider">kjpatel</h3>
+      </Link>
 
+      <div className="flex items-center gap-3 sm:gap-4">
         {/* Desktop Navigation */}
-        <nav
-          className="hidden md:flex items-center gap-1.5"
-          onMouseLeave={() => setHoveredSection(null)}
-        >
+        <nav className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm">
           {navItems.map((item) => {
             const isActive =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-            const isHighlighted =
-              hoveredSection === item.href ||
-              (hoveredSection === null && isActive);
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative px-4 py-1.5 rounded-full transition-colors duration-200 cursor-pointer select-none text-sm font-medium",
+                  "transition-colors duration-150 select-none",
                   isActive
-                    ? ""
-                    : "text-zinc-400 hover:text-secondary-foreground",
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground hover:text-foreground font-medium",
                 )}
-                onMouseEnter={() => setHoveredSection(item.href)}
               >
-                {isHighlighted && (
-                  <motion.div
-                    layoutId="header-nav-pill"
-                    className={cn(
-                      "absolute inset-0 rounded-full -z-10 shadow-sm",
-                      isActive ? "bg-secondary/80" : "bg-secondary/40",
-                    )}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                    }}
-                  />
-                )}
-                <span>{item.name}</span>
+                {item.name}
               </Link>
             );
           })}
         </nav>
-      </div>
 
-      <div className="flex items-center gap-2 sm:gap-3">
-        <Button variant="outline" size="xs" asChild>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-            <FileText />
-            <span>Resume</span>
-            <ArrowUpRight />
-          </a>
-        </Button>
+        <div className="h-4 w-px bg-border shrink-0" />
 
-        <div className="flex items-center gap-2">
-          <Kbd className="hidden md:flex">d</Kbd>
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <ModeToggle />
           <AccentThemePopover className="flex xl:hidden" />
         </div>

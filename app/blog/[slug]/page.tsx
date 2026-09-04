@@ -15,6 +15,8 @@ import {
   SectionContainer,
 } from "@/components/responsive-wrappers";
 import { Badge } from "@/components/ui/badge";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { mdxComponents } from "@/components/mdx-components";
 
 interface PageProps {
@@ -145,10 +147,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         <SectionContainer className="p-4 sm:p-6 space-y-4">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-muted-foreground hover:text-foreground transition-colors group"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Articles
+            Back to articles
           </Link>
 
           <div className="flex flex-wrap gap-2 items-center pt-2">
@@ -156,24 +158,24 @@ export default async function BlogPostPage({ params }: PageProps) {
               <Badge
                 key={tag}
                 variant="secondary"
-                className="text-xs font-mono"
+                className="text-xs font-medium"
               >
                 {tag}
               </Badge>
             ))}
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground font-heading leading-tight">
+          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight">
             {frontmatter.title}
           </h1>
 
-          <p className="text-base sm:text-xl text-muted-foreground font-des leading-relaxed">
+          <p className="text-base sm:text-xl text-muted-foreground leading-relaxed">
             {frontmatter.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-muted-foreground font-mono pt-2 border-t border-border/60">
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-muted-foreground pt-2 border-t border-border/60">
             <span className="flex items-center gap-1.5 font-medium text-foreground">
-              <User className="w-4 h-4 text-primary" />
+              <User className="w-4 h-4 text-foreground/70" />
               {frontmatter.author}
             </span>
             <span>•</span>
@@ -198,7 +200,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Cover Image */}
         <SectionContainer className="p-4 sm:p-6">
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-border shadow-sm bg-muted">
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-muted">
             <Image
               src={frontmatter.cover}
               alt={frontmatter.title}
@@ -212,16 +214,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Article Body + TOC Grid */}
         <SectionContainer className="p-4 sm:p-6">
           {headings.length > 0 && (
-            <details className="mb-8 rounded-xl border border-border/80 bg-muted/20 p-4 text-sm font-des">
-              <summary className="font-bold text-foreground font-heading cursor-pointer select-none">
-                Table of Contents ({headings.length} sections)
+            <details className="mb-8 rounded-xl border border-border/80 bg-muted/20 p-4 text-sm">
+              <summary className="font-bold text-foreground cursor-pointer select-none">
+                Table of contents ({headings.length} sections)
               </summary>
               <ul className="mt-3 space-y-1.5 pl-4 border-l border-border">
                 {headings.map((h) => (
                   <li key={h.id}>
                     <a
                       href={`#${h.id}`}
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {h.text}
                     </a>
@@ -233,7 +235,16 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* MDX Content */}
           <div className="prose dark:prose-invert max-w-none">
-            <MDXRemote source={content} components={mdxComponents} />
+            <MDXRemote
+              source={content}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkMath],
+                  rehypePlugins: [rehypeKatex],
+                },
+              }}
+            />
           </div>
         </SectionContainer>
 
@@ -244,13 +255,13 @@ export default async function BlogPostPage({ params }: PageProps) {
               {prev ? (
                 <Link
                   href={`/blog/${prev.slug}`}
-                  className="group rounded-xl border border-border p-4 hover:border-primary/50 transition-colors flex flex-col justify-between"
+                  className="group rounded-xl bg-card p-4 transition-colors flex flex-col justify-between"
                 >
-                  <span className="text-xs font-mono text-muted-foreground flex items-center gap-1 mb-1">
+                  <span className="text-xs text-muted-foreground flex items-center gap-1 mb-1">
                     <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />{" "}
-                    Previous Post
+                    Previous post
                   </span>
-                  <span className="font-bold text-sm text-foreground font-heading group-hover:text-primary transition-colors line-clamp-1">
+                  <span className="font-bold text-sm text-foreground group-hover:text-foreground/90 transition-colors line-clamp-1">
                     {prev.frontmatter.title}
                   </span>
                 </Link>
@@ -261,13 +272,13 @@ export default async function BlogPostPage({ params }: PageProps) {
               {next ? (
                 <Link
                   href={`/blog/${next.slug}`}
-                  className="group rounded-xl border border-border p-4 hover:border-primary/50 transition-colors flex flex-col justify-between text-right sm:text-right"
+                  className="group rounded-xl bg-card p-4 transition-colors flex flex-col justify-between text-right sm:text-right"
                 >
-                  <span className="text-xs font-mono text-muted-foreground flex items-center justify-end gap-1 mb-1">
-                    Next Post{" "}
+                  <span className="text-xs text-muted-foreground flex items-center justify-end gap-1 mb-1">
+                    Next post{" "}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <span className="font-bold text-sm text-foreground font-heading group-hover:text-primary transition-colors line-clamp-1">
+                  <span className="font-bold text-sm text-foreground group-hover:text-foreground/90 transition-colors line-clamp-1">
                     {next.frontmatter.title}
                   </span>
                 </Link>
@@ -281,20 +292,20 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <SectionContainer className="p-4 sm:p-6 space-y-4">
-            <h3 className="text-lg font-bold font-heading text-foreground">
-              Related Articles
+            <h3 className="text-lg font-bold text-foreground">
+              Related articles
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {relatedPosts.map((rPost) => (
                 <Link
                   key={rPost.slug}
                   href={`/blog/${rPost.slug}`}
-                  className="group rounded-xl border border-border p-4 hover:border-primary/50 transition-colors space-y-2"
+                  className="group rounded-xl bg-card p-4 transition-colors space-y-2"
                 >
-                  <h4 className="font-bold text-sm text-foreground font-heading group-hover:text-primary transition-colors">
+                  <h4 className="font-bold text-sm text-foreground group-hover:text-foreground/90 transition-colors">
                     {rPost.frontmatter.title}
                   </h4>
-                  <p className="text-xs text-muted-foreground font-des line-clamp-2">
+                  <p className="text-xs text-muted-foreground line-clamp-2">
                     {rPost.frontmatter.description}
                   </p>
                 </Link>

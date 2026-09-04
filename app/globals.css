@@ -45,8 +45,8 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --font-heading: var(--font-chivo); 
-  --font-desc: var(--font-signika);
+  --font-heading: var(--font-dm-sans); 
+  --font-desc: var(--font-dm-sans);
 }
 
 :root {

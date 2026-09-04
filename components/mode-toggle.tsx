@@ -54,9 +54,7 @@ export function ModeToggle() {
       onClick={toggleTheme}
       className="
         relative flex items-center justify-center cursor-pointer shrink-0
-        h-8 w-8 text-slate-800 dark:text-slate-300 rounded-full
-        transition-colors duration-300 inset-shadow-xs inset-shadow-slate-500/40 dark:inset-shadow-slate-600 
-      "
+        text-muted-foreground hover:text-foreground transition-colors duration-150 p-1 pr-2.5"
     >
       <AnimatePresence initial={false} mode="wait">
         {theme === "dark" ? (

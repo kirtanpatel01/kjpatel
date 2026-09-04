@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Signika_Negative, Chivo } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/them-provider";
 import "./globals.css";
@@ -14,20 +14,6 @@ const DMSans = DM_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const Signika = Signika_Negative({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-signika",
-  display: "swap",
-});
-
-const chivo = Chivo({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-chivo",
   display: "swap",
 });
 
@@ -47,6 +33,10 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var a=localStorage.getItem('accent_theme');if(a&&a!=='zinc'){document.documentElement.setAttribute('data-accent',a);}}catch(e){}})();`,
@@ -59,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${DMSans.className} ${Signika.variable} ${chivo.variable} antialiased`}
+        className={`${DMSans.className} ${DMSans.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
@@ -69,13 +59,15 @@ export default function RootLayout({
         >
           <Toaster richColors />
           <TooltipProvider>
-            <Header />
-            <JsonLd />
-            <AccentThemeRail />
-            <main className="min-h-[calc(100vh-5.25rem)] relative w-full max-w-3xl sm:border-x border-dashed mx-auto">
-              {children}
-            </main>
-            <Footer />
+            <div className="flex flex-col min-h-screen w-full">
+              <Header />
+              <JsonLd />
+              <AccentThemeRail />
+              <main className="flex-1 relative w-full max-w-3xl sm:border-x border-dashed mx-auto">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </TooltipProvider>
           <Analytics />
         </ThemeProvider>

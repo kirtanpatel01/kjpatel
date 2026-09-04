@@ -30,8 +30,8 @@ async function CodeBlock({ code, lang }: { code: string; lang: string }) {
 
   return (
     <div className="relative my-6 rounded-xl border border-border bg-muted/20 overflow-hidden shadow-xs">
-      <div className="flex items-center justify-between px-4 py-2 bg-muted/60 border-b border-border/80 text-xs font-mono text-muted-foreground">
-        <span className="uppercase tracking-wider font-semibold text-foreground/70">
+      <div className="flex items-center justify-between px-4 py-2 bg-muted/60 border-b border-border/80 text-xs text-muted-foreground">
+        <span className="tracking-wide font-medium text-foreground/70">
           {lang || "text"}
         </span>
         <CopyButton code={code} />
@@ -47,7 +47,7 @@ async function CodeBlock({ code, lang }: { code: string; lang: string }) {
 export const mdxComponents = {
   h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-10 mb-4 font-heading border-b border-border/60 pb-2 scroll-mt-20"
+      className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-10 mb-4 border-b border-border/60 pb-2 scroll-mt-20"
       {...props}
     >
       {children}
@@ -60,7 +60,7 @@ export const mdxComponents = {
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       id={id}
-      className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-8 mb-3 font-heading scroll-mt-20 group"
+      className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-8 mb-3 scroll-mt-20 group"
       {...props}
     >
       <a href={`#${id}`} className="hover:underline">
@@ -75,7 +75,7 @@ export const mdxComponents = {
   }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       id={id}
-      className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mt-6 mb-2 font-heading scroll-mt-20"
+      className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mt-6 mb-2 scroll-mt-20"
       {...props}
     >
       {children}
@@ -83,7 +83,7 @@ export const mdxComponents = {
   ),
   p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className="text-sm sm:text-base leading-relaxed text-foreground/90 font-des my-4"
+      className="text-sm sm:text-base leading-relaxed text-foreground/90 my-4"
       {...props}
     >
       {children}
@@ -99,7 +99,7 @@ export const mdxComponents = {
       return (
         <Link
           href={href}
-          className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+          className="font-medium text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors"
           {...props}
         >
           {children}
@@ -111,7 +111,7 @@ export const mdxComponents = {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+        className="font-medium text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors"
         {...props}
       >
         {children}
@@ -120,7 +120,7 @@ export const mdxComponents = {
   },
   ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className="my-4 ml-6 list-disc space-y-2 text-sm sm:text-base font-des text-foreground/90"
+      className="my-4 ml-6 list-disc space-y-2 text-sm sm:text-base text-foreground/90"
       {...props}
     >
       {children}
@@ -128,7 +128,7 @@ export const mdxComponents = {
   ),
   ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className="my-4 ml-6 list-decimal space-y-2 text-sm sm:text-base font-des text-foreground/90"
+      className="my-4 ml-6 list-decimal space-y-2 text-sm sm:text-base text-foreground/90"
       {...props}
     >
       {children}
@@ -144,7 +144,7 @@ export const mdxComponents = {
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="my-6 border-l-4 border-primary pl-4 italic text-foreground/80 bg-muted/30 py-3 pr-4 rounded-r-lg"
+      className="my-6 border-l-4 border-border pl-4 italic text-foreground/80 bg-muted/20 py-3 pr-4 rounded-r-lg"
       {...props}
     >
       {children}
@@ -159,7 +159,7 @@ export const mdxComponents = {
   }: React.TableHTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-x-auto rounded-lg border border-border">
       <table
-        className="w-full text-left text-xs sm:text-sm font-des"
+        className="w-full text-left text-xs sm:text-sm"
         {...props}
       >
         {children}
@@ -190,9 +190,9 @@ export const mdxComponents = {
     if (className?.startsWith("language-")) {
       return <code className={className}>{children}</code>;
     }
-    // Inline code styling
+    // Inline code styling: clean, integrated, Vercel/Linear developer style
     return (
-      <code className="rounded bg-muted px-1.5 py-0.5 text-xs sm:text-sm font-mono text-primary font-semibold border border-border/50">
+      <code className="relative rounded-sm bg-secondary/80 px-1 py-px text-sm font-mono font-medium text-foreground border border-border/50">
         {children}
       </code>
     );
@@ -211,7 +211,7 @@ export const mdxComponents = {
       return <CodeBlock code={code} lang={lang} />;
     }
     return (
-      <pre className="my-4 overflow-x-auto rounded-lg bg-muted p-4">
+      <pre className="my-4 overflow-x-auto rounded-lg bg-muted p-4 font-mono">
         {children}
       </pre>
     );
@@ -220,7 +220,7 @@ export const mdxComponents = {
     if (!src || typeof src !== "string") return null;
     return (
       <figure className="my-6">
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border shadow-xs">
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-muted">
           <Image
             src={src}
             alt={alt || "Article illustration"}
@@ -229,7 +229,7 @@ export const mdxComponents = {
           />
         </div>
         {alt && (
-          <figcaption className="mt-2 text-center text-xs text-muted-foreground italic font-des">
+          <figcaption className="mt-2 text-center text-xs text-muted-foreground italic">
             {alt}
           </figcaption>
         )}

@@ -271,7 +271,7 @@ export function Stage({
           {/* Sidebar */}
           {isMultiFile && (
             <div className="w-full md:w-64 flex flex-col shrink-0 border-b md:border-b-0 md:border-r border-border/10">
-              <div className="p-3 border-b text-xs font-bold uppercase tracking-widest text-muted-foreground bg-accent/5">
+              <div className="p-3 border-b text-xs font-bold text-muted-foreground bg-accent/5">
                 Files
               </div>
 

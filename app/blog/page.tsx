@@ -34,10 +34,10 @@ export default function BlogListingPage() {
   return (
     <PageContainer>
       <SectionContainer id="blog-header" className="p-4 sm:p-6 space-y-3">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground font-heading">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
           Engineering &amp; Articles
         </h1>
-        <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground font-des">
+        <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground">
           Thoughts, technical deep dives, and practical guides on full stack
           engineering, TypeScript, Next.js, and modern web architecture.
         </p>
@@ -47,12 +47,12 @@ export default function BlogListingPage() {
       {featuredPost ? (
         <SectionContainer id="featured-post" className="p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-primary">
-              Latest Article
+            <span className="text-xs font-medium tracking-wide text-muted-foreground">
+              Latest article
             </span>
           </div>
 
-          <div className="group relative rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:border-primary/50 shadow-xs flex flex-col md:flex-row">
+          <div className="group relative rounded-2xl bg-card overflow-hidden flex flex-col md:flex-row">
             {/* Cover Image */}
             <div className="relative w-full md:w-1/2 aspect-video md:aspect-auto min-h-[220px] overflow-hidden bg-muted">
               <Image
@@ -60,7 +60,7 @@ export default function BlogListingPage() {
                 alt={featuredPost.frontmatter.title}
                 fill
                 priority
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover"
               />
             </div>
 
@@ -72,25 +72,25 @@ export default function BlogListingPage() {
                     <Badge
                       key={tag}
                       variant="secondary"
-                      className="text-xs font-mono"
+                      className="text-xs font-medium"
                     >
                       {tag}
                     </Badge>
                   ))}
                 </div>
 
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground font-heading group-hover:text-primary transition-colors">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground/90 transition-colors">
                   <Link href={`/blog/${featuredPost.slug}`}>
                     {featuredPost.frontmatter.title}
                   </Link>
                 </h2>
 
-                <p className="text-sm sm:text-base text-muted-foreground font-des line-clamp-3 leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground line-clamp-3 leading-relaxed">
                   {featuredPost.frontmatter.description}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground font-mono">
+              <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
@@ -105,9 +105,9 @@ export default function BlogListingPage() {
 
                 <Link
                   href={`/blog/${featuredPost.slug}`}
-                  className="inline-flex items-center gap-1 font-semibold text-primary group-hover:translate-x-1 transition-transform"
+                  className="inline-flex items-center gap-1 font-semibold text-foreground hover:underline transition-all"
                 >
-                  Read Post <ArrowRight className="w-3.5 h-3.5" />
+                  Read post <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function BlogListingPage() {
             {otherPosts.map((post) => (
               <article
                 key={post.slug}
-                className="group rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:border-primary/50 flex flex-col justify-between"
+                className="group rounded-xl bg-card overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   <div className="relative w-full aspect-video overflow-hidden bg-muted">
@@ -136,7 +136,7 @@ export default function BlogListingPage() {
                       src={post.frontmatter.cover}
                       alt={post.frontmatter.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-4 space-y-2">
@@ -145,24 +145,24 @@ export default function BlogListingPage() {
                         <Badge
                           key={tag}
                           variant="outline"
-                          className="text-[10px] font-mono px-2 py-0"
+                          className="text-[10px] font-medium px-2 py-0"
                         >
                           {tag}
                         </Badge>
                       ))}
                     </div>
-                    <h3 className="text-base font-bold tracking-tight text-foreground font-heading group-hover:text-primary transition-colors">
+                    <h3 className="text-base font-bold tracking-tight text-foreground transition-colors">
                       <Link href={`/blog/${post.slug}`}>
                         {post.frontmatter.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground font-des line-clamp-2">
+                    <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                       {post.frontmatter.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-4 pt-0 flex items-center justify-between text-xs text-muted-foreground font-mono">
+                <div className="p-4 pt-0 flex items-center justify-between text-xs text-muted-foreground">
                   <span>{post.frontmatter.date}</span>
                   <span>{post.readingTime}</span>
                 </div>

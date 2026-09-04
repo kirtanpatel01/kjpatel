@@ -10,73 +10,62 @@ export default function Footer() {
       behavior: "smooth",
     });
   };
-  return (
-    <footer className="w-full max-w-3xl border-x border-dashed mx-auto border-t border-border py-1.5 px-3 flex flex-row justify-between items-end sm:items-center gap-4 text-xs tracking-widest text-muted-foreground bg-background sticky bottom-0 z-50 h-7">
-      {/* Left side on desktop: Text and Links grouped together */}
-      <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-2 sm:gap-4">
-        <div className="flex flex-wrap items-center gap-x-2">
-          <span>
-            Built with ❤️ by{" "}
-            <span className="text-foreground">Kirtan Patel</span>
-          </span>
-          <span className="text-border">|</span>
-          <span>
-            Inspired by{" "}
-            <a
-              href="https://chanhdai.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-foreground transition-colors text-primary"
-            >
-              chanhdai.com
-            </a>
-          </span>
-        </div>
 
-        {/* Social Icons - Left-aligned on Desktop, Above text on Mobile */}
-        {/* <div className="flex items-center gap-5 sm:gap-4 sm:border-l sm:border-border sm:pl-4">
-          {socialLinks.map((link) => (
-            <Tooltip key={link.name}>
-              <TooltipTrigger asChild>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center text-muted-foreground hover:text-foreground transition-all duration-300"
-                >
-                  {link.isNeutral ? (
-                    <div
-                      className="w-4 h-4 icon-mask"
-                      style={{
-                        maskImage: `url(${link.icon})`,
-                        WebkitMaskImage: `url(${link.icon})`,
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={link.icon}
-                      alt={link.name}
-                      className="w-4 h-4 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                    />
-                  )}
-                </a>
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                <p className=" text-[10px]">{link.username}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
-        </div> */}
+  return (
+    <footer className="w-full max-w-3xl sm:border-x border-dashed mx-auto border-t border-border py-2 px-3 flex flex-row justify-between items-center gap-3 text-xs tracking-wide text-muted-foreground bg-background/80 backdrop-blur-md sticky bottom-0 z-50 min-h-8">
+      {/* Left side: Built by & Inspired by */}
+      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+        <span>
+          Built with ❤️ by{" "}
+          <a
+            href="https://x.com/kjpatel_dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-foreground hover:underline transition-colors"
+          >
+            Kirtan Patel
+          </a>
+        </span>
+        <span className="text-border">·</span>
+        <span>
+          Inspired by{" "}
+          <a
+            href="https://chanhdai.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground underline decoration-border hover:decoration-foreground transition-colors"
+          >
+            chanhdai
+          </a>
+          ,{" "}
+          <a
+            href="https://www.manuarora.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground underline decoration-border hover:decoration-foreground transition-colors"
+          >
+            manuarora
+          </a>{" "}
+          &{" "}
+          <a
+            href="https://evilcharts.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground underline decoration-border hover:decoration-foreground transition-colors"
+          >
+            evilcharts
+          </a>
+        </span>
       </div>
 
-      {/* Back to Top - Far right side */}
+      {/* Back to Top */}
       <button
         onClick={scrollToTop}
         aria-label="Back to top"
-        className="flex items-center gap-2 hover:text-foreground transition-colors cursor-pointer shrink-0"
+        className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer shrink-0 text-xs font-medium"
       >
-        <span className="hidden md:block">Back to Top</span>
-        <ArrowUp className="w-4 h-4" />
+        <span className="hidden sm:inline">Top</span>
+        <ArrowUp className="w-3.5 h-3.5" />
       </button>
     </footer>
   );

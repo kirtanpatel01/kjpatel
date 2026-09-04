@@ -15,6 +15,9 @@ import { getCachedContributions } from "@/lib/get-cached-contributions";
 import { cn } from "@/lib/utils";
 import Work from "@/components/sections/work";
 import SidebarTOC from "@/components/sidebar-toc";
+import { Button } from "@/components/ui/button";
+import { ArrowUpRight, FileText } from "lucide-react";
+import Link from "next/link";
 
 const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
@@ -34,21 +37,30 @@ export default async function Home() {
     <PageContainer>
       {/* Hero Section */}
       <SectionContainer id="home" className="p-4">
-        <h1 className="font-bold text-xl sm:text-2xl">
-          Kirtan Patel — Full Stack Developer
-        </h1>
-        <div className="mt-4 max-w-3xl space-y-2 leading-relaxed font-des text-accent-foreground tracking-wide text-sm sm:text-base">
+        <div className="flex items-center gap-2">
+          <h1 className="font-bold text-xl sm:text-2xl">
+            Kirtan Patel — Full Stack Developer
+          </h1>
+          <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <Button variant="default" size="xs">
+              <FileText className="" />
+              <span>Resume</span>
+              <ArrowUpRight />
+            </Button>
+          </Link>
+        </div>
+        <div className="mt-4 max-w-3xl space-y-2 leading-relaxed text-foreground/90 tracking-wide text-sm sm:text-base">
           <p>
             I&apos;m{" "}
-            <span className="text-primary font-mono tracking-tight">
+            <span className="font-semibold text-foreground">
               Kirtan Patel
             </span>
             , a Full Stack Developer building production-ready web applications
             with Next.js, TypeScript, and modern cloud tooling.
           </p>
           <p>
-            I enjoy solving practical engineering problems across the full stack,
-            from product design to implementation and delivery.
+            I enjoy solving practical engineering problems across the full
+            stack, from product design to implementation and delivery.
           </p>
         </div>
 
