@@ -69,3 +69,13 @@ export function applyAccentTheme(theme: AccentTheme): void {
     new CustomEvent("accent-theme-change", { detail: theme })
   );
 }
+
+export function cycleAccentTheme(): AccentTheme {
+  if (typeof window === "undefined") return "zinc";
+  const current = getStoredAccentTheme();
+  const currentIndex = ACCENT_THEMES.findIndex((t) => t.id === current);
+  const nextIndex = (currentIndex + 1) % ACCENT_THEMES.length;
+  const nextTheme = ACCENT_THEMES[nextIndex].id;
+  applyAccentTheme(nextTheme);
+  return nextTheme;
+}

@@ -83,7 +83,7 @@ export const work: Project[] = [
     title: "Algorion AI",
     subtitle: "Company Website and AI Platform",
     description:
-      "Official website and AI platform developed as part of my internship at Algorion Research and Analysis Pvt. Ltd.",
+      "Official website and AI platform developed for Algorion Research and Analysis Pvt. Ltd.",
     badge: "Team Project",
     role: "Frontend Developer: Worked with designers and backend developers to build responsive, production ready interfaces and reusable frontend components.",
     keyContributions: [

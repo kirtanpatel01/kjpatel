@@ -6,6 +6,7 @@ import {
   type AccentTheme,
   getStoredAccentTheme,
   applyAccentTheme,
+  cycleAccentTheme,
 } from "@/lib/accent-theme";
 import { cn } from "@/lib/utils";
 import {
@@ -13,10 +14,24 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Kbd } from "@/components/ui/kbd";
+import { clickSoftSound } from "@/lib/click-soft";
 
 export function AccentThemeRail() {
   const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
   const [mounted, setMounted] = React.useState(false);
+
+  const playSound = React.useCallback(() => {
+    if (typeof window === "undefined") return;
+    const audio = new Audio(clickSoftSound.dataUri);
+    void audio.play().catch(() => {});
+  }, []);
+
+  const handleCycle = React.useCallback(() => {
+    const next = cycleAccentTheme();
+    setActiveTheme(next);
+    playSound();
+  }, [playSound]);
 
   React.useEffect(() => {
     setMounted(true);
@@ -34,9 +49,35 @@ export function AccentThemeRail() {
       window.removeEventListener("accent-theme-change", handleThemeChange);
   }, []);
 
+  // Handle 'T' key shortcut
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        (e.target as HTMLElement)?.isContentEditable
+      ) {
+        return;
+      }
+
+      if (e.metaKey || e.ctrlKey || e.altKey) {
+        return;
+      }
+
+      if (e.key.toLowerCase() === "t") {
+        e.preventDefault();
+        handleCycle();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleCycle]);
+
   const handleSelect = (themeId: AccentTheme) => {
     setActiveTheme(themeId);
     applyAccentTheme(themeId);
+    playSound();
   };
 
   if (!mounted) return null;
@@ -44,8 +85,14 @@ export function AccentThemeRail() {
   return (
     <div
       aria-label="Color Theme Switcher"
-      className="hidden xl:flex fixed xl:left-14 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-3.5 select-none"
+      className="hidden xl:flex fixed xl:left-14 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2.5 select-none"
     >
+      <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
+        T
+      </Kbd>
+
+      <div className="w-3.5 h-px bg-border/60 my-0.5" />
+
       {ACCENT_THEMES.map((theme) => {
         const isActive = activeTheme === theme.id;
         return (
@@ -57,9 +104,7 @@ export function AccentThemeRail() {
                 aria-label={`Select ${theme.label} theme`}
                 className={cn(
                   "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-all duration-200 outline-none",
-                  isActive
-                    ? "opacity-100"
-                    : "opacity-60 hover:opacity-100"
+                  isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
               >
                 <span
@@ -87,6 +132,12 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
   const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
   const [mounted, setMounted] = React.useState(false);
 
+  const playSound = React.useCallback(() => {
+    if (typeof window === "undefined") return;
+    const audio = new Audio(clickSoftSound.dataUri);
+    void audio.play().catch(() => {});
+  }, []);
+
   React.useEffect(() => {
     setMounted(true);
     const initial = getStoredAccentTheme();
@@ -105,12 +156,17 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
   const handleSelect = (themeId: AccentTheme) => {
     setActiveTheme(themeId);
     applyAccentTheme(themeId);
+    playSound();
   };
 
   if (!mounted) return null;
 
   return (
     <div className={cn("flex items-center gap-2 select-none", className)}>
+      <Kbd className="h-4 w-4 rounded-sm text-[10px] font-mono font-semibold uppercase">
+        T
+      </Kbd>
+      <div className="h-3 w-px bg-border/60 shrink-0" />
       {ACCENT_THEMES.map((theme) => {
         const isActive = activeTheme === theme.id;
         return (
@@ -141,7 +197,7 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
   );
 }
 
-import { Palette, Check } from "lucide-react";
+import { Palette } from "lucide-react";
 import {
   Popover,
   PopoverTrigger,
@@ -152,6 +208,12 @@ export function AccentThemePopover({ className }: { className?: string }) {
   const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
   const [mounted, setMounted] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+
+  const playSound = React.useCallback(() => {
+    if (typeof window === "undefined") return;
+    const audio = new Audio(clickSoftSound.dataUri);
+    void audio.play().catch(() => {});
+  }, []);
 
   React.useEffect(() => {
     setMounted(true);
@@ -171,6 +233,7 @@ export function AccentThemePopover({ className }: { className?: string }) {
   const handleSelect = (themeId: AccentTheme) => {
     setActiveTheme(themeId);
     applyAccentTheme(themeId);
+    playSound();
     setOpen(false);
   };
 
@@ -200,6 +263,10 @@ export function AccentThemePopover({ className }: { className?: string }) {
         className="w-auto p-2 backdrop-blur-md bg-background/95 border-border shadow-xl rounded-full select-none"
       >
         <div className="flex flex-row items-center gap-2.5">
+          <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
+            T
+          </Kbd>
+          <div className="h-3.5 w-px bg-border/60 shrink-0" />
           {ACCENT_THEMES.map((theme) => {
             const isActive = activeTheme === theme.id;
             return (
