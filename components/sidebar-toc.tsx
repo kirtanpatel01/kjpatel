@@ -145,8 +145,40 @@ function TOC({
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
-  const [activeSection, setActiveSection] = useState("home");
+  const getInitialSection = useCallback(() => {
+    if (typeof window === "undefined") return "home";
+
+    if (window.location.hash) {
+      const hash = window.location.hash.replace("#", "");
+      if (items.some((i) => i.id === hash)) return hash;
+    }
+
+    const isAtBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 15;
+    if (isAtBottom) return "contact";
+
+    let currentSection = "home";
+    for (const item of items) {
+      const element = document.getElementById(item.id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= focusLine) {
+          currentSection = item.id;
+        }
+      }
+    }
+    return currentSection;
+  }, [items, focusLine]);
+
+  const [activeSection, setActiveSection] = useState(getInitialSection);
   const activeSectionRef = useRef("home");
+  useEffect(() => {
+    const initial = getInitialSection();
+    activeSectionRef.current = initial;
+    setActiveSection(initial);
+  }, [getInitialSection]);
+
   const [points, setPoints] = useState<{ x: number; y: number }[]>([]);
   const [itemDistances, setItemDistances] = useState<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState(0);
@@ -205,15 +237,6 @@ function TOC({
       }
 
       if (currentSection !== activeSectionRef.current) {
-        console.log(`[Scroll Spy] Section Change: ${activeSectionRef.current} -> ${currentSection}`);
-        console.log(`TOC Items Positions relative to Y=${focusLine}px Focus Line:`);
-        for (const item of items) {
-          const el = document.getElementById(item.id);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            console.log(`  - ${item.label} (${item.id}): top = ${rect.top.toFixed(1)}px, active = ${rect.top <= focusLine}`);
-          }
-        }
         activeSectionRef.current = currentSection;
       }
 
@@ -329,13 +352,19 @@ function TOC({
   // Set diamond and tail positions immediately when points are first measured
   useEffect(() => {
     if (points.length > 0 && points[0].x !== 0 && distanceMotionValue.get() === 0) {
-      diamondX.set(points[0].x);
-      diamondY.set(points[0].y);
-      tailX.set(points[0].x);
-      tailY.set(points[0].y);
+      const initialIdx = items.findIndex((item) => item.id === activeSectionRef.current || item.id === activeSection);
+      const targetIdx = initialIdx >= 0 ? initialIdx : 0;
+      const initialDist = itemDistances[targetIdx] || 0;
+
+      distanceMotionValue.set(initialDist);
+      const initialPoint = points[targetIdx] || points[0];
+      diamondX.set(initialPoint.x);
+      diamondY.set(initialPoint.y);
+      tailX.set(initialPoint.x);
+      tailY.set(initialPoint.y);
       strokeDashoffset.set(tailLength);
     }
-  }, [points, diamondX, diamondY, tailX, tailY, strokeDashoffset, distanceMotionValue, tailLength]);
+  }, [points, itemDistances, activeSection, diamondX, diamondY, tailX, tailY, strokeDashoffset, distanceMotionValue, tailLength, items]);
 
   // Animate the active distance value and update diamond & tail positions along path geometry
   const activeIndex = items.findIndex((item) => item.id === activeSection);
@@ -583,6 +612,8 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
       <Link
         href={isHomePage ? href : `/${href}`}
         onClick={(e) => handleClick(e, href, id)}
+        data-toc-id={id}
+        suppressHydrationWarning
         className={cn(
           "text-sm tracking-wide font-des font-medium transition-colors duration-200 py-0.5",
           isActive
@@ -600,7 +631,7 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
 
 export default function SidebarTOC() {
   return (
-    <div className="flex flex-col gap-4 sticky top-24 select-none">
+    <div id="sidebar-toc-container" className="flex flex-col gap-4 sticky top-24 select-none">
       <TOC items={tocItems} headerOffset={80} focusLine={50} tailLength={80}>
         <TOCHeader>
           <AlignLeft className="w-3.5 h-3.5" />
@@ -617,6 +648,27 @@ export default function SidebarTOC() {
           ))}
         </TOCList>
       </TOC>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(${(() => {
+            try {
+              if (window.location.hash) {
+                const hash = window.location.hash.replace('#', '');
+                const target = document.querySelector('[data-toc-id="' + hash + '"]');
+                if (target) {
+                  const homeTarget = document.querySelector('[data-toc-id="home"]');
+                  if (homeTarget && homeTarget !== target) {
+                    homeTarget.classList.remove('text-foreground');
+                    homeTarget.classList.add('text-muted-foreground/70');
+                  }
+                  target.classList.remove('text-muted-foreground/70');
+                  target.classList.add('text-foreground');
+                }
+              }
+            } catch (e) {}
+          }).toString()})()`,
+        }}
+      />
     </div>
   );
 }

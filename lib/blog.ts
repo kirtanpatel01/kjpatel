@@ -51,7 +51,7 @@ export function getAllPosts(): BlogPost[] {
         updated: data.updated ? new Date(data.updated).toISOString().split("T")[0] : undefined,
         author: data.author || "Kirtan Patel",
         tags: Array.isArray(data.tags) ? data.tags : [],
-        cover: data.cover || "/images/blog/javascript-scope.jpg",
+        cover: data.cover || "/images/blog/cover/javascript-scope.svg",
         published: Boolean(data.published),
       };
 
@@ -89,7 +89,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       updated: data.updated ? new Date(data.updated).toISOString().split("T")[0] : undefined,
       author: data.author || "Kirtan Patel",
       tags: Array.isArray(data.tags) ? data.tags : [],
-      cover: data.cover || "/images/blog/javascript-scope.jpg",
+      cover: data.cover || "/images/blog/cover/javascript-scope.svg",
       published: Boolean(data.published),
     };
 

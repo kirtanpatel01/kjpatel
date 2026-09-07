@@ -3,7 +3,7 @@
 import emailjs from "emailjs-com";
 import { ArrowRight, MapPin, Globe, Mail, Clock } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   SectionContainer,
@@ -18,16 +18,62 @@ import {
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    from_name: "",
-    subject: "",
-    message: "",
+  const [formData, setFormData] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = sessionStorage.getItem("contact_form_draft");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            from_name: parsed.from_name || "",
+            subject: parsed.subject || "",
+            message: parsed.message || "",
+          };
+        }
+      } catch (e) {}
+    }
+    return {
+      from_name: "",
+      subject: "",
+      message: "",
+    };
   });
+
+  // Sync browser-restored DOM values after mount
+  useEffect(() => {
+    const emailEl = document.getElementById("contact-email-input") as HTMLInputElement | null;
+    const subjectEl = document.getElementById("contact-subject-input") as HTMLInputElement | null;
+    const messageEl = document.getElementById("contact-message-input") as HTMLTextAreaElement | null;
+
+    const domEmail = emailEl?.value || "";
+    const domSubject = subjectEl?.value || "";
+    const domMessage = messageEl?.value || "";
+
+    if (domEmail || domSubject || domMessage) {
+      setFormData((prev) => {
+        const updated = {
+          from_name: prev.from_name || domEmail,
+          subject: prev.subject || domSubject,
+          message: prev.message || domMessage,
+        };
+        try {
+          sessionStorage.setItem("contact_form_draft", JSON.stringify(updated));
+        } catch (e) {}
+        return updated;
+      });
+    }
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const updated = { ...formData, [e.target.name]: e.target.value };
+    setFormData(updated);
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("contact_form_draft", JSON.stringify(updated));
+      } catch (e) {}
+    }
   };
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +88,11 @@ export default function Contact() {
       () => {
         toast.success("Message sent successfully!");
         setFormData({ from_name: "", subject: "", message: "" });
+        if (typeof window !== "undefined") {
+          try {
+            sessionStorage.removeItem("contact_form_draft");
+          } catch (e) {}
+        }
         setLoading(false);
       },
       (error) => {
@@ -131,6 +182,7 @@ export default function Contact() {
         >
           <div className="group relative">
             <input
+              id="contact-email-input"
               type="email"
               name="from_name"
               required
@@ -144,6 +196,7 @@ export default function Contact() {
 
           <div className="group relative">
             <input
+              id="contact-subject-input"
               type="text"
               name="subject"
               placeholder="Subject"
@@ -156,6 +209,7 @@ export default function Contact() {
 
           <div className="group relative flex-grow">
             <textarea
+              id="contact-message-input"
               name="message"
               required
               rows={5}

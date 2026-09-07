@@ -74,27 +74,6 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-// Table of Contents generator from MDX content headings
-function extractHeadings(content: string) {
-  const headingRegex = /^##\s+(.+)$/gm;
-  const headings: { id: string; text: string }[] = [];
-  let match: RegExpExecArray | null = null;
-
-  while (true) {
-    match = headingRegex.exec(content);
-    if (match === null) break;
-
-    const text = match[1].trim();
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
-    headings.push({ id, text });
-  }
-
-  return headings;
-}
-
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -104,7 +83,6 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   const { frontmatter, content, readingTime } = post;
-  const headings = extractHeadings(content);
   const relatedPosts = getRelatedPosts(slug, frontmatter.tags, 2);
   const { prev, next } = getAdjacentPosts(slug);
 
@@ -211,27 +189,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </SectionContainer>
 
-        {/* Article Body + TOC Grid */}
+        {/* Article Body */}
         <SectionContainer className="p-4 sm:p-6">
-          {headings.length > 0 && (
-            <details className="mb-8 rounded-xl border border-border/80 bg-muted/20 p-4 text-sm">
-              <summary className="font-bold text-foreground cursor-pointer select-none">
-                Table of contents ({headings.length} sections)
-              </summary>
-              <ul className="mt-3 space-y-1.5 pl-4 border-l border-border">
-                {headings.map((h) => (
-                  <li key={h.id}>
-                    <a
-                      href={`#${h.id}`}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {h.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
 
           {/* MDX Content */}
           <div className="prose dark:prose-invert max-w-none">

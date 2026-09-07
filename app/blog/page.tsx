@@ -6,7 +6,6 @@ import { getAllPosts } from "@/lib/blog";
 import {
   PageContainer,
   SectionContainer,
-  SectionHeading,
 } from "@/components/responsive-wrappers";
 import { Badge } from "@/components/ui/badge";
 
@@ -122,8 +121,6 @@ export default function BlogListingPage() {
       {/* Other Posts Grid */}
       {otherPosts.length > 0 && (
         <SectionContainer id="all-posts" className="p-4 sm:p-6 space-y-4">
-          <SectionHeading>All Articles</SectionHeading>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {otherPosts.map((post) => (
               <article

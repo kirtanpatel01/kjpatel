@@ -18,7 +18,7 @@ import { Kbd } from "@/components/ui/kbd";
 import { clickSoftSound } from "@/lib/click-soft";
 
 export function AccentThemeRail() {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
   const [mounted, setMounted] = React.useState(false);
 
   const playSound = React.useCallback(() => {
@@ -80,57 +80,93 @@ export function AccentThemeRail() {
     playSound();
   };
 
-  if (!mounted) return null;
-
   return (
-    <div
-      aria-label="Color Theme Switcher"
-      className="hidden xl:flex fixed xl:left-14 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2.5 select-none"
-    >
-      <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
-        T
-      </Kbd>
+    <>
+      <div
+        id="accent-theme-rail"
+        aria-label="Color Theme Switcher"
+        className="hidden xl:flex fixed xl:left-14 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2.5 select-none"
+      >
+        <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
+          T
+        </Kbd>
 
-      <div className="w-3.5 h-px bg-border/60 my-0.5" />
+        <div className="w-3.5 h-px bg-border/60 my-0.5" />
 
-      {ACCENT_THEMES.map((theme) => {
-        const isActive = activeTheme === theme.id;
-        return (
-          <Tooltip key={theme.id} delayDuration={100}>
-            <TooltipTrigger asChild>
-              <button
-                onClick={() => handleSelect(theme.id)}
-                type="button"
-                aria-label={`Select ${theme.label} theme`}
-                className={cn(
-                  "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-all duration-200 outline-none",
-                  isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
-                )}
-              >
-                <span
+        {ACCENT_THEMES.map((theme) => {
+          const isActive = activeTheme === theme.id;
+          return (
+            <Tooltip key={theme.id} delayDuration={100}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => handleSelect(theme.id)}
+                  type="button"
+                  data-accent-btn={theme.id}
+                  suppressHydrationWarning
+                  aria-label={`Select ${theme.label} theme`}
                   className={cn(
-                    "w-3.5 h-3.5 rounded-full transition-all duration-200 shadow-xs",
-                    theme.dotColor,
-                    isActive
-                      ? `ring-2 ring-offset-2 ring-offset-background ${theme.ringColor}`
-                      : ""
+                    "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-all duration-200 outline-none",
+                    isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
                   )}
-                />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="right" sideOffset={12}>
-              <p className="text-xs font-medium tracking-wide">{theme.label}</p>
-            </TooltipContent>
-          </Tooltip>
-        );
-      })}
-    </div>
+                >
+                  <span
+                    data-accent-dot={theme.id}
+                    suppressHydrationWarning
+                    className={cn(
+                      "w-3.5 h-3.5 rounded-full transition-all duration-200 shadow-xs",
+                      theme.dotColor,
+                      isActive
+                        ? `ring-2 ring-offset-2 ring-offset-background ${theme.ringColor}`
+                        : ""
+                    )}
+                  />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={12}>
+                <p className="text-xs font-medium tracking-wide">{theme.label}</p>
+              </TooltipContent>
+            </Tooltip>
+          );
+        })}
+      </div>
+      {!mounted && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(${(() => {
+              try {
+                const saved = localStorage.getItem('accent_theme');
+                if (saved && saved !== 'zinc') {
+                  const rail = document.getElementById('accent-theme-rail');
+                  if (rail) {
+                    const defaultBtn = rail.querySelector('[data-accent-btn="zinc"]');
+                    const targetBtn = rail.querySelector('[data-accent-btn="' + saved + '"]');
+                    const defaultDot = rail.querySelector('[data-accent-dot="zinc"]');
+                    const targetDot = rail.querySelector('[data-accent-dot="' + saved + '"]');
+                    if (defaultBtn) { defaultBtn.classList.remove('opacity-100'); defaultBtn.classList.add('opacity-60'); }
+                    if (targetBtn) { targetBtn.classList.remove('opacity-60'); targetBtn.classList.add('opacity-100'); }
+                    const ringMap: Record<string, string> = {
+                      orange: 'ring-orange-500',
+                      sky: 'ring-sky-500',
+                      rose: 'ring-rose-500',
+                      teal: 'ring-teal-500'
+                    };
+                    if (defaultDot) defaultDot.className = defaultDot.className.replace(/ring-2 ring-offset-2 ring-offset-background ring-\\S+/g, '');
+                    if (targetDot && ringMap[saved]) {
+                      targetDot.className += ' ring-2 ring-offset-2 ring-offset-background ' + ringMap[saved];
+                    }
+                  }
+                }
+              } catch (e) {}
+            }).toString()})()`,
+          }}
+        />
+      )}
+    </>
   );
 }
 
 export function AccentThemeSelectorInline({ className }: { className?: string }) {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
-  const [mounted, setMounted] = React.useState(false);
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
 
   const playSound = React.useCallback(() => {
     if (typeof window === "undefined") return;
@@ -139,7 +175,6 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
   }, []);
 
   React.useEffect(() => {
-    setMounted(true);
     const initial = getStoredAccentTheme();
     setActiveTheme(initial);
 
@@ -158,8 +193,6 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
     applyAccentTheme(themeId);
     playSound();
   };
-
-  if (!mounted) return null;
 
   return (
     <div className={cn("flex items-center gap-2 select-none", className)}>
@@ -205,8 +238,7 @@ import {
 } from "@/components/ui/popover";
 
 export function AccentThemePopover({ className }: { className?: string }) {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>("zinc");
-  const [mounted, setMounted] = React.useState(false);
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
   const [open, setOpen] = React.useState(false);
 
   const playSound = React.useCallback(() => {
@@ -216,7 +248,6 @@ export function AccentThemePopover({ className }: { className?: string }) {
   }, []);
 
   React.useEffect(() => {
-    setMounted(true);
     const initial = getStoredAccentTheme();
     setActiveTheme(initial);
 
@@ -236,12 +267,6 @@ export function AccentThemePopover({ className }: { className?: string }) {
     playSound();
     setOpen(false);
   };
-
-  if (!mounted) {
-    return (
-      <div className={cn("h-8 w-8 shrink-0 rounded-full border border-border/50", className)} />
-    );
-  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
