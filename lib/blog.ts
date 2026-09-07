@@ -48,7 +48,9 @@ export function getAllPosts(): BlogPost[] {
         title: data.title || "Untitled Post",
         description: data.description || "",
         date: data.date ? new Date(data.date).toISOString().split("T")[0] : "",
-        updated: data.updated ? new Date(data.updated).toISOString().split("T")[0] : undefined,
+        updated: data.updated
+          ? new Date(data.updated).toISOString().split("T")[0]
+          : undefined,
         author: data.author || "Kirtan Patel",
         tags: Array.isArray(data.tags) ? data.tags : [],
         cover: data.cover || "/images/blog/cover/javascript-scope.svg",
@@ -63,7 +65,11 @@ export function getAllPosts(): BlogPost[] {
       };
     })
     .filter((post) => post.frontmatter.published)
-    .sort((a, b) => (new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()));
+    .sort(
+      (a, b) =>
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime(),
+    );
 
   return posts;
 }
@@ -73,7 +79,11 @@ export function getPostBySlug(slug: string): BlogPost | null {
     const mdxPath = path.join(BLOG_DIRECTORY, `${slug}.mdx`);
     const mdPath = path.join(BLOG_DIRECTORY, `${slug}.md`);
 
-    const fullPath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null;
+    const fullPath = fs.existsSync(mdxPath)
+      ? mdxPath
+      : fs.existsSync(mdPath)
+        ? mdPath
+        : null;
 
     if (!fullPath) {
       return null;
@@ -86,7 +96,9 @@ export function getPostBySlug(slug: string): BlogPost | null {
       title: data.title || "Untitled Post",
       description: data.description || "",
       date: data.date ? new Date(data.date).toISOString().split("T")[0] : "",
-      updated: data.updated ? new Date(data.updated).toISOString().split("T")[0] : undefined,
+      updated: data.updated
+        ? new Date(data.updated).toISOString().split("T")[0]
+        : undefined,
       author: data.author || "Kirtan Patel",
       tags: Array.isArray(data.tags) ? data.tags : [],
       cover: data.cover || "/images/blog/cover/javascript-scope.svg",
@@ -104,14 +116,20 @@ export function getPostBySlug(slug: string): BlogPost | null {
   }
 }
 
-export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2): BlogPost[] {
+export function getRelatedPosts(
+  currentSlug: string,
+  tags: string[],
+  limit = 2,
+): BlogPost[] {
   const allPosts = getAllPosts().filter((post) => post.slug !== currentSlug);
 
   if (allPosts.length === 0) return [];
 
   // Sort by matching tag count, then date
   const scoredPosts = allPosts.map((post) => {
-    const matchingTags = post.frontmatter.tags.filter((tag) => tags.includes(tag)).length;
+    const matchingTags = post.frontmatter.tags.filter((tag) =>
+      tags.includes(tag),
+    ).length;
     return { post, score: matchingTags };
   });
 
@@ -119,13 +137,19 @@ export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2):
     if (b.score !== a.score) {
       return b.score - a.score;
     }
-    return new Date(b.post.frontmatter.date).getTime() - new Date(a.post.frontmatter.date).getTime();
+    return (
+      new Date(b.post.frontmatter.date).getTime() -
+      new Date(a.post.frontmatter.date).getTime()
+    );
   });
 
   return scoredPosts.slice(0, limit).map((sp) => sp.post);
 }
 
-export function getAdjacentPosts(currentSlug: string): { prev: BlogPost | null; next: BlogPost | null } {
+export function getAdjacentPosts(currentSlug: string): {
+  prev: BlogPost | null;
+  next: BlogPost | null;
+} {
   const posts = getAllPosts();
   const index = posts.findIndex((p) => p.slug === currentSlug);
 

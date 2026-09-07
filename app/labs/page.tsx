@@ -46,13 +46,14 @@ function LabsPage() {
             My lab is coming soon.
           </h1>
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            I&apos;m shaping a few practical experiments and interface ideas here — small
-            systems, UI patterns, and creative prototypes that I keep refining.
+            I&apos;m shaping a few practical experiments and interface ideas
+            here — small systems, UI patterns, and creative prototypes that I
+            keep refining.
           </p>
           <div className="rounded-2xl border border-dashed border-foreground/20 bg-secondary/20 p-4 sm:p-5">
             <p className="text-sm sm:text-base text-foreground/80">
-              The live experiments are still being assembled, but the ideas are already
-              taking shape in the work and projects I build every day.
+              The live experiments are still being assembled, but the ideas are
+              already taking shape in the work and projects I build every day.
             </p>
           </div>
         </div>

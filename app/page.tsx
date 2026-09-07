@@ -52,10 +52,8 @@ export default async function Home() {
         <div className="mt-4 max-w-3xl space-y-2 leading-relaxed text-foreground/90 tracking-wide text-sm sm:text-base">
           <p>
             I&apos;m{" "}
-            <span className="font-semibold text-foreground">
-              Kirtan Patel
-            </span>
-            , a Full Stack Developer building production-ready web applications
+            <span className="font-semibold text-foreground">Kirtan Patel</span>,
+            a Full Stack Developer building production-ready web applications
             with Next.js, TypeScript, and modern cloud tooling.
           </p>
           <p>

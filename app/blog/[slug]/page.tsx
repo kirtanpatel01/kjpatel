@@ -191,7 +191,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Article Body */}
         <SectionContainer className="p-4 sm:p-6">
-
           {/* MDX Content */}
           <div className="prose dark:prose-invert max-w-none">
             <MDXRemote

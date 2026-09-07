@@ -14,9 +14,7 @@ export function SidebarTOCContent() {
           fileData={sidebarTocFiles}
           codeMapping={sidebarTocCode}
           previewComponent={
-            <div className="">
-              {/* TODO: Render actual component */}
-            </div>
+            <div className="">{/* TODO: Render actual component */}</div>
           }
           defaultFilePath="components/sidebar-toc.tsx"
           defaultFileNode={{ name: "sidebar-toc.tsx", type: "file" }}

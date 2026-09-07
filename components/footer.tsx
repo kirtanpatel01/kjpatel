@@ -61,8 +61,9 @@ export default function Footer() {
       {/* Back to Top */}
       <button
         onClick={scrollToTop}
+        type="button"
         aria-label="Back to top"
-        className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer shrink-0 text-xs font-medium"
+        className="relative flex items-center gap-1.5 hover:text-foreground transition-[color,transform] active:scale-[0.96] cursor-pointer shrink-0 text-xs font-medium after:absolute after:-inset-2 after:content-['']"
       >
         <span className="hidden sm:inline">Top</span>
         <ArrowUp className="w-3.5 h-3.5" />

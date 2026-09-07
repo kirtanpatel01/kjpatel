@@ -41,9 +41,15 @@ export default function Contact() {
 
   // Sync browser-restored DOM values after mount
   useEffect(() => {
-    const emailEl = document.getElementById("contact-email-input") as HTMLInputElement | null;
-    const subjectEl = document.getElementById("contact-subject-input") as HTMLInputElement | null;
-    const messageEl = document.getElementById("contact-message-input") as HTMLTextAreaElement | null;
+    const emailEl = document.getElementById(
+      "contact-email-input",
+    ) as HTMLInputElement | null;
+    const subjectEl = document.getElementById(
+      "contact-subject-input",
+    ) as HTMLInputElement | null;
+    const messageEl = document.getElementById(
+      "contact-message-input",
+    ) as HTMLTextAreaElement | null;
 
     const domEmail = emailEl?.value || "";
     const domSubject = subjectEl?.value || "";
@@ -124,18 +130,18 @@ export default function Contact() {
 
           <div className="space-y-2.5 text-sm sm:text-base">
             <div className="flex items-center gap-3 text-foreground/90">
-              <MapPin className="w-5 h-5 shrink-0 stroke-1" />
+              <MapPin className="w-5 h-5 shrink-0 stroke-[1.5]" />
               <div>
                 Vadodara,{" "}
                 <span className="text-muted-foreground">Gujarat, India</span>
               </div>
             </div>
             <div className="flex items-center gap-3 text-foreground/90">
-              <Globe className="w-5 h-5 shrink-0 stroke-1" />
+              <Globe className="w-5 h-5 shrink-0 stroke-[1.5]" />
               <span>Remote Friendly</span>
             </div>
             <div className="flex items-center gap-3 text-foreground/95 hover:text-foreground">
-              <Mail className="w-5 h-5 shrink-0 stroke-1" />
+              <Mail className="w-5 h-5 shrink-0 stroke-[1.5]" />
               <a
                 href="mailto:kjptel200022@gmail.com"
                 className="hover:underline underline-offset-4 font-semibold"
@@ -144,8 +150,11 @@ export default function Contact() {
               </a>
             </div>
             <div className="flex items-center gap-3 text-foreground/90">
-              <Clock className="w-5 h-5 shrink-0 stroke-1" />
-              <span>Usually replies within 24 hours</span>
+              <Clock className="w-5 h-5 shrink-0 stroke-[1.5]" />
+              <span>
+                Usually replies within <span className="tabular-nums">24</span>{" "}
+                hours
+              </span>
             </div>
           </div>
 
@@ -161,9 +170,9 @@ export default function Contact() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-foreground/80 hover:text-foreground hover:border-border/80 group transition-all duration-200"
+                      className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-foreground/80 hover:text-foreground group transition-colors duration-200"
                     >
-                      <Icon className="w-6 h-6 text-foreground/80 group-hover:text-foreground transition-all duration-200" />
+                      <Icon className="w-6 h-6 text-foreground/80 group-hover:text-foreground transition-colors duration-200" />
                     </a>
                   </TooltipTrigger>
                   <TooltipContent side="top" sideOffset={6}>

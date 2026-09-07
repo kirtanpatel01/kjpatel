@@ -96,5 +96,3 @@ export const work: Project[] = [
     githubLink: null,
   },
 ];
-
-

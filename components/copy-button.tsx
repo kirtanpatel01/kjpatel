@@ -3,6 +3,7 @@
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { AnimatePresence, motion } from "motion/react";
 
 interface CopyButtonProps {
   code: string;
@@ -27,19 +28,35 @@ export function CopyButton({ code }: CopyButtonProps) {
       onClick={handleCopy}
       type="button"
       aria-label="Copy code to clipboard"
-      className="flex items-center gap-1 px-2 py-1 text-xs font-mono rounded bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors border border-border/50 cursor-pointer"
+      className="relative flex items-center gap-1.5 px-2 py-1 text-xs font-mono rounded bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-[color,background-color,transform] active:scale-[0.96] border border-border/50 cursor-pointer after:absolute after:-inset-1.5 after:content-['']"
     >
-      {copied ? (
-        <>
-          <Check className="w-3.5 h-3.5 text-emerald-500" />
-          <span className="text-emerald-500">Copied!</span>
-        </>
-      ) : (
-        <>
-          <Copy className="w-3.5 h-3.5" />
-          <span>Copy</span>
-        </>
-      )}
+      <AnimatePresence mode="wait" initial={false}>
+        {copied ? (
+          <motion.span
+            key="check"
+            initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+            className="flex items-center gap-1 text-emerald-500 font-medium"
+          >
+            <Check className="w-3.5 h-3.5" />
+            <span>Copied!</span>
+          </motion.span>
+        ) : (
+          <motion.span
+            key="copy"
+            initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+            className="flex items-center gap-1"
+          >
+            <Copy className="w-3.5 h-3.5" />
+            <span>Copy</span>
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   );
 }

@@ -1,6 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValue, animate, MotionValue } from "motion/react";
@@ -18,10 +25,30 @@ const tocItems: TOCItemData[] = [
   { id: "home", label: "Home", href: "#home", level: 0 },
   { id: "skills", label: "Tech", href: "#skills", level: 0 },
   { id: "work", label: "Work", href: "#work", level: 0 },
-  { id: "work-trackmark", label: "Trackmark", href: "#work-trackmark", level: 1 },
-  { id: "work-homizo-admin", label: "Homizo Admin", href: "#work-homizo-admin", level: 1 },
-  { id: "work-quickswap-admin", label: "QuickSwap Admin", href: "#work-quickswap-admin", level: 1 },
-  { id: "work-algorion-ai", label: "Algorion AI", href: "#work-algorion-ai", level: 1 },
+  {
+    id: "work-trackmark",
+    label: "Trackmark",
+    href: "#work-trackmark",
+    level: 1,
+  },
+  {
+    id: "work-homizo-admin",
+    label: "Homizo Admin",
+    href: "#work-homizo-admin",
+    level: 1,
+  },
+  {
+    id: "work-quickswap-admin",
+    label: "QuickSwap Admin",
+    href: "#work-quickswap-admin",
+    level: 1,
+  },
+  {
+    id: "work-algorion-ai",
+    label: "Algorion AI",
+    href: "#work-algorion-ai",
+    level: 1,
+  },
   { id: "experience", label: "Experience", href: "#experience", level: 0 },
   { id: "contact", label: "Contact", href: "#contact", level: 0 },
 ];
@@ -34,9 +61,13 @@ interface TOCContextType {
   points: { x: number; y: number }[];
   totalPathLength: number;
   registerRef: (id: string, el: HTMLDivElement | null) => void;
-  handleClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string, targetId: string) => void;
+  handleClick: (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    targetId: string,
+  ) => void;
   containerRef: React.RefObject<HTMLDivElement | null>;
-  
+
   // Motion values
   diamondX: MotionValue<number>;
   diamondY: MotionValue<number>;
@@ -61,7 +92,10 @@ function useTOC() {
 }
 
 // Helper functions for path calculations
-const getSegmentLength = (p1: { x: number; y: number }, p2: { x: number; y: number }) => {
+const getSegmentLength = (
+  p1: { x: number; y: number },
+  p2: { x: number; y: number },
+) => {
   if (Math.abs(p1.x - p2.x) < 1) {
     return Math.abs(p2.y - p1.y);
   } else {
@@ -70,9 +104,11 @@ const getSegmentLength = (p1: { x: number; y: number }, p2: { x: number; y: numb
     const yMid = p1.y + dy * 0.5;
     const yStart = yMid - transitionHeight * 0.5;
     const yEnd = yMid + transitionHeight * 0.5;
-    
+
     const v1 = yStart - p1.y;
-    const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
+    const diag = Math.sqrt(
+      Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2),
+    );
     const v2 = p2.y - yEnd;
     return v1 + diag + v2;
   }
@@ -87,15 +123,15 @@ const getPointOnPath = (dist: number, pts: { x: number; y: number }[]) => {
     const p1 = pts[i - 1];
     const p2 = pts[i];
     const segLen = getSegmentLength(p1, p2);
-    
+
     if (accumulatedDist + segLen >= dist) {
       const localDist = dist - accumulatedDist;
-      
+
       if (Math.abs(p1.x - p2.x) < 1) {
         const ratio = localDist / segLen;
         return {
           x: p1.x,
-          y: p1.y + (p2.y - p1.y) * ratio
+          y: p1.y + (p2.y - p1.y) * ratio,
         };
       } else {
         const dy = p2.y - p1.y;
@@ -103,10 +139,12 @@ const getPointOnPath = (dist: number, pts: { x: number; y: number }[]) => {
         const yMid = p1.y + dy * 0.5;
         const yStart = yMid - transitionHeight * 0.5;
         const yEnd = yMid + transitionHeight * 0.5;
-        
+
         const v1 = yStart - p1.y;
-        const diag = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2));
-        
+        const diag = Math.sqrt(
+          Math.pow(p2.x - p1.x, 2) + Math.pow(yEnd - yStart, 2),
+        );
+
         if (localDist <= v1) {
           return { x: p1.x, y: p1.y + localDist };
         } else if (localDist <= v1 + diag) {
@@ -114,7 +152,7 @@ const getPointOnPath = (dist: number, pts: { x: number; y: number }[]) => {
           const ratio = diagDist / diag;
           return {
             x: p1.x + (p2.x - p1.x) * ratio,
-            y: yStart + (yEnd - yStart) * ratio
+            y: yStart + (yEnd - yStart) * ratio,
           };
         } else {
           const v2Dist = localDist - v1 - diag;
@@ -198,7 +236,7 @@ function TOC({
 
   // Dashoffset to keep a trailing segment behind the diamond (controlled dynamically)
   const strokeDashoffset = useMotionValue(tailLength);
-  
+
   // Using a very large gap (9999) to completely prevent the browser from repeating the dash
   const strokeDasharray = `${tailLength} 9999`;
 
@@ -225,7 +263,7 @@ function TOC({
 
       // Find the active section by scanning all TOC items and selecting the last one that has scrolled past the focus line
       let currentSection = "home";
-      
+
       for (const item of items) {
         const element = document.getElementById(item.id);
         if (element) {
@@ -282,7 +320,7 @@ function TOC({
 
   useEffect(() => {
     updatePoints();
-    
+
     // Set up a resize observer on the container
     if (!containerRef.current) return;
     const observer = new ResizeObserver(() => {
@@ -300,7 +338,11 @@ function TOC({
   }, [updatePoints]);
 
   // Smooth scroll handler
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, targetId: string) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    targetId: string,
+  ) => {
     if (isHomePage && href.startsWith("#")) {
       e.preventDefault();
       const element = document.getElementById(targetId);
@@ -309,7 +351,8 @@ function TOC({
         setActiveSection(targetId);
         activeSectionRef.current = targetId;
 
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - headerOffset;
 
         window.scrollTo({
@@ -328,7 +371,8 @@ function TOC({
 
   // Pre-calculate path lengths and sub-item distances using pure JS math for stability
   useEffect(() => {
-    if (points.length === 0 || points.every(p => p.x === 0 && p.y === 0)) return;
+    if (points.length === 0 || points.every((p) => p.x === 0 && p.y === 0))
+      return;
 
     // Calculate total path length
     let totalLen = 0;
@@ -351,8 +395,15 @@ function TOC({
 
   // Set diamond and tail positions immediately when points are first measured
   useEffect(() => {
-    if (points.length > 0 && points[0].x !== 0 && distanceMotionValue.get() === 0) {
-      const initialIdx = items.findIndex((item) => item.id === activeSectionRef.current || item.id === activeSection);
+    if (
+      points.length > 0 &&
+      points[0].x !== 0 &&
+      distanceMotionValue.get() === 0
+    ) {
+      const initialIdx = items.findIndex(
+        (item) =>
+          item.id === activeSectionRef.current || item.id === activeSection,
+      );
       const targetIdx = initialIdx >= 0 ? initialIdx : 0;
       const initialDist = itemDistances[targetIdx] || 0;
 
@@ -364,17 +415,34 @@ function TOC({
       tailY.set(initialPoint.y);
       strokeDashoffset.set(tailLength);
     }
-  }, [points, itemDistances, activeSection, diamondX, diamondY, tailX, tailY, strokeDashoffset, distanceMotionValue, tailLength, items]);
+  }, [
+    points,
+    itemDistances,
+    activeSection,
+    diamondX,
+    diamondY,
+    tailX,
+    tailY,
+    strokeDashoffset,
+    distanceMotionValue,
+    tailLength,
+    items,
+  ]);
 
   // Animate the active distance value and update diamond & tail positions along path geometry
   const activeIndex = items.findIndex((item) => item.id === activeSection);
 
   useEffect(() => {
-    if (activeIndex < 0 || itemDistances.length === 0 || itemDistances.length <= activeIndex) return;
+    if (
+      activeIndex < 0 ||
+      itemDistances.length === 0 ||
+      itemDistances.length <= activeIndex
+    )
+      return;
     const target = itemDistances[activeIndex];
     const current = distanceMotionValue.get();
     const movingForward = target >= current;
-    
+
     const controls = animate(distanceMotionValue, target, {
       type: "spring",
       stiffness: 90,
@@ -400,30 +468,44 @@ function TOC({
             strokeDashoffset.set(-latest);
           }
         }
-      }
+      },
     });
-    
+
     return () => controls.stop();
-  }, [activeIndex, itemDistances, diamondX, diamondY, tailX, tailY, strokeDashoffset, distanceMotionValue, totalPathLength, points, tailLength]);
+  }, [
+    activeIndex,
+    itemDistances,
+    diamondX,
+    diamondY,
+    tailX,
+    tailY,
+    strokeDashoffset,
+    distanceMotionValue,
+    totalPathLength,
+    points,
+    tailLength,
+  ]);
 
   return (
-    <TOCContext.Provider value={{
-      activeSection,
-      setActiveSection,
-      points,
-      totalPathLength,
-      registerRef,
-      handleClick,
-      containerRef,
-      diamondX,
-      diamondY,
-      tailX,
-      tailY,
-      strokeDashoffset,
-      strokeDasharray,
-      isHomePage,
-      tailLength,
-    }}>
+    <TOCContext.Provider
+      value={{
+        activeSection,
+        setActiveSection,
+        points,
+        totalPathLength,
+        registerRef,
+        handleClick,
+        containerRef,
+        diamondX,
+        diamondY,
+        tailX,
+        tailY,
+        strokeDashoffset,
+        strokeDasharray,
+        isHomePage,
+        tailLength,
+      }}
+    >
       {children}
     </TOCContext.Provider>
   );
@@ -438,7 +520,12 @@ interface TOCHeaderProps {
 
 function TOCHeader({ children, className }: TOCHeaderProps) {
   return (
-    <div className={cn("flex items-center gap-2 font-semibold pl-2 text-sm", className)}>
+    <div
+      className={cn(
+        "flex items-center gap-2 font-semibold pl-2 text-sm",
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -454,7 +541,10 @@ interface TOCListProps {
 function TOCList({ children, className }: TOCListProps) {
   const { containerRef } = useTOC();
   return (
-    <div ref={containerRef} className={cn("relative flex flex-col py-1", className)}>
+    <div
+      ref={containerRef}
+      className={cn("relative flex flex-col py-1", className)}
+    >
       {children}
     </div>
   );
@@ -477,8 +567,8 @@ function TOCConnector() {
   // Generate SVG Path
   const generatePath = (pts: { x: number; y: number }[]) => {
     if (pts.length === 0) return "";
-    if (pts.every(p => p.x === 0 && p.y === 0)) return "";
-    
+    if (pts.every((p) => p.x === 0 && p.y === 0)) return "";
+
     let d = `M ${pts[0].x} ${pts[0].y}`;
     for (let i = 1; i < pts.length; i++) {
       const p1 = pts[i - 1];
@@ -491,7 +581,7 @@ function TOCConnector() {
         const yMid = p1.y + dy * 0.5;
         const yStart = yMid - transitionHeight * 0.5;
         const yEnd = yMid + transitionHeight * 0.5;
-        
+
         d += ` L ${p1.x} ${yStart}`;
         d += ` L ${p2.x} ${yEnd}`;
         d += ` L ${p2.x} ${p2.y}`;
@@ -505,7 +595,10 @@ function TOCConnector() {
   if (points.length === 0) return null;
 
   return (
-    <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      aria-hidden="true"
+    >
       <defs>
         {/* Dynamic linear gradient tracking the active trail */}
         <motion.linearGradient
@@ -531,7 +624,7 @@ function TOCConnector() {
           strokeLinecap="round"
         />
       )}
-      
+
       {/* Active trailing line */}
       {backgroundPath && (
         <motion.path
@@ -582,12 +675,7 @@ interface TOCItemProps {
 }
 
 function TOCItem({ id, href, level, children }: TOCItemProps) {
-  const {
-    activeSection,
-    registerRef,
-    handleClick,
-    isHomePage,
-  } = useTOC();
+  const { activeSection, registerRef, handleClick, isHomePage } = useTOC();
 
   const isActive = activeSection === id;
 
@@ -595,7 +683,7 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
     <div
       className={cn(
         "relative py-1 flex items-center transition-all duration-300",
-        level === 0 ? "pl-6" : "pl-12"
+        level === 0 ? "pl-6" : "pl-12",
       )}
     >
       {/* Invisible measurement point registered to the parent context */}
@@ -605,7 +693,7 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
         }}
         className="absolute left-2 w-1.5 h-1.5 pointer-events-none opacity-0"
         style={{
-          left: level === 0 ? "8px" : "28px"
+          left: level === 0 ? "8px" : "28px",
         }}
       />
 
@@ -618,7 +706,7 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
           "text-sm tracking-wide font-des font-medium transition-colors duration-200 py-0.5",
           isActive
             ? "text-foreground"
-            : "text-muted-foreground/70 hover:text-foreground"
+            : "text-muted-foreground/70 hover:text-foreground",
         )}
       >
         {children}
@@ -631,7 +719,10 @@ function TOCItem({ id, href, level, children }: TOCItemProps) {
 
 export default function SidebarTOC() {
   return (
-    <div id="sidebar-toc-container" className="flex flex-col gap-4 sticky top-24 select-none">
+    <div
+      id="sidebar-toc-container"
+      className="flex flex-col gap-4 sticky top-24 select-none"
+    >
       <TOC items={tocItems} headerOffset={80} focusLine={50} tailLength={80}>
         <TOCHeader>
           <AlignLeft className="w-3.5 h-3.5" />
@@ -640,9 +731,14 @@ export default function SidebarTOC() {
 
         <TOCList>
           <TOCConnector />
-          
+
           {tocItems.map((item) => (
-            <TOCItem key={item.id} id={item.id} href={item.href} level={item.level}>
+            <TOCItem
+              key={item.id}
+              id={item.id}
+              href={item.href}
+              level={item.level}
+            >
               {item.label}
             </TOCItem>
           ))}
@@ -650,34 +746,33 @@ export default function SidebarTOC() {
       </TOC>
       <script
         dangerouslySetInnerHTML={{
-          __html: `(${(() => {
-            try {
-              if (window.location.hash) {
-                const hash = window.location.hash.replace('#', '');
-                const target = document.querySelector('[data-toc-id="' + hash + '"]');
-                if (target) {
-                  const homeTarget = document.querySelector('[data-toc-id="home"]');
-                  if (homeTarget && homeTarget !== target) {
-                    homeTarget.classList.remove('text-foreground');
-                    homeTarget.classList.add('text-muted-foreground/70');
+          __html: `(${(
+            () => {
+              try {
+                if (window.location.hash) {
+                  const hash = window.location.hash.replace("#", "");
+                  const target = document.querySelector(
+                    '[data-toc-id="' + hash + '"]',
+                  );
+                  if (target) {
+                    const homeTarget = document.querySelector(
+                      '[data-toc-id="home"]',
+                    );
+                    if (homeTarget && homeTarget !== target) {
+                      homeTarget.classList.remove("text-foreground");
+                      homeTarget.classList.add("text-muted-foreground/70");
+                    }
+                    target.classList.remove("text-muted-foreground/70");
+                    target.classList.add("text-foreground");
                   }
-                  target.classList.remove('text-muted-foreground/70');
-                  target.classList.add('text-foreground');
                 }
-              }
-            } catch (e) {}
-          }).toString()})()`,
+              } catch (e) {}
+            }
+          ).toString()})()`,
         }}
       />
     </div>
   );
 }
 
-export {
-  TOC,
-  TOCHeader,
-  TOCList,
-  TOCItem,
-  TOCConnector,
-  useTOC,
-};
+export { TOC, TOCHeader, TOCList, TOCItem, TOCConnector, useTOC };

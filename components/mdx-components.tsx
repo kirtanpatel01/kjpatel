@@ -55,14 +55,23 @@ function getTextContent(children: React.ReactNode): string {
   if (typeof children === "string") return children;
   if (typeof children === "number") return String(children);
   if (Array.isArray(children)) return children.map(getTextContent).join("");
-  if (React.isValidElement(children) && (children.props as { children?: React.ReactNode })?.children) {
-    return getTextContent((children.props as { children?: React.ReactNode }).children);
+  if (
+    React.isValidElement(children) &&
+    (children.props as { children?: React.ReactNode })?.children
+  ) {
+    return getTextContent(
+      (children.props as { children?: React.ReactNode }).children,
+    );
   }
   return "";
 }
 
 export const mdxComponents = {
-  h1: ({ children, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+  h1: ({
+    children,
+    id,
+    ...props
+  }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const headingId = id || slugify(getTextContent(children));
     return (
       <h1
@@ -216,10 +225,7 @@ export const mdxComponents = {
     ...props
   }: React.TableHTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-x-auto rounded-lg border border-border">
-      <table
-        className="w-full text-left text-xs sm:text-sm"
-        {...props}
-      >
+      <table className="w-full text-left text-xs sm:text-sm" {...props}>
         {children}
       </table>
     </div>

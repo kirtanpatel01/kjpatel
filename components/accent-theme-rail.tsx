@@ -18,7 +18,9 @@ import { Kbd } from "@/components/ui/kbd";
 import { clickSoftSound } from "@/lib/click-soft";
 
 export function AccentThemeRail() {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() =>
+    getStoredAccentTheme(),
+  );
   const [mounted, setMounted] = React.useState(false);
 
   const playSound = React.useCallback(() => {
@@ -105,25 +107,27 @@ export function AccentThemeRail() {
                   suppressHydrationWarning
                   aria-label={`Select ${theme.label} theme`}
                   className={cn(
-                    "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-all duration-200 outline-none",
-                    isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
+                    "relative group flex items-center justify-center p-1 rounded-full cursor-pointer transition-[opacity,transform] duration-200 active:scale-[0.96] outline-none after:absolute after:-inset-2.5 after:content-['']",
+                    isActive ? "opacity-100" : "opacity-60 hover:opacity-100",
                   )}
                 >
                   <span
                     data-accent-dot={theme.id}
                     suppressHydrationWarning
                     className={cn(
-                      "w-3.5 h-3.5 rounded-full transition-all duration-200 shadow-xs",
+                      "w-3.5 h-3.5 rounded-full transition-[box-shadow,ring-color] duration-200 shadow-xs",
                       theme.dotColor,
                       isActive
                         ? `ring-2 ring-offset-2 ring-offset-background ${theme.ringColor}`
-                        : ""
+                        : "",
                     )}
                   />
                 </button>
               </TooltipTrigger>
               <TooltipContent side="right" sideOffset={12}>
-                <p className="text-xs font-medium tracking-wide">{theme.label}</p>
+                <p className="text-xs font-medium tracking-wide">
+                  {theme.label}
+                </p>
               </TooltipContent>
             </Tooltip>
           );
@@ -132,32 +136,54 @@ export function AccentThemeRail() {
       {!mounted && (
         <script
           dangerouslySetInnerHTML={{
-            __html: `(${(() => {
-              try {
-                const saved = localStorage.getItem('accent_theme');
-                if (saved && saved !== 'zinc') {
-                  const rail = document.getElementById('accent-theme-rail');
-                  if (rail) {
-                    const defaultBtn = rail.querySelector('[data-accent-btn="zinc"]');
-                    const targetBtn = rail.querySelector('[data-accent-btn="' + saved + '"]');
-                    const defaultDot = rail.querySelector('[data-accent-dot="zinc"]');
-                    const targetDot = rail.querySelector('[data-accent-dot="' + saved + '"]');
-                    if (defaultBtn) { defaultBtn.classList.remove('opacity-100'); defaultBtn.classList.add('opacity-60'); }
-                    if (targetBtn) { targetBtn.classList.remove('opacity-60'); targetBtn.classList.add('opacity-100'); }
-                    const ringMap: Record<string, string> = {
-                      orange: 'ring-orange-500',
-                      sky: 'ring-sky-500',
-                      rose: 'ring-rose-500',
-                      teal: 'ring-teal-500'
-                    };
-                    if (defaultDot) defaultDot.className = defaultDot.className.replace(/ring-2 ring-offset-2 ring-offset-background ring-\\S+/g, '');
-                    if (targetDot && ringMap[saved]) {
-                      targetDot.className += ' ring-2 ring-offset-2 ring-offset-background ' + ringMap[saved];
+            __html: `(${(
+              () => {
+                try {
+                  const saved = localStorage.getItem("accent_theme");
+                  if (saved && saved !== "zinc") {
+                    const rail = document.getElementById("accent-theme-rail");
+                    if (rail) {
+                      const defaultBtn = rail.querySelector(
+                        '[data-accent-btn="zinc"]',
+                      );
+                      const targetBtn = rail.querySelector(
+                        '[data-accent-btn="' + saved + '"]',
+                      );
+                      const defaultDot = rail.querySelector(
+                        '[data-accent-dot="zinc"]',
+                      );
+                      const targetDot = rail.querySelector(
+                        '[data-accent-dot="' + saved + '"]',
+                      );
+                      if (defaultBtn) {
+                        defaultBtn.classList.remove("opacity-100");
+                        defaultBtn.classList.add("opacity-60");
+                      }
+                      if (targetBtn) {
+                        targetBtn.classList.remove("opacity-60");
+                        targetBtn.classList.add("opacity-100");
+                      }
+                      const ringMap: Record<string, string> = {
+                        orange: "ring-orange-500",
+                        sky: "ring-sky-500",
+                        rose: "ring-rose-500",
+                        teal: "ring-teal-500",
+                      };
+                      if (defaultDot)
+                        defaultDot.className = defaultDot.className.replace(
+                          /ring-2 ring-offset-2 ring-offset-background ring-\\S+/g,
+                          "",
+                        );
+                      if (targetDot && ringMap[saved]) {
+                        targetDot.className +=
+                          " ring-2 ring-offset-2 ring-offset-background " +
+                          ringMap[saved];
+                      }
                     }
                   }
-                }
-              } catch (e) {}
-            }).toString()})()`,
+                } catch (e) {}
+              }
+            ).toString()})()`,
           }}
         />
       )}
@@ -165,8 +191,14 @@ export function AccentThemeRail() {
   );
 }
 
-export function AccentThemeSelectorInline({ className }: { className?: string }) {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
+export function AccentThemeSelectorInline({
+  className,
+}: {
+  className?: string;
+}) {
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() =>
+    getStoredAccentTheme(),
+  );
 
   const playSound = React.useCallback(() => {
     if (typeof window === "undefined") return;
@@ -211,7 +243,7 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
             aria-label={`Select ${theme.label} theme`}
             className={cn(
               "p-0.5 rounded-full cursor-pointer transition-all duration-200 outline-none",
-              isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
+              isActive ? "opacity-100" : "opacity-60 hover:opacity-100",
             )}
           >
             <span
@@ -220,7 +252,7 @@ export function AccentThemeSelectorInline({ className }: { className?: string })
                 theme.dotColor,
                 isActive
                   ? `ring-2 ring-offset-1 ring-offset-background ${theme.ringColor}`
-                  : ""
+                  : "",
               )}
             />
           </button>
@@ -238,7 +270,9 @@ import {
 } from "@/components/ui/popover";
 
 export function AccentThemePopover({ className }: { className?: string }) {
-  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() => getStoredAccentTheme());
+  const [activeTheme, setActiveTheme] = React.useState<AccentTheme>(() =>
+    getStoredAccentTheme(),
+  );
   const [open, setOpen] = React.useState(false);
 
   const playSound = React.useCallback(() => {
@@ -275,8 +309,8 @@ export function AccentThemePopover({ className }: { className?: string }) {
           type="button"
           aria-label="Change Accent Theme"
           className={cn(
-            "relative flex items-center justify-center cursor-pointer shrink-0 text-muted-foreground hover:text-foreground transition-colors duration-150 p-1 outline-none",
-            className
+            "relative flex items-center justify-center cursor-pointer shrink-0 text-muted-foreground hover:text-foreground transition-[color,transform] duration-150 active:scale-[0.96] p-1 outline-none after:absolute after:-inset-1.5 after:content-['']",
+            className,
           )}
         >
           <Palette className="w-4 h-4" />
@@ -302,17 +336,17 @@ export function AccentThemePopover({ className }: { className?: string }) {
                 title={`${theme.label} Theme`}
                 aria-label={`Select ${theme.label} theme`}
                 className={cn(
-                  "p-0.5 rounded-full cursor-pointer transition-all duration-200 outline-none",
-                  isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
+                  "relative p-0.5 rounded-full cursor-pointer transition-[opacity,transform] duration-200 active:scale-[0.96] outline-none after:absolute after:-inset-2 after:content-['']",
+                  isActive ? "opacity-100" : "opacity-60 hover:opacity-100",
                 )}
               >
                 <span
                   className={cn(
-                    "block w-4 h-4 rounded-full transition-all duration-200 shadow-xs",
+                    "block w-4 h-4 rounded-full transition-[box-shadow,ring-color] duration-200 shadow-xs",
                     theme.dotColor,
                     isActive
                       ? `ring-2 ring-offset-2 ring-offset-background ${theme.ringColor}`
-                      : ""
+                      : "",
                   )}
                 />
               </button>

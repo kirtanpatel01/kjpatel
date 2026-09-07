@@ -1,4 +1,10 @@
-export type SkillCategory = "Languages" | "Frameworks" | "Backend" | "Database" | "DevOps" | "Tools";
+export type SkillCategory =
+  | "Languages"
+  | "Frameworks"
+  | "Backend"
+  | "Database"
+  | "DevOps"
+  | "Tools";
 
 export interface Skill {
   name: string;

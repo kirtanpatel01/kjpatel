@@ -66,7 +66,7 @@ export function applyAccentTheme(theme: AccentTheme): void {
     // Ignore storage errors
   }
   window.dispatchEvent(
-    new CustomEvent("accent-theme-change", { detail: theme })
+    new CustomEvent("accent-theme-change", { detail: theme }),
   );
 }
 

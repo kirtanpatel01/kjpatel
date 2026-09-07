@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { use } from "react"
-import { format } from "date-fns"
+import { use } from "react";
+import { format } from "date-fns";
 
-import { cn } from "@/lib/utils"
-import { Spinner } from "@/components/ui/spinner"
+import { cn } from "@/lib/utils";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import type { Activity } from "@/components/contribution-graph"
+} from "@/components/ui/tooltip";
+import type { Activity } from "@/components/contribution-graph";
 import {
   ContributionGraph,
   ContributionGraphBlock,
@@ -18,18 +18,18 @@ import {
   ContributionGraphFooter,
   ContributionGraphLegend,
   ContributionGraphTotalCount,
-} from "@/components/contribution-graph"
+} from "@/components/contribution-graph";
 
 export function GitHubContributions({
   contributions,
   githubProfileUrl,
   className,
 }: {
-  contributions: Promise<Activity[]>
-  githubProfileUrl: string
-  className?: string
+  contributions: Promise<Activity[]>;
+  githubProfileUrl: string;
+  className?: string;
 }) {
-  const data = use(contributions)
+  const data = use(contributions);
 
   return (
     <ContributionGraph
@@ -38,9 +38,7 @@ export function GitHubContributions({
       blockSize={11}
       blockMargin={2.2}
       blockRadius={2.5}
-      style={{
-        
-      }}
+      style={{}}
     >
       <ContributionGraphCalendar
         className="no-scrollbar px-0"
@@ -88,7 +86,7 @@ export function GitHubContributions({
         <ContributionGraphLegend />
       </ContributionGraphFooter>
     </ContributionGraph>
-  )
+  );
 }
 
 export function GitHubContributionsFallback() {
@@ -96,5 +94,5 @@ export function GitHubContributionsFallback() {
     <div className="flex h-40.5 w-full items-center justify-center">
       <Spinner className="text-muted-foreground" />
     </div>
-  )
+  );
 }
