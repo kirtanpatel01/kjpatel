@@ -44,51 +44,109 @@ async function CodeBlock({ code, lang }: { code: string; lang: string }) {
   );
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+function getTextContent(children: React.ReactNode): string {
+  if (typeof children === "string") return children;
+  if (typeof children === "number") return String(children);
+  if (Array.isArray(children)) return children.map(getTextContent).join("");
+  if (React.isValidElement(children) && (children.props as { children?: React.ReactNode })?.children) {
+    return getTextContent((children.props as { children?: React.ReactNode }).children);
+  }
+  return "";
+}
+
 export const mdxComponents = {
-  h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1
-      className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-10 mb-4 border-b border-border/60 pb-2 scroll-mt-20"
-      {...props}
-    >
-      {children}
-    </h1>
-  ),
+  h1: ({ children, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const headingId = id || slugify(getTextContent(children));
+    return (
+      <h1
+        id={headingId || undefined}
+        className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mt-10 mb-4 border-b border-border/60 pb-2 scroll-mt-20"
+        {...props}
+      >
+        {children}
+      </h1>
+    );
+  },
   h2: ({
     children,
     id,
     ...props
-  }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2
-      id={id}
-      className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-8 mb-3 scroll-mt-20 group"
-      {...props}
-    >
-      <a href={`#${id}`} className="hover:underline">
-        {children}
-      </a>
-    </h2>
-  ),
+  }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const headingId = id || slugify(getTextContent(children));
+    if (!headingId) {
+      return (
+        <h2
+          className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-8 mb-3 scroll-mt-20"
+          {...props}
+        >
+          {children}
+        </h2>
+      );
+    }
+    return (
+      <h2
+        id={headingId}
+        className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-8 mb-3 scroll-mt-20 group"
+        {...props}
+      >
+        <a href={`#${headingId}`} className="hover:underline">
+          {children}
+        </a>
+      </h2>
+    );
+  },
   h3: ({
     children,
     id,
     ...props
-  }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-      id={id}
-      className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mt-6 mb-2 scroll-mt-20"
-      {...props}
-    >
-      {children}
-    </h3>
-  ),
-  p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p
-      className="text-sm sm:text-base leading-relaxed text-foreground/90 my-4"
-      {...props}
-    >
-      {children}
-    </p>
-  ),
+  }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const headingId = id || slugify(getTextContent(children));
+    return (
+      <h3
+        id={headingId || undefined}
+        className="text-lg sm:text-xl font-semibold tracking-tight text-foreground mt-6 mb-2 scroll-mt-20"
+        {...props}
+      >
+        {children}
+      </h3>
+    );
+  },
+  p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => {
+    const hasBlockOrImg = React.Children.toArray(children).some((child) => {
+      if (React.isValidElement(child)) {
+        const type = child.type;
+        if (
+          type === "img" ||
+          type === "figure" ||
+          type === "div" ||
+          (typeof type === "function" &&
+            (type.name === "img" ||
+              (type as { displayName?: string }).displayName === "img"))
+        ) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    const Component = hasBlockOrImg ? "div" : "p";
+
+    return (
+      <Component
+        className="text-sm sm:text-base leading-relaxed text-foreground/90 my-4"
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  },
   a: ({
     href,
     children,
