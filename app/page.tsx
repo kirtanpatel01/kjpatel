@@ -14,6 +14,7 @@ import {
 import { getCachedContributions } from "@/lib/get-cached-contributions";
 import { cn } from "@/lib/utils";
 import Work from "@/components/sections/work";
+import TicTacToe from "@/components/tic-tac-toe";
 import SidebarTOC from "@/components/sidebar-toc";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, FileText } from "lucide-react";
@@ -35,6 +36,11 @@ export default async function Home() {
   const contributions = getCachedContributions(GITHUB_USERNAME);
   return (
     <PageContainer>
+      {/* Tic-Tac-Toe Easter Egg on Left Whitespace */}
+      <aside className="hidden 2xl:block fixed 2xl:left-[calc(50vw-384px-190px)] top-28 z-30">
+        <TicTacToe />
+      </aside>
+
       {/* Hero Section */}
       <SectionContainer id="home" className="p-4">
         <div className="flex items-center gap-2">
