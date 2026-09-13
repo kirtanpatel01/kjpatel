@@ -37,7 +37,7 @@ async function CodeBlock({ code, lang }: { code: string; lang: string }) {
         <CopyButton code={code} />
       </div>
       <div
-        className="p-4 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed [&>pre]:bg-transparent! [&>pre]:m-0! [&>pre]:p-0! [&_code]:bg-transparent!"
+        className="p-4 overflow-x-auto text-xs sm:text-sm leading-relaxed [&>pre]:bg-transparent! [&>pre]:m-0! [&>pre]:p-0! [&_code]:bg-transparent!"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>
@@ -256,7 +256,7 @@ export const mdxComponents = {
     }
     // Inline code styling: clean, integrated, Vercel/Linear developer style
     return (
-      <code className="relative rounded-sm bg-secondary/80 px-1 py-px text-sm font-mono font-medium text-foreground border border-border/50">
+      <code className="relative rounded-sm bg-secondary/80 px-1 py-px text-sm font-medium text-foreground border border-border/50">
         {children}
       </code>
     );
@@ -275,7 +275,7 @@ export const mdxComponents = {
       return <CodeBlock code={code} lang={lang} />;
     }
     return (
-      <pre className="my-4 overflow-x-auto rounded-lg bg-muted p-4 font-mono">
+      <pre className="my-4 overflow-x-auto rounded-lg bg-muted p-4 ">
         {children}
       </pre>
     );

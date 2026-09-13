@@ -156,12 +156,13 @@ function getMoveByDifficulty(board: BoardState, difficulty: Difficulty): number 
   return getBestMove(board);
 }
 
-export function TicTacToe() {
+export function TicTacToe({ large = false }: { large?: boolean } = {}) {
   const [board, setBoard] = useState<BoardState>(() => Array(9).fill(null));
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [isThinking, setIsThinking] = useState(false);
   const [winner, setWinner] = useState<Player | "draw" | null>(null);
   const [winningLine, setWinningLine] = useState<number[] | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const cycleDifficulty = () => {
@@ -235,11 +236,25 @@ export function TicTacToe() {
     setWinningLine(null);
   };
 
+  const isPlaying = board.some((c) => c !== null) && winner === null;
+
   return (
     <motion.div
-      drag
+      ref={containerRef}
+      drag={!large}
       dragMomentum={false}
-      className="relative overflow-hidden p-2 rounded-lg bg-background/80 backdrop-blur-xs select-none w-[160px] cursor-grab active:cursor-grabbing"
+      tabIndex={0}
+      onMouseEnter={() => containerRef.current?.focus()}
+      onMouseLeave={() => containerRef.current?.blur()}
+      onKeyDown={(e) => {
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+      }}
+      className={cn(
+        "relative overflow-hidden bg-background/80 backdrop-blur-xs select-none border transition-colors focus:outline-none mx-auto",
+        isPlaying ? "border-border/50" : "border-transparent",
+        large ? "p-6 sm:p-8 rounded-2xl w-full max-w-sm sm:max-w-md shadow-sm border-border/20 cursor-default" : "p-2 rounded-lg w-[160px] cursor-grab active:cursor-grabbing"
+      )}
     >
       {/* Clipped confetti canvas inside container */}
       <canvas
@@ -248,34 +263,34 @@ export function TicTacToe() {
       />
 
       {/* Top Header directly on top of the board */}
-      <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1.5 px-0.5">
+      <div className={cn("flex items-center justify-between text-muted-foreground", large ? "pb-6 px-1" : "pb-1.5 px-0.5 text-[11px]")}>
         <button
           type="button"
           onClick={cycleDifficulty}
           aria-label={`Difficulty: ${difficulty}. Click to change.`}
-          title="Click to toggle difficulty (easy → medium → hard)"
-          className="h-5 px-1.5 text-[10px] font-mono font-medium rounded bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all cursor-pointer active:scale-95 capitalize select-none"
+          title="Click to toggle difficulty (easy -> medium -> hard)"
+          className={cn("font-medium rounded bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all cursor-pointer active:scale-95 capitalize select-none", large ? "h-8 px-3 text-sm" : "h-5 px-1.5 text-[10px]")}
         >
           {difficulty}
         </button>
         <div className="flex items-center gap-1.5">
           {winner === "X" && (
-            <span className="text-emerald-500 font-semibold text-[10px]">
+            <span className={cn("text-emerald-500 font-semibold", large ? "text-base" : "text-[10px]")}>
               Won!
             </span>
           )}
           {winner === "O" && (
-            <span className="text-destructive font-semibold text-[10px]">
+            <span className={cn("text-destructive font-semibold", large ? "text-base" : "text-[10px]")}>
               AI Won
             </span>
           )}
           {winner === "draw" && (
-            <span className="text-muted-foreground font-medium text-[10px]">
+            <span className={cn("text-muted-foreground font-medium", large ? "text-base" : "text-[10px]")}>
               Draw
             </span>
           )}
           {!winner && isThinking && (
-            <span className="text-muted-foreground/80 animate-pulse text-[10px]">
+            <span className={cn("text-muted-foreground/80 animate-pulse", large ? "text-base" : "text-[10px]")}>
               Thinking...
             </span>
           )}
@@ -283,9 +298,9 @@ export function TicTacToe() {
             type="button"
             onClick={resetGame}
             aria-label="Reset game"
-            className="relative flex items-center justify-center p-0.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer active:scale-95 after:absolute after:-inset-1.5 after:content-['']"
+            className={cn("relative flex items-center justify-center p-0.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer active:scale-95", large ? "" : "after:absolute after:-inset-1.5 after:content-['']")}
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className={cn(large ? "w-5 h-5 ml-2" : "w-3.5 h-3.5")} />
           </button>
         </div>
       </div>
@@ -309,7 +324,8 @@ export function TicTacToe() {
               disabled={cell !== null || isThinking || winner !== null}
               aria-label={`${CELL_LABELS[idx]}: ${cell ? cell : "empty"}`}
               className={cn(
-                "aspect-square flex items-center justify-center text-sm font-mono font-bold transition-colors outline-none cursor-pointer focus-visible:ring-1 focus-visible:ring-ring",
+                "aspect-square flex items-center justify-center font-bold transition-colors outline-none cursor-pointer focus-visible:ring-1 focus-visible:ring-ring",
+                large ? "text-5xl sm:text-7xl" : "text-sm",
                 hasRightBorder && "border-r border-border/60",
                 hasBottomBorder && "border-b border-border/60",
                 cell === null &&

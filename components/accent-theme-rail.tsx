@@ -89,7 +89,7 @@ export function AccentThemeRail() {
         aria-label="Color Theme Switcher"
         className="hidden xl:flex fixed xl:left-14 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2.5 select-none"
       >
-        <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
+        <Kbd className="h-5 w-5 rounded-md text-[11px] font-semibold uppercase">
           T
         </Kbd>
 
@@ -228,7 +228,7 @@ export function AccentThemeSelectorInline({
 
   return (
     <div className={cn("flex items-center gap-2 select-none", className)}>
-      <Kbd className="h-4 w-4 rounded-sm text-[10px] font-mono font-semibold uppercase">
+      <Kbd className="h-4 w-4 rounded-sm text-[10px] font-semibold uppercase">
         T
       </Kbd>
       <div className="h-3 w-px bg-border/60 shrink-0" />
@@ -322,7 +322,7 @@ export function AccentThemePopover({ className }: { className?: string }) {
         className="w-auto p-2 backdrop-blur-md bg-background/95 border-border shadow-xl rounded-full select-none"
       >
         <div className="flex flex-row items-center gap-2.5">
-          <Kbd className="h-5 w-5 rounded-md text-[11px] font-mono font-semibold uppercase">
+          <Kbd className="h-5 w-5 rounded-md text-[11px] font-semibold uppercase">
             T
           </Kbd>
           <div className="h-3.5 w-px bg-border/60 shrink-0" />

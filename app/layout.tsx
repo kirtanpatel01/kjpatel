@@ -63,7 +63,7 @@ export default function RootLayout({
               <Header />
               <JsonLd />
               <AccentThemeRail />
-              <main className="flex-1 relative w-full max-w-3xl sm:border-x border-dashed mx-auto">
+              <main className="flex-1 relative w-full max-w-3xl sm:border-x border-dashed mx-auto flex flex-col">
                 {children}
               </main>
               <Footer />

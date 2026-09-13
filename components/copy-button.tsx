@@ -28,7 +28,7 @@ export function CopyButton({ code }: CopyButtonProps) {
       onClick={handleCopy}
       type="button"
       aria-label="Copy code to clipboard"
-      className="relative flex items-center gap-1.5 px-2 py-1 text-xs font-mono rounded bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-[color,background-color,transform] active:scale-[0.96] border border-border/50 cursor-pointer after:absolute after:-inset-1.5 after:content-['']"
+      className="relative flex items-center gap-1.5 px-2 py-1 text-xs rounded bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-[color,background-color,transform] active:scale-[0.96] border border-border/50 cursor-pointer after:absolute after:-inset-1.5 after:content-['']"
     >
       <AnimatePresence mode="wait" initial={false}>
         {copied ? (

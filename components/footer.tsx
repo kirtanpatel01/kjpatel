@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Gamepad2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -12,9 +13,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full max-w-3xl sm:border-x border-dashed mx-auto border-t border-border py-2 px-3 flex flex-row justify-between items-center gap-3 text-xs tracking-wide text-muted-foreground bg-background/80 backdrop-blur-md sticky bottom-0 z-50 min-h-8">
+    <footer className="w-full max-w-3xl sm:border-x border-dashed mx-auto border-t border-border py-4 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-wide text-muted-foreground bg-background/80 backdrop-blur-md">
       {/* Left side: Built by & Inspired by */}
-      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+      <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-1.5 gap-y-1.5 w-full md:w-auto text-center md:text-left leading-relaxed">
         <span>
           Built with ❤️ by{" "}
           <a
@@ -26,7 +27,7 @@ export default function Footer() {
             Kirtan Patel
           </a>
         </span>
-        <span className="text-border">·</span>
+        <span className="text-border hidden sm:inline">·</span>
         <span>
           Inspired by{" "}
           <a
@@ -58,16 +59,27 @@ export default function Footer() {
         </span>
       </div>
 
-      {/* Back to Top */}
-      <button
-        onClick={scrollToTop}
-        type="button"
-        aria-label="Back to top"
-        className="relative flex items-center gap-1.5 hover:text-foreground transition-[color,transform] active:scale-[0.96] cursor-pointer shrink-0 text-xs font-medium after:absolute after:-inset-2 after:content-['']"
-      >
-        <span className="hidden sm:inline">Top</span>
-        <ArrowUp className="w-3.5 h-3.5" />
-      </button>
+      <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end border-t md:border-none border-border/50 pt-3 md:pt-0">
+        {/* Arcade Link */}
+        <Link
+          href="/games"
+          aria-label="Arcade Games"
+          className="group relative flex items-center justify-center hover:text-foreground transition-colors duration-300 active:scale-95 cursor-pointer"
+        >
+          <Gamepad2 className="w-4 h-4" />
+        </Link>
+
+        {/* Back to Top */}
+        <button
+          onClick={scrollToTop}
+          type="button"
+          aria-label="Back to top"
+          className="relative flex items-center gap-1.5 hover:text-foreground transition-[color,transform] active:scale-[0.96] cursor-pointer shrink-0 text-xs font-medium after:absolute after:-inset-2 after:content-['']"
+        >
+          <span>Top</span>
+          <ArrowUp className="w-3.5 h-3.5" />
+        </button>
+      </div>
     </footer>
   );
 }
