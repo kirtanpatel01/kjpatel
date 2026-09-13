@@ -1,13 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import {
   PageContainer,
   SectionContainer,
 } from "@/components/responsive-wrappers";
-import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
   title: "Blog | Kirtan Patel",
@@ -32,16 +30,6 @@ export default function BlogListingPage() {
 
   return (
     <PageContainer>
-      <SectionContainer id="blog-header" className="p-4 sm:p-6 space-y-3">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-          Engineering &amp; Articles
-        </h1>
-        <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground">
-          Thoughts, technical deep dives, and practical guides on full stack
-          engineering, TypeScript, Next.js, and modern web architecture.
-        </p>
-      </SectionContainer>
-
       {/* Featured / Latest Article */}
       {featuredPost ? (
         <SectionContainer id="featured-post" className="p-4 sm:p-6">
@@ -53,7 +41,7 @@ export default function BlogListingPage() {
 
           <div className="group relative rounded-2xl bg-card overflow-hidden flex flex-col md:flex-row">
             {/* Cover Image */}
-            <div className="relative w-full md:w-1/2 aspect-video md:aspect-auto min-h-[220px] overflow-hidden bg-muted">
+            <div className="relative w-full md:w-1/2 aspect-video md:aspect-auto overflow-hidden bg-muted">
               <Image
                 src={featuredPost.frontmatter.cover}
                 alt={featuredPost.frontmatter.title}
@@ -66,18 +54,6 @@ export default function BlogListingPage() {
             {/* Content */}
             <div className="p-5 sm:p-6 md:w-1/2 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
-                <div className="flex flex-wrap gap-2 items-center">
-                  {featuredPost.frontmatter.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="text-xs font-medium"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground/90 transition-colors">
                   <Link href={`/blog/${featuredPost.slug}`}>
                     {featuredPost.frontmatter.title}
@@ -90,24 +66,8 @@ export default function BlogListingPage() {
               </div>
 
               <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {featuredPost.frontmatter.date}
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    {featuredPost.readingTime}
-                  </span>
-                </div>
-
-                <Link
-                  href={`/blog/${featuredPost.slug}`}
-                  className="inline-flex items-center gap-1 font-semibold text-foreground hover:underline transition-all"
-                >
-                  Read post <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <span>{featuredPost.frontmatter.date}</span>
+                <span>{featuredPost.readingTime}</span>
               </div>
             </div>
           </div>
@@ -136,26 +96,12 @@ export default function BlogListingPage() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="p-4 space-y-2">
-                    <div className="flex flex-wrap gap-1.5 items-center">
-                      {post.frontmatter.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="outline"
-                          className="text-[10px] font-medium px-2 py-0"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
+                  <div className="p-4 pb-2">
                     <h3 className="text-base font-bold tracking-tight text-foreground transition-colors">
                       <Link href={`/blog/${post.slug}`}>
                         {post.frontmatter.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
-                      {post.frontmatter.description}
-                    </p>
                   </div>
                 </div>
 

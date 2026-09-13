@@ -102,12 +102,76 @@ function getBestMove(board: BoardState): number {
   return bestMove;
 }
 
+type Difficulty = "easy" | "medium" | "hard";
+const DIFFICULTY_ORDER: Difficulty[] = ["easy", "medium", "hard"];
+
+function getAvailableMoves(board: BoardState): number[] {
+  const moves: number[] = [];
+  for (let i = 0; i < 9; i++) {
+    if (board[i] === null) moves.push(i);
+  }
+  return moves;
+}
+
+function getRandomMove(board: BoardState): number {
+  const available = getAvailableMoves(board);
+  if (available.length === 0) return -1;
+  return available[Math.floor(Math.random() * available.length)];
+}
+
+function getMoveByDifficulty(board: BoardState, difficulty: Difficulty): number {
+  const available = getAvailableMoves(board);
+  if (available.length === 0) return -1;
+
+  if (difficulty === "easy") {
+    // Easy: 80% random mistakes, 20% optimal
+    return Math.random() < 0.8 ? getRandomMove(board) : getBestMove(board);
+  }
+
+  if (difficulty === "medium") {
+    // Medium:
+    // 1. Take immediate win if available
+    for (const move of available) {
+      board[move] = "O";
+      const isWin = checkWinner(board).winner === "O";
+      board[move] = null;
+      if (isWin) return move;
+    }
+
+    // 2. Block player's immediate win (65% chance, 35% blunder)
+    for (const move of available) {
+      board[move] = "X";
+      const isPlayerWin = checkWinner(board).winner === "X";
+      board[move] = null;
+      if (isPlayerWin) {
+        if (Math.random() < 0.65) return move;
+      }
+    }
+
+    // 3. Otherwise 50% optimal, 50% random
+    return Math.random() < 0.5 ? getBestMove(board) : getRandomMove(board);
+  }
+
+  // Hard: 100% optimal unbeatable minimax
+  return getBestMove(board);
+}
+
 export function TicTacToe() {
   const [board, setBoard] = useState<BoardState>(() => Array(9).fill(null));
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [isThinking, setIsThinking] = useState(false);
   const [winner, setWinner] = useState<Player | "draw" | null>(null);
   const [winningLine, setWinningLine] = useState<number[] | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const cycleDifficulty = () => {
+    setDifficulty((prev) => {
+      const currentIndex = DIFFICULTY_ORDER.indexOf(prev);
+      const nextIndex = (currentIndex + 1) % DIFFICULTY_ORDER.length;
+      return DIFFICULTY_ORDER[nextIndex];
+    });
+    resetGame();
+  };
 
   const triggerLocalConfetti = useCallback(() => {
     if (!canvasRef.current) return;
@@ -140,7 +204,7 @@ export function TicTacToe() {
     if (result.winner) {
       setWinner(result.winner);
       if (result.line) setWinningLine(result.line);
-      if (result.winner === "X" || result.winner === "O") {
+      if (result.winner === "X") {
         triggerLocalConfetti();
       }
       return;
@@ -149,7 +213,7 @@ export function TicTacToe() {
     // Computer's turn
     setIsThinking(true);
     setTimeout(() => {
-      const compMove = getBestMove(newBoard);
+      const compMove = getMoveByDifficulty(newBoard, difficulty);
       if (compMove !== -1) {
         newBoard[compMove] = "O";
         setBoard(newBoard);
@@ -158,9 +222,6 @@ export function TicTacToe() {
         if (compResult.winner) {
           setWinner(compResult.winner);
           if (compResult.line) setWinningLine(compResult.line);
-          if (compResult.winner === "X" || compResult.winner === "O") {
-            triggerLocalConfetti();
-          }
         }
       }
       setIsThinking(false);
@@ -178,7 +239,7 @@ export function TicTacToe() {
     <motion.div
       drag
       dragMomentum={false}
-      className="relative overflow-hidden p-2 rounded-lg bg-background/80 backdrop-blur-xs select-none w-[150px] cursor-grab active:cursor-grabbing"
+      className="relative overflow-hidden p-2 rounded-lg bg-background/80 backdrop-blur-xs select-none w-[160px] cursor-grab active:cursor-grabbing"
     >
       {/* Clipped confetti canvas inside container */}
       <canvas
@@ -188,7 +249,15 @@ export function TicTacToe() {
 
       {/* Top Header directly on top of the board */}
       <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1.5 px-0.5">
-        <span>You: X</span>
+        <button
+          type="button"
+          onClick={cycleDifficulty}
+          aria-label={`Difficulty: ${difficulty}. Click to change.`}
+          title="Click to toggle difficulty (easy → medium → hard)"
+          className="h-5 px-1.5 text-[10px] font-mono font-medium rounded bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all cursor-pointer active:scale-95 capitalize select-none"
+        >
+          {difficulty}
+        </button>
         <div className="flex items-center gap-1.5">
           {winner === "X" && (
             <span className="text-emerald-500 font-semibold text-[10px]">
