@@ -211,7 +211,7 @@ export const mdxComponents = {
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="my-6 border-l-4 border-border pl-4 italic text-foreground/80 bg-muted/20 py-3 pr-4 rounded-r-lg"
+      className="my-6 border-l-4 border-border pl-4 pr-4 italic text-foreground/80 bg-muted/20 py-3 rounded-r-lg [&>p:first-child]:mt-0 [&>p:last-child]:mb-0"
       {...props}
     >
       {children}

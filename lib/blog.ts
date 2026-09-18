@@ -11,6 +11,7 @@ export interface BlogPostFrontmatter {
   tags: string[];
   cover: string;
   published: boolean;
+  category?: string;
 }
 
 export interface BlogPost {
@@ -55,6 +56,7 @@ export function getAllPosts(): BlogPost[] {
         tags: Array.isArray(data.tags) ? data.tags : [],
         cover: data.cover || "/images/blog/cover/javascript-scope.svg",
         published: Boolean(data.published),
+        category: data.category || "Concepts",
       };
 
       return {
@@ -103,6 +105,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       tags: Array.isArray(data.tags) ? data.tags : [],
       cover: data.cover || "/images/blog/cover/javascript-scope.svg",
       published: Boolean(data.published),
+      category: data.category || "Concepts",
     };
 
     return {

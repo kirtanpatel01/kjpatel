@@ -1,0 +1,99 @@
+---
+title: "How the Internet Works: Foundations and Fundamentals"
+description: "A look into the physical infrastructure of the internet, network types, and the difference between the Web and the Internet."
+date: "2026-09-18"
+author: "Kirtan Patel"
+category: "Learnings"
+tags:
+  - Networking
+  - Internet
+  - Computer Science
+cover: "/images/blog/cover/how-the-internet-works.jpg"
+published: true
+---
+
+## History
+
+- The first internet was developed by the US.
+- In 1969, the US Department of Defense funded a project called **ARPANET** — Advanced Research Projects Agency Network.
+- The goal was that even if one node goes down, communication shouldn't stop.
+- The very first message delivered was "**LO**" (It was supposed to be **LOGIN**, but because of a system crash, it only processed the first two letters).
+- And the first protocol introduced for communication was **TCP/IP**.
+
+## Basic Terminology
+
+**Computer Network:** It's a medium between two hosts to communicate and share resources.
+
+**Host:** Any device that gets an IP Address.
+
+**Networking:** Sharing data and resources in a network.
+
+## What is the internet?
+
+- It's a network of networks.
+- Most people think the internet is a virtual thing (at least I did until now), but in reality…
+  - it's physical.
+  - it's cables. (https://www.submarinecablemap.com/)
+  - it's hardware.
+  - it's buildings.
+
+## Broader picture of the internet
+
+No one owns the internet; everybody owns a piece of it.
+
+Now here is the big question — your phone is connected to Wi-Fi. Wi-Fi connects to your router. The router connects to your ISP. But how does your ISP in India connect to a server sitting in the United States? The answer is [submarine cables](https://www.submarinecablemap.com/).
+
+When you open a website hosted in the US right now, there is a very real chance your request travelled from your device, through your ISP, down to a coastal landing station, through an undersea cable across the ocean, and arrived at a data centre on the other side. That is not magic. That is engineering.
+
+## WWW vs Internet
+
+1. **Internet:** It's the infrastructure.
+2. **World Wide Web (WWW):** It's a service that runs on that infrastructure.
+
+They are not the same thing.
+
+Think of the internet as a massive, global network that moves data from one place to another. It doesn't care what that data is. It could be email, images, videos, audio, games.
+
+The **World Wide Web** is one specific application that runs on top of the internet. In 1991, a British scientist, **Tim Berners-Lee**, had the idea to create a simple system of interlinked documents that anyone could access over the internet using a browser.
+
+For this, he invented these three things:
+
+- **HTML** to write and structure documents.
+- **HTTP** protocol that defines how those documents are requested and delivered over the internet.
+- **URL** system to give every document a unique address so anyone could find it.
+
+Put all three together, and you have the web: A massive collection of pages, linked to each other, accessible through a browser, delivered over the internet using HTTP.
+
+## Client-Server Architecture
+
+It contains two things: a client and a server.
+
+1. **Client**: Anything that makes a request (e.g., browser, mobile app, terminal).
+2. **Server:** Anything that listens for requests and responds to them.
+
+A server is just a computer. Running software that listens on a port, waiting for incoming requests and sending back responses. Your own laptop can be a server.
+
+> Client sends a request, server processes it and sends back a response.
+
+## Types of Networks
+
+1. **PAN**: Personal Area Network. Your personal devices. Bluetooth range. Just you.
+2. **LAN**: Local Area Network. Your home, office, campus, building. Private.
+3. **MAN**: Metropolitan Area Network. A city or large campus. Multiple buildings connected. Regional.
+4. **WAN**: Wide Area Network. Countries, continents, the entire globe. The internet is the biggest example.
+
+> *The internet is a collection of all these types of networks!*
+
+## Network Topologies
+
+Topology is a Greek word meaning place or arrangement.
+
+In the context of computer networks, topology is the way devices are arranged and connected to each other.
+
+### Types of Network Topology
+
+1. **Bus Topology:** All devices are connected to a single cable called the bus.
+2. **Ring Topology:** Each device is connected to the next device in a circular loop, forming a ring. Data travels around the ring in one direction, passing through each device.
+3. **Star Topology:** All devices are connected to a central hub/switch. The hub/switch acts as the central point of connection, and data flows through it to reach the intended devices.
+4. **Mesh Topology:** Each device is connected to every other device in the network. It forms a network of interconnected paths, providing multiple routes for data to travel.
+5. **Tree Topology:** It's a hierarchical network topology that combines elements of the bus and star topologies. It's like a family tree where everyone has their place in the hierarchy.
