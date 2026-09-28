@@ -2,9 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PageContainer, SectionContainer } from "@/components/responsive-wrappers";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CopyButton } from "@/components/copy-button";
-import { codeToHtml } from "shiki";
+import { ComponentPreview } from "@/components/component-preview";
 
 export const metadata = {
   title: "Glossy Blue Button | Components",
@@ -14,15 +12,7 @@ const codeString = `<button className="rounded-lg bg-[#0052FF] px-6 py-2 text-sm
   Book a call
 </button>`;
 
-export default async function GlossyButtonPage() {
-  const codeHtml = await codeToHtml(codeString, {
-    lang: "tsx",
-    themes: {
-      light: "github-light",
-      dark: "github-dark",
-    },
-  });
-
+export default function GlossyButtonPage() {
   return (
     <PageContainer>
       <SectionContainer className="p-4 sm:p-6 space-y-6">
@@ -33,7 +23,7 @@ export default async function GlossyButtonPage() {
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to components
         </Link>
-        
+
         <div className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
             Glossy Blue Button
@@ -43,36 +33,13 @@ export default async function GlossyButtonPage() {
           </p>
         </div>
 
-        <Tabs defaultValue="preview" className="w-full mt-6">
-          <TabsList className="mb-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="preview" className="mt-0">
-            <div className="rounded-xl border border-border bg-card p-12 flex items-center justify-center min-h-[300px]">
-              <button className="rounded-lg bg-[#0052FF] px-6 py-2 text-sm font-medium text-white shadow-[inset_0_4px_4px_rgba(0,229,255,0.5)] hover:bg-[#0047df] transition-colors">
-                Book a call
-              </button>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="code" className="mt-0">
-            <div className="relative rounded-xl border border-border bg-muted/20 overflow-hidden shadow-xs">
-              <div className="flex items-center justify-between px-4 py-2 bg-muted/60 border-b border-border/80 text-xs text-muted-foreground">
-                <span className="tracking-wide font-medium text-foreground/70">
-                  tsx
-                </span>
-                <CopyButton code={codeString} />
-              </div>
-              <div 
-                className="p-4 text-xs sm:text-sm leading-relaxed [&>pre]:whitespace-pre-wrap [&>pre]:break-words [&>pre]:bg-transparent! [&>pre]:m-0! [&>pre]:p-0! [&_code]:bg-transparent!"
-                dangerouslySetInnerHTML={{ __html: codeHtml }}
-              />
-            </div>
-          </TabsContent>
-        </Tabs>
+        <ComponentPreview code={codeString}>
+          <button className="rounded-lg bg-gradient-to-b from-blue-500 to-indigo-500 hover:from-blue-600 dark:from-blue-700 dark:to-indigo-600 dark:hover:from-blue-800 px-6 py-2 text-sm font-medium text-white inset-shadow-sm inset-shadow-blue-600/70 dark:inset-shadow-blue-400 cursor-pointer">
+            Book a call
+          </button>
+        </ComponentPreview>
       </SectionContainer>
     </PageContainer>
   );
 }
+
