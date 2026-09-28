@@ -26,8 +26,8 @@ export async function ComponentPreview({
     codeHtml = await codeToHtml(code, {
       lang,
       themes: {
-        light: "github-light",
-        dark: "slack-dark",
+        light: "ayu-light",
+        dark: "ayu-dark",
       },
     });
   } catch {

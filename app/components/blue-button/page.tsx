@@ -5,14 +5,14 @@ import { PageContainer, SectionContainer } from "@/components/responsive-wrapper
 import { ComponentPreview } from "@/components/component-preview";
 
 export const metadata = {
-  title: "Glossy Blue Button | Components",
+  title: "Blue Button | Components",
 };
 
-const codeString = `<button className="rounded-lg bg-[#0052FF] px-6 py-2 text-sm font-medium text-white shadow-[inset_0_4px_4px_rgba(0,229,255,0.5)] hover:bg-[#0047df] transition-colors">
+const codeString = `<button className="rounded-lg bg-gradient-to-b from-blue-500 to-indigo-500 hover:from-blue-600 dark:from-blue-700 dark:to-indigo-600 dark:hover:from-blue-800 px-6 py-2 text-sm font-medium text-white inset-shadow-sm inset-shadow-blue-700/70 dark:inset-shadow-blue-400 cursor-pointer">
   Book a call
 </button>`;
 
-export default function GlossyButtonPage() {
+export default function BlueButtonPage() {
   return (
     <PageContainer>
       <SectionContainer className="p-4 sm:p-6 space-y-6">
@@ -26,7 +26,7 @@ export default function GlossyButtonPage() {
 
         <div className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Glossy Blue Button
+            Blue Button
           </h1>
           <p className="text-muted-foreground">
             A vibrant, gradient-based button with a subtle top edge highlight.
@@ -34,7 +34,7 @@ export default function GlossyButtonPage() {
         </div>
 
         <ComponentPreview code={codeString}>
-          <button className="rounded-lg bg-gradient-to-b from-blue-500 to-indigo-500 hover:from-blue-600 dark:from-blue-700 dark:to-indigo-600 dark:hover:from-blue-800 px-6 py-2 text-sm font-medium text-white inset-shadow-sm inset-shadow-blue-600/70 dark:inset-shadow-blue-400 cursor-pointer">
+          <button className="rounded-lg bg-gradient-to-b from-blue-500 to-indigo-500 hover:from-blue-600 dark:from-blue-700 dark:to-indigo-600 dark:hover:from-blue-800 px-6 py-2 text-sm font-medium text-white inset-shadow-sm inset-shadow-blue-700/70 dark:inset-shadow-blue-400 cursor-pointer">
             Book a call
           </button>
         </ComponentPreview>
