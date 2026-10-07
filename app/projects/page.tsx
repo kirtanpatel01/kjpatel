@@ -1,5 +1,4 @@
-import { HugeiconsIcon } from "@hugeicons/react";
-import { LinkSquare01Icon } from "@hugeicons/core-free-icons";
+import { ExternalLink } from "lucide-react";
 import React from "react";
 import {
   PageContainer,
@@ -87,7 +86,7 @@ export default async function ProjectsPage() {
                       {project.title}
                     </h3>
                     <div className="text-muted-foreground group-hover/link:text-foreground p-1 -ml-1 rounded-sm transition-colors shrink-0" aria-hidden="true">
-                      <HugeiconsIcon icon={LinkSquare01Icon} className="w-4 h-4" />
+                      <ExternalLink className="w-4 h-4" />
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground leading-snug">
