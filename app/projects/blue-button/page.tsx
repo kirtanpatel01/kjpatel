@@ -5,7 +5,7 @@ import { PageContainer, SectionContainer } from "@/components/responsive-wrapper
 import { ComponentPreview } from "@/components/component-preview";
 
 export const metadata = {
-  title: "Blue Button | Components",
+  title: "Blue Button | Projects",
 };
 
 const codeString = `<button className="rounded-lg bg-gradient-to-b from-blue-500 to-indigo-500 hover:from-blue-600 dark:from-blue-700 dark:to-indigo-600 dark:hover:from-blue-800 px-6 py-2 text-sm font-medium text-white inset-shadow-sm inset-shadow-blue-700/70 dark:inset-shadow-blue-400 cursor-pointer">
@@ -17,11 +17,11 @@ export default function BlueButtonPage() {
     <PageContainer>
       <SectionContainer className="p-4 sm:p-6 space-y-6">
         <Link
-          href="/components"
+          href="/projects"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to components
+          Back to projects
         </Link>
 
         <div className="space-y-1">
