@@ -7,7 +7,6 @@ import { ModeToggle } from "./mode-toggle";
 import { AccentThemePopover } from "./accent-theme-rail";
 
 const navItems: { name: string; href: string }[] = [
-  { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
 ];
