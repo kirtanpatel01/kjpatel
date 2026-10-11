@@ -49,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${DMSans.className} ${DMSans.variable} antialiased min-h-screen flex flex-col`}
+        className={`${DMSans.className} ${DMSans.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

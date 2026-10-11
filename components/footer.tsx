@@ -13,7 +13,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full max-w-3xl sm:border-x border-dashed mx-auto border-t border-border py-4 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-wide text-muted-foreground bg-background/80 backdrop-blur-md">
+    <footer className="w-full max-w-3xl sm:border-x border-dashed mx-auto border-t border-border px-2 py-1 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-wide text-muted-foreground bg-background/80 backdrop-blur-md">
       {/* Left side: Built by & Inspired by */}
       <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-1.5 gap-y-1.5 w-full md:w-auto text-center md:text-left leading-relaxed">
         <span>

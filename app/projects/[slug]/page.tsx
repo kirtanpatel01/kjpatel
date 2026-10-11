@@ -1,6 +1,9 @@
 import { projects } from "@/lib/constants/projects";
 import { notFound } from "next/navigation";
-import { PageContainer, SectionContainer } from "@/components/responsive-wrappers";
+import {
+  PageContainer,
+  SectionContainer,
+} from "@/components/responsive-wrappers";
 import React from "react";
 import {
   Breadcrumb,
@@ -11,9 +14,16 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
   if (!project) return { title: "Project Not Found" };
   return {
     title: `${project.title} | Projects`,
@@ -21,8 +31,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -30,8 +41,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   return (
     <PageContainer>
-      <SectionContainer className="p-4">
-        <Breadcrumb className="mb-6">
+      <SectionContainer className="p-4 sm:p-6 space-y-6">
+        <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -45,13 +56,29 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div>
-          <h3 className="font-semibold text-foreground tracking-tight">
+        <div className="space-y-3">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-heading">
             {project.title}
-          </h3>
-          <p className="text-sm text-muted-foreground leading-snug">
+          </h1>
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-desc">
             {project.description}
           </p>
+
+          {project.link && (
+            <div className="pt-2">
+              <Button asChild size="sm" variant="default">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5"
+                >
+                  <span>Visit Project</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
       </SectionContainer>
     </PageContainer>
