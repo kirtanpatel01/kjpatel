@@ -2,6 +2,11 @@ import { PageContainer, SectionContainer } from "@/components/responsive-wrapper
 import Link from "next/link";
 import Image from "next/image";
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 export const metadata = {
   title: "Arcade | Kirtan Patel",
   description: "A small collection of side projects and mini-games.",
