@@ -12,47 +12,25 @@ export interface Project {
 
 export const work: Project[] = [
   {
-    title: "Trackmark",
-    subtitle: "Internal Case Management and IPR Operations Platform",
+    title: "Trev",
+    subtitle: "Multi-Tenant Client Workspace & Engineering Management Platform",
     description:
-      "Internal production work management and case tracking platform built for Intellectual Property Rights consultancy operations, replacing manual spreadsheets with centralized service specific workflows across 21 specialized IPR services.",
+      "Multi-tenant client portal and engineering management platform built for digital agency Fmoxlay to centralize sprint tracking, requirements scoping, task workflows, and real-time project messaging into a single source of truth.",
     badge: "Internal Project",
     keyContributions: [
-      "Built fullstack MERN monorepo architecture with a dynamic service form system supporting 21 specialized IPR services.",
-      "Developed a configurable stage engine supporting complex case lifecycles and automatic status synchronization.",
-      "Implemented document management with Backblaze B2 cloud storage, short lived presigned URLs, and document access audit logging.",
-    ],
-    tech: [
-      "MongoDB",
-      "Express.js",
-      "React.js",
-      "Node.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Backblaze B2",
-    ],
-    link: null,
-    githubLink: null,
-  },
-  {
-    title: "Homizo Admin",
-    subtitle: "Home Services Operations Platform",
-    description:
-      "Internal enterprise administration platform for an on demand home services ecosystem, managing bookings, provider verification, quotations, pricing, payouts, location tracking, and operational analytics.",
-    badge: "Internal Project",
-    keyContributions: [
-      "Built the internal administration platform and core operational workflows for provider onboarding and verification.",
-      "Implemented end to end booking management with provider assignment, status tracking, and OTP based field operations.",
-      "Developed financial management workflows covering itemized costs, commissions, payouts, and multitable analytics with Recharts.",
+      "Architected the full-stack platform using Next.js 16 App Router and Supabase, designing a 10-table relational schema with PostgreSQL Row Level Security (RLS) policies and Security Definer functions to guarantee strict multi-tenant isolation across clients, developers, and admins.",
+      "Engineered an interactive Kanban task board and two-tier requirements-to-features decomposition engine with multi-developer assignments, status lifecycles, and high-density TanStack data tables.",
+      "Implemented a real-time messaging and notification system leveraging Supabase Realtime subscriptions with TanStack Query cache reconciliation, automated transactional SMTP invites, and custom micro-interactions like hold-to-confirm action guards.",
     ],
     tech: [
       "Next.js",
-      "React.js",
+      "React",
       "TypeScript",
-      "PostgreSQL",
-      "Prisma",
       "Supabase",
+      "PostgreSQL",
+      "React Query",
       "Tailwind CSS",
+      "Motion",
     ],
     link: null,
     githubLink: null,

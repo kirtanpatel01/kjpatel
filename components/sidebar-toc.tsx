@@ -26,15 +26,9 @@ const tocItems: TOCItemData[] = [
   { id: "skills", label: "Tech", href: "#skills", level: 0 },
   { id: "work", label: "Work", href: "#work", level: 0 },
   {
-    id: "work-trackmark",
-    label: "Trackmark",
-    href: "#work-trackmark",
-    level: 1,
-  },
-  {
-    id: "work-homizo-admin",
-    label: "Homizo Admin",
-    href: "#work-homizo-admin",
+    id: "work-trev",
+    label: "Trev",
+    href: "#work-trev",
     level: 1,
   },
   {
