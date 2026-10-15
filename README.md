@@ -23,10 +23,10 @@ The site is a modern portfolio experience with:
 
 ## Project Structure
 
-- app/ — routes, metadata, and page entry points
-- components/ — UI, sections, labs, and reusable blocks
-- lib/ — helpers, constants, and content utilities
-- public/ — static assets and sound files
+- app/ - routes, metadata, and page entry points
+- components/ - UI, sections, labs, and reusable blocks
+- lib/ - helpers, constants, and content utilities
+- public/ - static assets and sound files
 
 ## Getting Started
 

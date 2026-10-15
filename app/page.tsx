@@ -39,7 +39,7 @@ export default async function Home() {
       <SectionContainer id="home" className="p-4">
         <div className="flex items-center gap-2">
           <h1 className="font-bold text-xl sm:text-2xl">
-            Kirtan Patel — Full Stack Developer
+            Kirtan Patel | Full Stack Developer
           </h1>
           <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
             <Button variant="default" size="xs">
