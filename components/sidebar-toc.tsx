@@ -24,25 +24,6 @@ interface TOCItemData {
 const tocItems: TOCItemData[] = [
   { id: "home", label: "Home", href: "#home", level: 0 },
   { id: "skills", label: "Tech", href: "#skills", level: 0 },
-  { id: "work", label: "Work", href: "#work", level: 0 },
-  {
-    id: "work-trev",
-    label: "Trev",
-    href: "#work-trev",
-    level: 1,
-  },
-  {
-    id: "work-quickswap-admin",
-    label: "QuickSwap Admin",
-    href: "#work-quickswap-admin",
-    level: 1,
-  },
-  {
-    id: "work-algorion-ai",
-    label: "Algorion AI",
-    href: "#work-algorion-ai",
-    level: 1,
-  },
   { id: "experience", label: "Experience", href: "#experience", level: 0 },
   { id: "contact", label: "Contact", href: "#contact", level: 0 },
 ];

@@ -13,7 +13,6 @@ import {
 } from "@/components/github-contributions";
 import { getCachedContributions } from "@/lib/get-cached-contributions";
 import { cn } from "@/lib/utils";
-import Work from "@/components/sections/work";
 import SidebarTOC from "@/components/sidebar-toc";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, FileText } from "lucide-react";
@@ -90,9 +89,6 @@ export default async function Home() {
 
       {/* Skills Section */}
       <Skills />
-
-      {/* Work Section */}
-      <Work />
 
       {/* Experience Section */}
       <Experience />
