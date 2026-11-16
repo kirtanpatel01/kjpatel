@@ -23,9 +23,9 @@ const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
 
 export const metadata = {
-  title: "Kirtan Patel | Full Stack Developer",
+  title: "Kirtan Patel | Senior Developer",
   description:
-    "Full Stack Engineer building production-ready web applications with Next.js, TypeScript, and modern cloud tooling.",
+    "Senior Developer building production-ready web applications, scalable architecture, and modern cloud solutions.",
   alternates: {
     canonical: "/",
   },
@@ -39,7 +39,7 @@ export default async function Home() {
       <SectionContainer id="home" className="p-4">
         <div className="flex items-center gap-2">
           <h1 className="font-bold text-xl sm:text-2xl">
-            Kirtan Patel | Full Stack Developer
+            Kirtan Patel | Senior Developer
           </h1>
           <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
             <Button variant="default" size="xs">
@@ -53,12 +53,21 @@ export default async function Home() {
           <p>
             I&apos;m{" "}
             <span className="font-semibold text-foreground">Kirtan Patel</span>,
-            a Full Stack Developer building production-ready web applications
-            with Next.js, TypeScript, and modern cloud tooling.
+            a Senior Developer &amp; Full Stack Engineer building scalable web
+            applications, reliable architectures, and modern cloud systems.
           </p>
           <p>
-            I enjoy solving practical engineering problems across the full
-            stack, from product design to implementation and delivery.
+            Currently leading technology development and architectural design at{" "}
+            <Link
+              href="https://askdigi.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-foreground underline-offset-4 hover:underline"
+            >
+              AskDigi
+            </Link>
+            . I focus on high availability, client technical delivery, and
+            engineering leadership.
           </p>
         </div>
 

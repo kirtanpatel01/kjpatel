@@ -5,7 +5,11 @@ export default function JsonLd() {
       {
         "@type": "Person",
         name: "Kirtan Patel",
-        jobTitle: "Full Stack Developer",
+        jobTitle: "Senior Developer",
+        worksFor: {
+          "@type": "Organization",
+          name: "AskDigi",
+        },
         url: "https://kjpatel.me",
         sameAs: [
           "https://github.com/kirtanpatel01",
@@ -13,6 +17,7 @@ export default function JsonLd() {
           "https://x.com/kjpatel_dev",
         ],
         knowsAbout: [
+          "Software Architecture",
           "React",
           "Next.js",
           "Node.js",

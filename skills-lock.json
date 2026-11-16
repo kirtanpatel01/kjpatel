@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "backlink-hunter": {
+      "source": "whatsuppiyush/backlink-claude-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "9f3264491268d66cea6eadc420de226b41f544412e5048f1698dfe414287f249"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",

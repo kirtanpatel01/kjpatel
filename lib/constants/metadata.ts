@@ -7,12 +7,16 @@ export const siteMetadata: Metadata = {
     template: "%s | Kirtan Patel",
   },
   description:
-    "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman tailored for high-performance web experiences.",
+    "Personal portfolio of Kirtan Patel, a Senior Developer & Full Stack Engineer specializing in scalable web architecture and modern cloud systems.",
   keywords: [
+    "Senior Developer",
     "Full Stack Developer",
+    "Software Architect",
+    "Technical Lead",
     "Web Design",
     "React",
     "Next.js",
+    "TypeScript",
     "Portfolio",
     "Kirtan Patel",
   ],
@@ -22,16 +26,16 @@ export const siteMetadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://kjpatel.me",
-    title: "Kirtan Patel | Full Stack Developer",
+    title: "Kirtan Patel | Senior Developer",
     description:
-      "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman.",
+      "Personal portfolio of Kirtan Patel, a Senior Developer & Full Stack Engineer.",
     siteName: "Kirtan Patel Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kirtan Patel | Full Stack Developer",
+    title: "Kirtan Patel | Senior Developer",
     description:
-      "Personal portfolio of Kirtan Patel, a Full Stack Developer & Digital Craftsman.",
+      "Personal portfolio of Kirtan Patel, a Senior Developer & Full Stack Engineer.",
     creator: "@kjpatel_dev",
   },
   alternates: {

@@ -2,6 +2,7 @@ export interface Experience {
   period: string;
   role: string;
   company: string;
+  website?: string;
   location: string;
   type: string;
   responsibilities: string[];
@@ -9,10 +10,24 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    period: "January 2026 – Current",
+    period: "October 2026 – Present",
+    type: "Full-time",
+    role: "Senior Developer",
+    company: "AskDigi",
+    website: "https://askdigi.in",
+    location: "Vadodara, Gujarat",
+    responsibilities: [
+      "Lead core technology development and architectural design across internal systems and client-facing digital platforms.",
+      "Drive system reliability, security, and scalable infrastructure to guarantee high availability across platforms and codebases.",
+      "Direct client technical delivery, scoping integration requirements and serving as primary technical lead for product deployments.",
+    ],
+  },
+  {
+    period: "January 2026 – October 2026",
     type: "Full-time",
     role: "Full Stack Engineer",
     company: "Algorion Research & Analysis Pvt. Ltd.",
+    website: "https://algorion.in/",
     location: "Remote",
     responsibilities: [
       "Initially joined as the sole developer for Moreganise, designing and building the ERP & POS platform from the ground up.",

@@ -3,6 +3,8 @@
 import { experiences } from "@/lib/constants";
 import { SectionContainer, SectionHeading } from "../responsive-wrappers";
 import { Badge } from "../ui/badge";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Experience() {
   return (
@@ -20,9 +22,21 @@ export default function Experience() {
                     {exp.type}
                   </Badge>
                 </h4>
-                <span className="text-foreground/70 font-semibold tracking-wide">
-                  {exp.company}
-                </span>
+                {exp.website ? (
+                  <Link
+                    href={exp.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-foreground/70 hover:text-foreground font-semibold tracking-wide hover:underline underline-offset-4 transition-colors group"
+                  >
+                    <span>{exp.company}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+                  </Link>
+                ) : (
+                  <span className="text-foreground/70 font-semibold tracking-wide">
+                    {exp.company}
+                  </span>
+                )}
               </div>
               <Badge variant="secondary">{exp.period}</Badge>
             </div>

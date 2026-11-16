@@ -121,8 +121,8 @@ export default function Contact() {
               Let&apos;s Build Something.
             </h3>
             <p className="text-sm sm:text-base text-foreground/80 leading-relaxed max-w-sm">
-              I&apos;m currently looking for full stack engineering role and
-              startup opportunities.
+              Open to discussing technical architecture, open-source initiatives,
+              and engineering collaborations.
             </p>
           </div>
 
