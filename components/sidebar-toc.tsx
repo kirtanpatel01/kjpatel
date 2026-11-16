@@ -23,9 +23,9 @@ interface TOCItemData {
 
 const tocItems: TOCItemData[] = [
   { id: "home", label: "Home", href: "#home", level: 0 },
-  { id: "skills", label: "Tech", href: "#skills", level: 0 },
+  { id: "skills", label: "Stack", href: "#skills", level: 0 },
   { id: "experience", label: "Experience", href: "#experience", level: 0 },
-  { id: "contact", label: "Contact", href: "#contact", level: 0 },
+  { id: "contact", label: "Connect", href: "#contact", level: 0 },
 ];
 
 // --- 1. React Context for reusable compound components ---
@@ -151,8 +151,8 @@ interface TOCProps {
 function TOC({
   children,
   items,
-  headerOffset = 80,
-  focusLine = 50,
+  headerOffset = 70,
+  focusLine = 85,
   tailLength = 80,
 }: TOCProps) {
   const pathname = usePathname();
@@ -698,7 +698,7 @@ export default function SidebarTOC() {
       id="sidebar-toc-container"
       className="flex flex-col gap-4 sticky top-24 select-none"
     >
-      <TOC items={tocItems} headerOffset={80} focusLine={50} tailLength={80}>
+      <TOC items={tocItems} headerOffset={70} focusLine={85} tailLength={80}>
         <TOCHeader>
           <AlignLeft className="w-3.5 h-3.5" />
           <span>On This Page</span>

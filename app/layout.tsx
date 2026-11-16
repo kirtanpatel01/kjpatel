@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import JsonLd from "@/components/json-ld";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AccentThemeRail } from "@/components/accent-theme-rail";
+import { LogoMorph } from "@/components/logo-morph";
 
 const DMSans = DM_Sans({
   subsets: ["latin"],
@@ -63,9 +64,12 @@ export default function RootLayout({
               <Header />
               <JsonLd />
               <AccentThemeRail />
-              <main className="flex-1 relative w-full max-w-3xl sm:border-x border-dashed mx-auto flex flex-col">
+              <main className="flex-1 relative w-full max-w-3xl mx-auto flex flex-col px-4 sm:px-6 md:px-8">
                 {children}
               </main>
+              <div className="w-full max-w-3xl mx-auto flex items-center justify-center py-6">
+                <LogoMorph />
+              </div>
               <Footer />
             </div>
           </TooltipProvider>

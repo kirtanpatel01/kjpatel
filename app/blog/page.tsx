@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts, type BlogPost } from "@/lib/blog";
@@ -7,6 +6,7 @@ import {
   SectionContainer,
 } from "@/components/responsive-wrappers";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export const metadata = {
   title: "Blog | Kirtan Patel",
@@ -38,9 +38,7 @@ function PostCard({ post }: { post: BlogPost }) {
         </div>
         <div className="p-4 pb-2">
           <h3 className="text-base font-bold tracking-tight text-foreground transition-colors">
-            <Link href={`/blog/${post.slug}`}>
-              {post.frontmatter.title}
-            </Link>
+            <Link href={`/blog/${post.slug}`}>{post.frontmatter.title}</Link>
           </h3>
         </div>
       </div>
@@ -55,18 +53,31 @@ function PostCard({ post }: { post: BlogPost }) {
 
 export default function BlogListingPage() {
   const posts = getAllPosts();
-  
+
   const conceptsPosts = posts.filter(
-    (post) => post.frontmatter.category === "Concepts" || !post.frontmatter.category
+    (post) =>
+      post.frontmatter.category === "Concepts" || !post.frontmatter.category,
   );
-  
+
   const learningsPosts = posts.filter(
-    (post) => post.frontmatter.category === "Learnings"
+    (post) => post.frontmatter.category === "Learnings",
   );
 
   return (
-    <PageContainer>
-      <SectionContainer id="all-posts" className="p-4 sm:p-6">
+    <PageContainer className="pb-20">
+      <SectionContainer id="all-posts" className="pt-16 sm:pt-20 pb-8">
+        <div className="space-y-2 mb-8">
+          <span className="block text-xs uppercase font-semibold tracking-widest text-muted-foreground/70">
+            Writings
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            Blog
+          </h1>
+          <p className="text-sm text-muted-foreground font-medium">
+            Technical articles, engineering insights, and practical web
+            development guides.
+          </p>
+        </div>
         <Tabs defaultValue="concepts" className="w-full">
           <TabsList className="mb-6">
             <TabsTrigger value="concepts">
@@ -82,12 +93,14 @@ export default function BlogListingPage() {
               </span>
             </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="concepts" className="mt-0">
             {conceptsPosts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {conceptsPosts.map((post) => (
-                  <PostCard key={post.slug} post={post} />
+                {conceptsPosts.map((post, idx) => (
+                  <ScrollReveal key={post.slug} delay={idx * 0.06} y={12}>
+                    <PostCard post={post} />
+                  </ScrollReveal>
                 ))}
               </div>
             ) : (
@@ -96,12 +109,14 @@ export default function BlogListingPage() {
               </div>
             )}
           </TabsContent>
-          
+
           <TabsContent value="learnings" className="mt-0">
             {learningsPosts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {learningsPosts.map((post) => (
-                  <PostCard key={post.slug} post={post} />
+                {learningsPosts.map((post, idx) => (
+                  <ScrollReveal key={post.slug} delay={idx * 0.06} y={12}>
+                    <PostCard post={post} />
+                  </ScrollReveal>
                 ))}
               </div>
             ) : (

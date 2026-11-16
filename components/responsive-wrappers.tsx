@@ -43,25 +43,27 @@ export function SectionTitle({
 }
 
 /**
- * SectionHeading - Responsive heading with consistent scaling
- * Mobile: text-xl, Tablet: text-3xl, Desktop: text-4xl
+ * SectionHeading - Responsive, borderless heading with clean typography and optional tracking tag
  */
 export function SectionHeading({
   children,
+  tag,
   className,
 }: {
   children: React.ReactNode;
+  tag?: string;
   className?: string;
 }) {
   return (
-    <div
-      className={cn("my-0 border-y border-dashed border-border/70", className)}
-    >
-      <div className="h-2 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]" />
-      <div className="px-3 py-2 border-y border-dashed bg-accent/40 text-accent-foreground font-bold text-lg sm:text-2xl leading-tight">
+    <div className={cn("pb-5 space-y-1.5", className)}>
+      {tag && (
+        <span className="block text-xs uppercase font-semibold tracking-widest text-muted-foreground/70">
+          {tag}
+        </span>
+      )}
+      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
         {children}
-      </div>
-      <div className="h-2 w-full bg-[repeating-linear-gradient(-45deg,var(--border)_0,var(--border)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]" />
+      </h2>
     </div>
   );
 }
@@ -99,7 +101,7 @@ export function SectionContainer({
   id?: string;
 }) {
   return (
-    <div id={id} className={cn("w-full", className)}>
+    <div id={id} className={cn("w-full scroll-mt-20", className)}>
       {children}
     </div>
   );

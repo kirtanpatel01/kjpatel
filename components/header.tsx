@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { AccentThemePopover } from "./accent-theme-rail";
@@ -16,11 +17,11 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full max-w-3xl sm:border-x border-dashed mx-auto sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg flex items-center justify-between px-2.5 h-11 sm:h-12">
+    <header className="w-full max-w-3xl mx-auto sticky top-0 z-50 bg-background/80 backdrop-blur-lg flex items-center justify-between px-4 sm:px-6 md:px-8 h-12 sm:h-14">
       <Link
         href="/"
         aria-label="Home"
-        className="shrink-0 flex items-center justify-center gap-2.5"
+        className="shrink-0 flex items-center justify-center gap-2.5 active:scale-[0.96] transition-transform"
       >
         <div
           className="w-7 h-7 icon-mask bg-foreground"
@@ -33,8 +34,8 @@ export default function Header() {
       </Link>
 
       <div className="flex items-center gap-3 sm:gap-4">
-        {/* Desktop Navigation */}
-        <nav className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm">
+        {/* Desktop Navigation with animated pill */}
+        <nav className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -46,13 +47,25 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "transition-colors duration-150 select-none",
+                  "relative px-2.5 py-1 transition-colors duration-150 select-none rounded-full",
                   isActive
                     ? "text-foreground font-semibold"
                     : "text-muted-foreground hover:text-foreground font-medium",
                 )}
               >
-                {item.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="active-nav-pill"
+                    className="absolute inset-0 bg-muted/80 dark:bg-muted/40 rounded-full -z-10"
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 30,
+                      bounce: 0,
+                    }}
+                  />
+                )}
+                <span className="relative z-10">{item.name}</span>
               </Link>
             );
           })}

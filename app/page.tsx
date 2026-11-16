@@ -17,6 +17,7 @@ import SidebarTOC from "@/components/sidebar-toc";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, FileText } from "lucide-react";
 import Link from "next/link";
+import { HeroMotion } from "@/components/hero-motion";
 
 const GITHUB_USERNAME = "kirtanpatel01";
 const GITHUB_PROFILE_URL = "https://github.com/kirtanpatel01";
@@ -33,58 +34,66 @@ export const metadata = {
 export default async function Home() {
   const contributions = getCachedContributions(GITHUB_USERNAME);
   return (
-    <PageContainer>
+    <PageContainer className="pb-24 space-y-20 sm:space-y-28">
       {/* Hero Section */}
-      <SectionContainer id="home" className="p-4">
-        <div className="flex items-center gap-2">
-          <h1 className="font-bold text-xl sm:text-2xl">
-            Kirtan Patel | Senior Developer
-          </h1>
-          <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-            <Button variant="default" size="xs">
-              <FileText className="" />
-              <span>Resume</span>
-              <ArrowUpRight />
-            </Button>
-          </Link>
-        </div>
-        <div className="mt-4 max-w-3xl space-y-2 leading-relaxed text-foreground/90 tracking-wide text-sm sm:text-base">
-          <p>
-            I&apos;m{" "}
-            <span className="font-semibold text-foreground">Kirtan Patel</span>,
-            a Senior Developer &amp; Full Stack Engineer building scalable web
-            applications, reliable architectures, and modern cloud systems.
-          </p>
-          <p>
-            Currently leading technology development and architectural design at{" "}
+      <SectionContainer id="home" className="pt-6 sm:pt-10">
+        <HeroMotion>
+          <div className="flex items-center gap-3">
+            <h1 className="font-bold text-2xl sm:text-3xl tracking-tight text-foreground">
+              Kirtan Patel | Senior Developer
+            </h1>
             <Link
-              href="https://askdigi.in"
+              href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-foreground underline-offset-4 hover:underline"
+              className="active:scale-[0.96] transition-transform inline-flex"
             >
-              AskDigi
+              <Button variant="default" size="xs">
+                <FileText className="" />
+                <span>Resume</span>
+                <ArrowUpRight />
+              </Button>
             </Link>
-            . I focus on high availability, client technical delivery, and
-            engineering leadership.
-          </p>
-        </div>
+          </div>
 
-        <Suspense fallback={<GitHubContributionsFallback />}>
-          <GitHubContributions
-            contributions={contributions}
-            githubProfileUrl={GITHUB_PROFILE_URL}
-            className={cn(
-              "mt-4",
-              // GitHub Default Theme
-              // '**:data-[level="0"]:fill-[#eff2f5] dark:**:data-[level="0"]:fill-[#151b23]',
-              // '**:data-[level="1"]:fill-[#aceebb] dark:**:data-[level="1"]:fill-[#033a16]',
-              // '**:data-[level="2"]:fill-[#4ac26b] dark:**:data-[level="2"]:fill-[#196c2e]',
-              // '**:data-[level="3"]:fill-[#2da44e] dark:**:data-[level="3"]:fill-[#2ea043]',
-              // '**:data-[level="4"]:fill-[#116329] dark:**:data-[level="4"]:fill-[#56d364]',
-            )}
-          />
-        </Suspense>
+          <div className="max-w-2xl space-y-3 leading-relaxed text-foreground/90 tracking-wide text-sm sm:text-base">
+            <p>
+              I&apos;m{" "}
+              <span className="font-semibold text-foreground">Kirtan Patel</span>,
+              a Senior Developer &amp; Full Stack Engineer building scalable web
+              applications, reliable architectures, and modern cloud systems.
+            </p>
+            <p>
+              Currently leading technology development and architectural design at{" "}
+              <Link
+                href="https://askdigi.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-foreground underline-offset-4 hover:underline"
+              >
+                AskDigi
+              </Link>
+              . I focus on high availability, client technical delivery, and
+              engineering leadership.
+            </p>
+          </div>
+
+          <Suspense fallback={<GitHubContributionsFallback />}>
+            <GitHubContributions
+              contributions={contributions}
+              githubProfileUrl={GITHUB_PROFILE_URL}
+              className={cn(
+                "mt-2",
+                // GitHub Default Theme
+                // '**:data-[level="0"]:fill-[#eff2f5] dark:**:data-[level="0"]:fill-[#151b23]',
+                // '**:data-[level="1"]:fill-[#aceebb] dark:**:data-[level="1"]:fill-[#033a16]',
+                // '**:data-[level="2"]:fill-[#4ac26b] dark:**:data-[level="2"]:fill-[#196c2e]',
+                // '**:data-[level="3"]:fill-[#2da44e] dark:**:data-[level="3"]:fill-[#2ea043]',
+                // '**:data-[level="4"]:fill-[#116329] dark:**:data-[level="4"]:fill-[#56d364]',
+              )}
+            />
+          </Suspense>
+        </HeroMotion>
       </SectionContainer>
 
       {/* Skills Section */}
